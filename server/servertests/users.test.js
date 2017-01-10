@@ -4,29 +4,41 @@ const db = require('APP/db')
 const User = require('APP/db/models/user')
 const app = require('APP/server/start')
 
-describe('/api/users', () => {
+const dummyAdminAcct = {
+  firstName: "Iam",
+  lastName: "Anadmin",
+  email: "cooladminemail@admin.com",
+  isAdmin: true,
+}
+
+function login (request, done) {
+  request
+    .send(theAccount)
+}
+
+describe('User API', () => {
 
   describe('see other users', () => 
-//   it('When not logged in as admin, GET / fails 401 (Unauthorized)', () =>
-//     request(app)
-          // Add test for auth here
-//       .get(`/api/users`)
-//       .expect(401)
-//   )    
-    it('When logged in as admin, GET / returns 200 (Successful)', () =>
+    it('When not logged in as admin, GET / fails 401 (Unauthorized)', () =>
+      request(app)
+            // Add test for auth here
+        .get(`/api/users`)
+        .expect(401)
+    ),    
+    it('as an admin -- GET / returns 200 (Successful)', () =>
       request(app)
         .get('/api/users')
         .expect(200)
     )
   )
 
-  describe('see one other user', () => 
-    // it('When not logged in as admin, GET /:userId fails 401 (Unauthorized)', () => 
-    //   request(app)
-    //     // Add test for auth here
-    //     .get('/api/users/1')
-    //     .expect(401)
-    // ),
+  describe('see one other user', () =>
+    it('When not logged in as admin, GET /:userId fails 401 (Unauthorized)', () => 
+      request(app)
+        // Add test for auth here
+        .get('/api/users/1')
+        .expect(401)
+    ),
     it('When logged in as admin, GET /:userId returns 200 (Successful)', () =>
       request(app)
         .get('/api/users/1')
@@ -47,7 +59,7 @@ describe('/api/users', () => {
     //     })
     //     .expect(401)
     // )
-    it('When logged in as admin, POST creates a user', () => 
+    it('-- POST creates a user when logged in as admin', () => 
       request(app)
         .post('/api/users')
         .send({
@@ -58,18 +70,18 @@ describe('/api/users', () => {
         })
         .expect(201)
     ),
-    it('POST missing required info results in 400', () =>
+    it('-- POST missing required info results in 400', () =>
       request(app)
         .post('/api/users')
         .send({
           email: 'beth@secrets.org'
         })
-        .expect(401)
+        .expect(500)
     )
   )
 
-  describe('promoting users to admin', () => 
-    it('When logged in, an admin can promote another user to admin', () =>
+  describe('promoting users to admin', () =>
+    it('-- an admin can promote another user to admin', () =>
       request(app)
         .put('/api/users/1')
         .send({
@@ -85,7 +97,7 @@ describe('/api/users', () => {
     //     .delete('/api/users/1')
     //     .then(401)
     // )
-    it('When logged in as an admin, DELETE /:userId deletes a user', () =>
+    it('-- when logged in as an admin, DELETE /:userId deletes a user', () =>
       request(app)
         .delete('/api/users/1')
         .then(function (res) {
@@ -105,37 +117,18 @@ describe('/api/users', () => {
   //   )
   // )
 
-  // describe('')
-
-  // describe('view puppies', () => {
-  //   it('gets all puppies', () => 
-  //     request(app)
-  //       .get('/api/puppies')
-  //       .expect('Content-Type', /json/)
-  //       .expect(200)
-  //   )
-  //   it('gets one puppy', () => 
-  //     request(app)
-  //       .get('/api/puppies/1')
-  //       .expect('Content-Type', /json/)
-  //       .expect(200, res => {
-  //         res.body.id = 1;
-  //       })
-  //   )
-  // })
-
-  //   describe('')
-  //     it('POST redirects to the user it just made', () =>
-  //       request(app)
-  //         .post('/api/users')
-  //         .send({
-  //           email: 'eve@interloper.com',
-  //           password: '23456',
-  //         })
-  //         .redirects(1)
-  //         .then(res => expect(res.body).to.contain({
-  //           email: 'eve@interloper.com'
-  //         }))        
-  //     )
-  // })
+//   describe('')
+//     it('POST redirects to the user it just made', () =>
+//     request(app)
+//         .post('/api/users')
+//         .send({
+//         email: 'eve@interloper.com',
+//         password: '23456',
+//         })
+//         .redirects(1)
+//         .then(res => expect(res.body).to.contain({
+//         email: 'eve@interloper.com'
+//         }))        
+//     )
+// })
 })
