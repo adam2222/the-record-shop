@@ -1,8 +1,16 @@
+<<<<<<< HEAD:server/auth.test.js
 const request = require('supertest-as-promised');
 const {expect} = require('chai');
 const db = require('APP/db');
 const User = require('APP/db/models/user');
 const app = require('./start');
+=======
+const request = require('supertest-as-promised')
+const {expect} = require('chai')
+const db = require('APP/db')
+const User = require('APP/db/models/user')
+const app = require('APP/server/start')
+>>>>>>> 90f638409d69ccd5f1d95b9ea14c2f7cce9c16c1:server/servertests/auth.test.js
 
 const alice = {
   firstName: 'Alice',

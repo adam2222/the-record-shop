@@ -16,4 +16,11 @@ const forbidden = message => (req, res, next) => {
   res.status(403).send(message)
 }
 
-module.exports = {mustBeLoggedIn, selfOnly, forbidden,}
+const adminOnly = (req, res, next) => {
+  if (!req.user.adminId) {
+    return res.status(401).send('You must be an admin')
+  }
+  next()
+}
+
+module.exports = {mustBeLoggedIn, selfOnly, forbidden, adminOnly}
