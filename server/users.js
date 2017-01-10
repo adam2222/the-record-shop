@@ -10,7 +10,7 @@ const api = require('express').Router();
 
 // ALL USERS
 
-api.get('/', forbidden('only admins can list users'), (req, res, next) => 
+api.get('/', mustBeLoggedIn, adminOnly, (req, res, next) => 
 	User.findAll()
 	.then(users => res.json(users))
 	.catch(next)
