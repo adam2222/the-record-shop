@@ -28,6 +28,10 @@ const User = db.define('users', {
   // We support oauth, so users may or may not have passwords.
   password_digest: Sequelize.STRING,
 	password: Sequelize.VIRTUAL,
+  passwordReset: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  },
   DOB: Sequelize.DATE
 }, {
 	indexes: [{fields: ['email'], unique: true}],
