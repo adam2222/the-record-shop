@@ -24,25 +24,17 @@ const ExampleApp = connect(
 render (
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path="/" component={ExampleApp}>
-        <Header>
-          <Search />
-          <Login />
-          <Cart />
-        </Header>
+      <Route path="/" component={App}>
 
-        <Route path="home" component={Main}>
+        <Route path="/home" component={HomeContainer} />
 
-        <Route path="allPuppies" component={AllPuppies}>
-
+        <Route path="/puppies" component={AllPuppiesContainer}>
+          <Route path="/puppies/:breed" component={AllPuppiesContainer} />
         </Route>
 
-          <Route path="puppy/:id">
+        <Route path="puppy/:id" component={PuppyContainer} />
 
-          </Route>
-
-        </Main>
-        <IndexRedirect to="/Home" />
+        <IndexRedirect to="/home" />
       </Route>
     </Router>
   </Provider>,
