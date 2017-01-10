@@ -8,7 +8,7 @@ api
   .use('/auth', require('./auth'))
   .use('/users', require('./users'))
   .use('/puppies', require('./puppies'))
-  .use('/cart', require('./cart'))
+  // .use('/cart', require('./cart'))
 
 // Send along any errors
 api.use((err, req, res, next) => {
