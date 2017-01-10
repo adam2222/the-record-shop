@@ -6,8 +6,10 @@
 
 const User = require('./user')
 const Puppy = require('./puppy')
+const Shipping = require('./shipping')
 
 Puppy.belongsTo(User)
 User.hasMany(Puppy)
+Shipping.belongsTo(User)
 
-module.exports = {User, Puppy}
+module.exports = {User, Puppy, Shipping}
