@@ -4,7 +4,7 @@ const db = require('APP/db')
 const User = db.model('users')
 // const Order = db.model('orders')
 
-const {mustBeLoggedIn, forbidden, selfOnly, adminOnly,} = require('./servertests/auth.filters')
+const {mustBeLoggedIn, forbidden, selfOnly, adminOnly} = require('./auth.filters')
 
 const api = require('express').Router();
 
