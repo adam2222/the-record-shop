@@ -1,4 +1,4 @@
-import Home from '../components/Home';
+import Header from '../components/Header';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => {
@@ -7,4 +7,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps)(Header);
