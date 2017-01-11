@@ -12,6 +12,7 @@ const CreditCard = require('./credit_card')
 Album.belongsTo(User)
 User.hasMany(Album)
 Shipping.belongsTo(User)
+User.hasMany(Shipping)
 User.hasMany(CreditCard)
 CreditCard.belongsTo(User)
 

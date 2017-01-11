@@ -1,9 +1,10 @@
-'use strict';
+'use strict'
 
-const bcrypt = require('bcrypt');
-const Sequelize = require('sequelize');
-const db = require('APP/db');
+const bcrypt = require('bcrypt')
+const Sequelize = require('sequelize')
+const db = require('APP/db')
 const Shipping = require('APP/db/models/shipping')
+const CreditCard = require('APP/db/models/credit_card')
 const User = db.define('users', {
   firstName: {
     type: Sequelize.STRING,
@@ -48,18 +49,17 @@ const User = db.define('users', {
             err ? reject(err) : resolve(result))
       )
     }
+  },
+  scopes: {
+    populate: () => ({
+      include: [{
+        model: Shipping
+      }, {
+        model: CreditCard
+      }]
+    })
   }
-  // },
-  // scopes: {
-  //   populate: () => ({
-  //     include: [{
-  //       model: Shipping,
-  //       as: 'shippingInfo'
-  //     }]
-  //   })
-  // }
 })
-
 
 
 function setEmailAndPassword(user) {
