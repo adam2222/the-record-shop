@@ -51,15 +51,5 @@ api.delete('/:userId', mustBeLoggedIn, adminOnly, (req, res, next) => {
 	})
 	.catch(next)
 })
-
-// SHOPPING CART
-
-// api.get('/:userId/cart', mustBeLoggedIn, (req, res, next) => {
-// 	Shopping_Cart.findOne({
-// 		include: [Puppies]
-// 	})
-// 	.then(cart => res.json(cart))
-// 	.catch(next)
-// })
 	
 module.exports = api;

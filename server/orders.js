@@ -5,9 +5,15 @@ const Order = db.model('orders')
 const {mustBeLoggedIn, forbidden, selfOnly, adminOnly} = require('./auth.filters')
 const api = require('express').Router();
 
-api.get('/', mustBeLoggedIn, adminOnly, (req, res, next) => {
+api.get('/', mustBeLoggedIn, (req, res, next) => {
     Order.findAll()
-    .then(orders => orders.json)
+    .then(orders => {
+        // If user is an admin, return all orders
+        if (req.user.isAdmin) return res.json(orders);
+        
+        // Otherwise, return all of the user's own orders
+        return res.json(orders.map(order => order.user_id === req.user.id));
+    })
     .catch(next);
 })
 
