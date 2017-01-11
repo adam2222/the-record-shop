@@ -80,6 +80,19 @@ describe('The `User` model', () => {
 
     })
 
+    // it('eager loads credit card and shipping information', function () {
+
+    //   return user.save()
+    //   .then(function (savedUser) {
+    //     return savedUser.reload(User.options.scopes.populate())
+    //     .then(function(thisUser) {
+    //       console.log(thisUser)
+    //       expect(typeof thisUser.shippingInfo).to.equal('object')
+    //     })
+    //   })
+
+    // })
+
     it('requires `firstName`', function () {
 
       user.firstName = null

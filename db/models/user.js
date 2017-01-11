@@ -3,6 +3,7 @@
 const bcrypt = require('bcrypt');
 const Sequelize = require('sequelize');
 const db = require('APP/db');
+const Shipping = require('APP/db/models/shipping')
 const User = db.define('users', {
   firstName: {
     type: Sequelize.STRING,
@@ -45,22 +46,33 @@ const User = db.define('users', {
         bcrypt.compare(plaintext, this.password_digest,
           (err, result) =>
             err ? reject(err) : resolve(result))
-        );
+      )
     }
   }
-});
+  // },
+  // scopes: {
+  //   populate: () => ({
+  //     include: [{
+  //       model: Shipping,
+  //       as: 'shippingInfo'
+  //     }]
+  //   })
+  // }
+})
+
+
 
 function setEmailAndPassword(user) {
-  user.email = user.email && user.email.toLowerCase();
-  if (!user.password) return Promise.resolve(user);
+  user.email = user.email && user.email.toLowerCase()
+  if (!user.password) return Promise.resolve(user)
 
   return new Promise((resolve, reject) =>
 	  bcrypt.hash(user.get('password'), 10, (err, hash) => {
-		  if (err) reject(err);
-		  user.set('password_digest', hash);
-      resolve(user);
+		  if (err) reject(err)
+		  user.set('password_digest', hash)
+      resolve(user)
 	  })
-  );
+  )
 }
 
-module.exports = User;
+module.exports = User
