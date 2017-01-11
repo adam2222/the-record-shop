@@ -3,7 +3,7 @@
 const db = require('APP/db')
 const User = require('APP/db/models/user')
 const Album = require('APP/db/models/album')
-const ShoppingCart = require('../models/shopping_cart')
+const ShoppingCartItem = require('../models/shopping_cart')
 const {expect} = require('chai')
 const Promise = require('bluebird')
 
@@ -39,7 +39,7 @@ describe('The Shopping Cart model', () => {
 
         Promise.all([user, album])
         .spread((user, album) => {
-            return ShoppingCart.create({
+            return ShoppingCartItem.create({
                 quantity: 1,
                 user_id: user.id,
                 album_id: album.id
@@ -48,23 +48,9 @@ describe('The Shopping Cart model', () => {
     })
   })
 
-  // describe('shopping cart', function(){
-  //     it('retrieves albums', function(){
-  //         console.log(album)
-  //       //   const adamsAlbums = user.getAlbums()
-  //       //   .then(albums => {
-  //       //       console.log('****************************')
-  //       //       console.log('ALBUMS \n', albums);
-  //       //       console.log('****************************')
-  //       //       console.log('CART \n', cart);
-  //       //       console.log('****************************')
-  //       //   })
-  //     })
-  // })
-
   afterEach(function () {
     return Promise.all([
-      ShoppingCart.truncate({ cascade: true })
+      ShoppingCartItem.truncate({ cascade: true })
     ])
   })
 })
