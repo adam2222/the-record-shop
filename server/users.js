@@ -16,6 +16,9 @@ api.get('/', mustBeLoggedIn, adminOnly, (req, res, next) =>
 
 api.post('/', (req, res, next) =>
 	User.create(req.body)
+	.then((user) => {
+		// ShoppingCart.create() FINISH ME
+	})
 	.then(user => res.sendStatus(201))
 	.catch(next)
 )
