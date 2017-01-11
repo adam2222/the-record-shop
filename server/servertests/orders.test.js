@@ -35,5 +35,83 @@ describe('Orders Route', () => {
       })
 
     })
+    it('returns an order if there is one in the DB', function () {
+
+      var orders = Order.build({
+        total: 100
+      })
+
+      return orders.save().then(function () {
+
+        return agent
+        .get('/api/orders')
+        .expect(200)
+        .expect(function (res) {
+          expect(res.body).to.be.an.instanceOf(Array)
+          expect(res.body[0].total).to.equal(100)
+        })
+      })
+    })
   })
+
+  describe('PUT api/orders/:id', function () {
+
+    var newOrder
+
+    beforeEach(function () {
+
+      return Order.create({
+        total: 200
+      })
+      .then(function (newlyCreatedOrder) {
+        newOrder = newlyCreatedOrder
+      })
+
+    })
+
+    it('updates an order', function () {
+
+      return agent
+      .put('/api/orders/' + newOrder.id)
+      .send({
+        total: 100
+      })
+      .expect(200)
+      .expect(function (res) {
+        expect(res.body.id).to.not.be.an('undefined')
+        expect(res.body.total).to.equal(100)
+        expect(res.body.status).to.equal('created')
+      })
+
+    })
+
+    it('saves updates to the DB', function () {
+
+      return agent
+      .put('/api/orders/' + newOrder.id)
+      .send({
+        total: 10
+      })
+      .then(function () {
+        return Order.findById(newOrder.id)
+      })
+      .then(function (foundOrder) {
+        expect(foundOrder).to.exist // eslint-disable-line no-unused-expressions
+        expect(foundOrder.total).to.equal(10)
+      })
+
+    })
+
+    it('gets 500 for invalid update', function () {
+
+      return agent
+      .put('/api/orders/' + newOrder.id)
+      .send({ total: 'no strings allowed' })
+      .expect(500)
+
+    })
+
+  })
+
+
 })
