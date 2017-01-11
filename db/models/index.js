@@ -5,11 +5,15 @@
 // to get access to the User model.
 
 const User = require('./user')
-const Puppy = require('./puppy')
+const Album = require('./album')
 const Shipping = require('./shipping')
+const CreditCard = require('./credit_card')
 
-Puppy.belongsTo(User)
-User.hasMany(Puppy)
+Album.belongsTo(User)
+User.hasMany(Album)
 Shipping.belongsTo(User)
+User.hasMany(CreditCard)
+CreditCard.belongsTo(User)
 
-module.exports = {User, Puppy, Shipping}
+
+module.exports = {User, Album, Shipping, CreditCard}

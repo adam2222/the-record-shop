@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 
-
-
-export default class Puppies extends Component {
+export default class Home extends Component {
   render(){
     return (
       <div>
-        Puppies
+        Header
       </div>
     )
   }
