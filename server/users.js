@@ -2,7 +2,7 @@
 
 const db = require('APP/db')
 const User = db.model('users')
-// const Shopping_Cart = db.model('shopping_cart');
+const ShoppingCartItem = db.model('shopping_cart');
 const {mustBeLoggedIn, forbidden, selfOnly, adminOnly} = require('./auth.filters')
 const api = require('express').Router();
 
@@ -16,9 +16,6 @@ api.get('/', mustBeLoggedIn, adminOnly, (req, res, next) =>
 
 api.post('/', (req, res, next) =>
 	User.create(req.body)
-	.then((user) => {
-		// ShoppingCart.create() FINISH ME
-	})
 	.then(user => res.sendStatus(201))
 	.catch(next)
 )
@@ -54,5 +51,34 @@ api.delete('/:userId', mustBeLoggedIn, adminOnly, (req, res, next) => {
 	})
 	.catch(next)
 })
-	
+
+// SHOPPING CART
+
+api.get('/:userId/cart', mustBeLoggedIn, (req, res, next) => {
+	ShoppingCartItem.findAll({
+		where: {user_id: req.params.userId}
+	})
+	.then(items => res.json(items))
+	.catch(next)
+})
+
+api.put('/:userId/cart', mustBeLoggedIn, (req, res, next) => {
+	ShoppingCartItem.create({
+		quantity: req.body.quantity,
+		album_id: req.body.albumId,
+		user_id: req.params.userId
+	})
+	.then(item => {
+		return res.json(item);
+	})
+	.catch(next)
+})
+
+api.delete('/:userId/cart/:albumId', mustBeLoggedIn, (req, res, next) => {
+	ShoppingCartItem.destroy({
+		where: {album_id: req.params.albumId}
+	})
+	.catch(next)
+})
+
 module.exports = api;
