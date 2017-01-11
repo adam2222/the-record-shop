@@ -19,13 +19,13 @@ function login (request, done) {
 describe('User API', () => {
 
   describe('see other users', () => 
-    it('When not logged in as admin, GET / fails 401 (Unauthorized)', () =>
+    it('-- GET / fails 401 (Unauthorized) when not logged in as admin', () =>
       request(app)
             // Add test for auth here
         .get(`/api/users`)
         .expect(401)
     ),    
-    it('as an admin -- GET / returns 200 (Successful)', () =>
+    it('-- GET / returns 200 (Successful) when logged in as admin', () =>
       request(app)
         .get('/api/users')
         .expect(200)
@@ -33,13 +33,13 @@ describe('User API', () => {
   )
 
   describe('see one other user', () =>
-    it('When not logged in as admin, GET /:userId fails 401 (Unauthorized)', () => 
+    it('-- GET /:userId fails 401 (Unauthorized) when not logged in as admin', () => 
       request(app)
         // Add test for auth here
         .get('/api/users/1')
         .expect(401)
     ),
-    it('When logged in as admin, GET /:userId returns 200 (Successful)', () =>
+    it('-- GET /:userId returns 200 (Successful) when logged in as admin', () =>
       request(app)
         .get('/api/users/1')
         .expect(200)
@@ -70,7 +70,7 @@ describe('User API', () => {
         })
         .expect(201)
     ),
-    it('-- POST missing required info results in 400', () =>
+    it('-- POST missing required info results in 500', () =>
       request(app)
         .post('/api/users')
         .send({

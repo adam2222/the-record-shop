@@ -1,28 +1,28 @@
 const request = require('supertest-as-promised')
 const {expect} = require('chai')
 const db = require('APP/db')
-const Puppy = require('APP/db/models/puppy')
+const Album = require('APP/db/models/album')
 const app = require('APP/server/start')
 
 
-describe('Puppy API', () => {
-    it('gets all puppies', () => 
+describe('Album API', () => {
+    it('gets all albums', () => 
         request(app)
-        .get('/api/puppies')
+        .get('/api/albums')
         .expect('Content-Type', /json/)
         .expect(200)
     )
-    it('gets one puppy', () => 
+    it('gets one album', () => 
         request(app)
-        .get('/api/puppies/1')
+        .get('/api/albums/1')
         .expect('Content-Type', /json/)
         .expect(200, res => {
             res.body.id = 1;
         })
     )
-    it('gets all puppies of one breed', () => 
+    it('gets all albums of one breed', () => 
         request(app)
-        .get('/api/puppies/doberman')
+        .get('/api/albums/jazz')
         .expect('Content-Type', /json/)
         .expect(200)
     )
