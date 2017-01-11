@@ -1,40 +1,51 @@
 'use strict'
 
 const db = require('APP/db')
-const Order = db.model('orders')
+const Order = require('APP/db/models/order')
 const {mustBeLoggedIn, forbidden, selfOnly, adminOnly} = require('./auth.filters')
-const api = require('express').Router();
+const router = require('express').Router()
 
-api.get('/', mustBeLoggedIn, (req, res, next) => {
+router.get('/', (req, res, next) => {
     Order.findAll()
     .then(orders => {
         // If user is an admin, return all orders
-        if (req.user.isAdmin) return res.json(orders);
-        
-        // Otherwise, return all of the user's own orders
-        return res.json(orders.map(order => order.user_id === req.user.id));
-    })
-    .catch(next);
-})
+        // if (req.user.isAdmin) return res.json(orders)
 
-api.post('/', (req, res, next) => {
-    Order.create(req.body)
-    .then(() => res.sendStatus(201))
+        // Otherwise, return all of the user's own orders
+        // return res.json(orders.filter(order => order.user_id === req.user.id))
+        res.json(orders)
+    })
     .catch(next)
 })
 
-api.get('/:orderId', (req, res, next) => {
-    Order.findOne({
-        where: {id: req.params.orderId}
+router.post('/', (req, res, next) => {
+    Order.create(req.body)
+    .then(createdOrder => {
+        res.status(201).json(createdOrder)
     })
+    .catch(next)
+})
+
+router.get('/:orderId', (req, res, next) => {
+    Order.findById(+req.params.orderId)
     .then(order => res.json(order))
     .catch(next)
 })
 
-api.get('/status/:statusType', mustBeLoggedIn, adminOnly, (req, res, next) => {
-    Order.findAll({
-        where: {status: req.params.statusType}
+router.put('/:orderId', mustBeLoggedIn, adminOnly, (req, res, next) => {
+    Order.update(req.body, {
+        where: {
+           id: +req.params.orderId
+        },
+        returning: true
     })
-    .then(orders => res.json(orders))
+    .then(([amountUpdated, arrayOfUpdatedOrders]) => {
+        if (!amountUpdated) {
+            throw Error('unable to update')
+        }
+        res.status(200).json(arrayOfUpdatedOrders[0])
+    })
     .catch(next)
 })
+
+module.exports = router

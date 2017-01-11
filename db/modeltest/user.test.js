@@ -86,7 +86,7 @@ describe('The `User` model', () => {
       .then(function (savedUser) {
         return savedUser.reload(User.options.scopes.populate())
         .then(function(thisUser) {
-          console.log(thisUser)
+          // console.log(thisUser)
           expect(typeof thisUser.shippings).to.equal('object')
           expect(typeof thisUser.credit_cards).to.equal('object')
         })
