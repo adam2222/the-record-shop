@@ -20,6 +20,7 @@ describe('The `Album` model', () => {
 
   var modelBody = {
     title: 'No Strings Attached',
+    // artist: 'NSYNC',
     genre: 'Pop',
     release_year: 2000,
     description: 'No Strings Attached is the second studio album by American boy band NSYNC, released on March 21, 2000 by Jive Records. Looking to distinguish their music from that of their labelmates, its music incorporates pop and R&B styles. Prior to the release of the album, NSYNC separated from their management Trans Continental and their label RCA Records; its title is a play on the idea of independence from corporate control.',
@@ -29,11 +30,12 @@ describe('The `Album` model', () => {
 
   var modelBody2 = { //modelBody without quantity_available
     title: 'No Strings Attached',
+    // artist: 'NSYNC',
     genre: 'Pop',
     release_year: 2000,
     description: 'No Strings Attached is the second studio album by American boy band NSYNC, released on March 21, 2000 by Jive Records. Looking to distinguish their music from that of their labelmates, its music incorporates pop and R&B styles. Prior to the release of the album, NSYNC separated from their management Trans Continental and their label RCA Records; its title is a play on the idea of independence from corporate control.',
     cost: 15,
-    quantity_available: 8
+    quantity_available: 2
   }
 
   var album, album2
@@ -89,7 +91,7 @@ describe('The `Album` model', () => {
         artist: 'Michael Jackson',
         description: albumDescription,
         cost: 100,
-        quantity_available: 2
+        quantity_available: 5
       })
       .then(function(result) {
         expect(result).to.be.an('object')
