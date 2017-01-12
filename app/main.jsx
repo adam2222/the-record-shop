@@ -5,11 +5,26 @@ import {render} from 'react-dom'
 import {connect, Provider} from 'react-redux'
 import App from './components/App'
 import HomeContainer from './containers/HomeContainer'
-// import Puppies from './components/Puppies'
-// import Puppies from './components/Puppies'
-// import PuppyContainer from './components/PuppyContainer'
+
 
 import store from './store'
+
+
+render (
+  <Provider store={store}>
+    <Router history={browserHistory}>
+      <Route path="/" component={App}>
+        <Route path="/home" component={HomeContainer} />
+        <IndexRedirect to="/home" />
+      </Route>
+    </Router>
+  </Provider>,
+  document.getElementById('main')
+)
+
+
+
+
 
 // const ExampleApp = connect(
 //   ({ auth }) => ({ user: auth })
@@ -22,23 +37,6 @@ import store from './store'
 //       {children}
 //     </div>
 // )
-
-render (
-  <Provider store={store}>
-    <Router history={browserHistory}>
-      <Route path="/" component={App}>
-
-        <Route path="/home" component={HomeContainer} />
-
-
-
-        <IndexRedirect to="/home" />
-      </Route>
-    </Router>
-  </Provider>,
-  document.getElementById('main')
-)
-
 // <Route path="/puppies" component={AllPuppiesContainer}>
 //   <Route path="/puppies/:breed" component={AllPuppiesContainer} />
 // </Route>
