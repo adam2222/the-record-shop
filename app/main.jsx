@@ -5,33 +5,15 @@ import {render} from 'react-dom'
 import {connect, Provider} from 'react-redux'
 import App from './components/App'
 import HomeContainer from './containers/HomeContainer'
-// import Puppies from './components/Puppies'
-// import Puppies from './components/Puppies'
-// import PuppyContainer from './components/PuppyContainer'
 
 import store from './store'
-
-// const ExampleApp = connect(
-//   ({ auth }) => ({ user: auth })
-// ) (
-//   ({ user, children }) =>
-//     <div>
-//       <nav>
-//         {user ? <WhoAmI/> : <Login/>}
-//       </nav>
-//       {children}
-//     </div>
-// )
 
 render (
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={App}>
-
-        <Route path="/home" component={HomeContainer} />
-
-
-
+        <Route path="/albums" component={AlbumsContainer} />
+        <Route path="/albums/:albumId" component={AlbumContainer} />
         <IndexRedirect to="/home" />
       </Route>
     </Router>
