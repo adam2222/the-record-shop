@@ -1,16 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import HeaderContainer from '../containers/HeaderContainer'
-import HomeContainer from '../containers/HomeContainer'
-import Footer from './footer'
+// import HomeContainer from '../containers/HomeContainer'
+// import Footer from './footer'
 
-export default class App extends Component {
-  render(){
-    return (
-      <div>
-        <HeaderContainer />
-        <HomeContainer />
-        <Footer />
-      </div>
-    )
-  }
+export default (props) => {
+  console.log('hit')
+  return (
+    <div>
+      <HeaderContainer />
+        {props.children}
+    </div>
+  )
 }
+
