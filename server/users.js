@@ -2,7 +2,7 @@
 
 const db = require('APP/db')
 const User = db.model('users')
-const ShoppingCartItem = db.model('shopping_cart');
+const ShoppingCartItem = db.model('shopping_cart_items');
 const {mustBeLoggedIn, forbidden, selfOnly, adminOnly} = require('./auth.filters')
 const api = require('express').Router();
 
