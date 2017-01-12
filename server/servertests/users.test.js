@@ -2,6 +2,7 @@ const request = require('supertest-as-promised')
 const {expect} = require('chai')
 const db = require('APP/db')
 const User = require('APP/db/models/user')
+const Album = require('APP/db/models/album')
 const app = require('APP/server/start')
 
 const dummyAdminAcct = {
@@ -18,13 +19,13 @@ function login (request, done) {
 
 describe('User API', () => {
 
-  describe('see other users', () => 
+  describe('see other users', () =>
     it('-- GET / fails 401 (Unauthorized) when not logged in as admin', () =>
       request(app)
             // Add test for auth here
         .get(`/api/users`)
         .expect(401)
-    ),    
+    ),
     it('-- GET / returns 200 (Successful) when logged in as admin', () =>
       request(app)
         .get('/api/users')
@@ -33,7 +34,7 @@ describe('User API', () => {
   )
 
   describe('see one other user', () =>
-    it('-- GET /:userId fails 401 (Unauthorized) when not logged in as admin', () => 
+    it('-- GET /:userId fails 401 (Unauthorized) when not logged in as admin', () =>
       request(app)
         // Add test for auth here
         .get('/api/users/1')
@@ -45,8 +46,8 @@ describe('User API', () => {
         .expect(200)
     )
   )
-  
-  describe('create an account', () => 
+
+  describe('create an account', () =>
     // it('When not logged in as admin, POST fails 401 (Unauthorized', () =>
     //   request(app)
     //     .post('/api/users')
@@ -59,7 +60,7 @@ describe('User API', () => {
     //     })
     //     .expect(401)
     // )
-    it('-- POST creates a user when logged in as admin', () => 
+    it('-- POST creates a user when logged in as admin', () =>
       request(app)
         .post('/api/users')
         .send({
@@ -91,7 +92,7 @@ describe('User API', () => {
     )
   )
 
-  describe('deleting users', () => 
+  describe('deleting users', () =>
     // it('When not logged in or not an admin, DELETE /:userId fails 401 (Unauthorized)', () =>
     //   request(app)
     //     .delete('/api/users/1')
@@ -108,8 +109,74 @@ describe('User API', () => {
     )
   )
 
+  describe('shopping cart', function(){
+
+    describe('adding to cart', function(){
+      it('returns json of added item', function(){
+        request(app)
+        .post('api/users/1/cart')
+        .send({
+          album_id: 2,
+          quantity: 1
+        })
+        .expect(201)
+        .then(res => {
+          expect(res.body.album_id).to.equal('2')
+          expect(res.body.quantity).to.equal('1')
+          expect(res.body.user_id).to.equal('1')
+        })
+
+      })
+    })
+ })
+    // beforeEach(function(){
+    //   const adam = User.create({
+    //     id: 1,
+    //     firstName: 'Adam',
+    //     lastName: 'Intrator',
+    //     email: 'adam@adam.adam',
+    //     password_digest: 'pass',
+    //     password: 'pass',
+    //     DOB: '1980/4/3'
+    //   })
+    //
+    //   const david = User.create({
+    //     id: 2,
+    //     firstName: 'David',
+    //     lastName: 'Godow',
+    //     email: 'david@adam.adam',
+    //     password_digest: 'asdf',
+    //     password: 'asd',
+    //   })
+    //
+    //   const bad = Album.create({
+    //       id: 1,
+    //       title: 'Bad',
+    //       artist: 'Michael Jackson',
+    //       genre: 'Pop',
+    //       release_year: 1986,
+    //       description: 'Awesome!',
+    //       cost: 10,
+    //       quantity_available: 2
+    //   })
+    //
+    //   const aftp = Album.create({
+    //       id: 2,
+    //       title: 'Automatic For The Peope',
+    //       artist: 'REM',
+    //       genre: 'Pop',
+    //       release_year: 1990,
+    //       description: 'Cool!',
+    //       cost: 10,
+    //       quantity_available: 3
+    //   })
+    //
+    // })
+
+
+
   // PASSWORD RESET TEST -- ASK HOW TO DO THIS
-  // describe('triggering password reset', () => 
+  // describe('triggering password reset', () =>
   //   it('When logged in as an admin, can prompt a user to reset his/her password', () =>
   //     request(app)
   //       .put('/api/users/1')
@@ -128,7 +195,7 @@ describe('User API', () => {
 //         .redirects(1)
 //         .then(res => expect(res.body).to.contain({
 //         email: 'eve@interloper.com'
-//         }))        
+//         }))
 //     )
 // })
 })

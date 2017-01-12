@@ -3,7 +3,7 @@
 const db = require('APP/db')
 const User = require('APP/db/models/user')
 const Album = require('APP/db/models/album')
-const ShoppingCartItem = require('../models/shopping_cart')
+const ShoppingCartItem = require('../models/shopping_cart_items')
 const {expect} = require('chai')
 const Promise = require('bluebird')
 
