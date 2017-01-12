@@ -7,31 +7,25 @@ const {expect} = require('chai')
 
 describe('The `Album` model', () => {
 
-  /**
-   * First we clear the database and recreate the tables before beginning a run
-   */
 
   before('wait for the db', () => db.didSync)
 
-  /**
-   * Also, we empty the tables after each spec
-   */
+
   afterEach(function () {
     return Promise.all([
       Album.truncate({ cascade: true })
     ])
   })
 
-  /**
-   * Next, we create an (un-saved!) article instance before every spec
-   * Next, we create an (un-saved!) a   */
+
   var modelBody = {
     title: 'No Strings Attached',
     // artist: 'NSYNC',
     genre: 'Pop',
     release_year: 2000,
     description: 'No Strings Attached is the second studio album by American boy band NSYNC, released on March 21, 2000 by Jive Records. Looking to distinguish their music from that of their labelmates, its music incorporates pop and R&B styles. Prior to the release of the album, NSYNC separated from their management Trans Continental and their label RCA Records; its title is a play on the idea of independence from corporate control.',
-    cost: 15
+    cost: 15,
+    quantity_available: 3
   }
 
   var modelBody2 = { //modelBody without quantity_available
@@ -40,7 +34,8 @@ describe('The `Album` model', () => {
     genre: 'Pop',
     release_year: 2000,
     description: 'No Strings Attached is the second studio album by American boy band NSYNC, released on March 21, 2000 by Jive Records. Looking to distinguish their music from that of their labelmates, its music incorporates pop and R&B styles. Prior to the release of the album, NSYNC separated from their management Trans Continental and their label RCA Records; its title is a play on the idea of independence from corporate control.',
-    cost: 15
+    cost: 15,
+    quantity_available: 2
   }
 
   var album, album2
@@ -51,11 +46,7 @@ describe('The `Album` model', () => {
 
   describe('attributes definition', function(){
 
-    /**
-     * Your model should have two fields (both required): `title` and `content`.
-     *
-     * http://docs.sequelizejs.com/en/v3/docs/models-definition/#validations
-     */
+
     it('includes `title`, `cost` and `genre` fields', function () {
 
       return album.save()
@@ -79,8 +70,6 @@ describe('The `Album` model', () => {
 
     })
 
-
-
     it('has default artist ', function() {
       expect(album2.artist).to.equal('Not Available')
     })
@@ -101,7 +90,8 @@ describe('The `Album` model', () => {
         title: 'Bad',
         artist: 'Michael Jackson',
         description: albumDescription,
-        cost: 100
+        cost: 100,
+        quantity_available: 5
       })
       .then(function(result) {
         expect(result).to.be.an('object');

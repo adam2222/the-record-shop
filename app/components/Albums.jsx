@@ -1,14 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
+export default class AllAlbums extends Component {
 
-
-export default class Puppies extends Component {
-  render(){
+  render() {
     return (
       <div>
-        Puppies
+        Albums
       </div>
     )
   }
-
 }

@@ -14,15 +14,15 @@ api.get('/', (req, res, next) => {
     	}
     })
     .then(albums => res.json(albums))
-    .catch(next);
+    .catch(next)
 })
 
 api.get('/:albumId', (req, res, next) => {
     Album.findOne({
-        where: {id: req.params.albumId}
+        where: {id: +req.params.albumId}
     })
     .then(album => res.json(album))
-    .catch(next);
+    .catch(next)
 })
 
 api.put('/:albumId/decrement/:quantity', (req, res, next) => {
@@ -40,4 +40,4 @@ api.put('/:albumId/decrement/:quantity', (req, res, next) => {
 	.catch(next)
 })
 
-module.exports = api;
+module.exports = api
