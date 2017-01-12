@@ -1,6 +1,7 @@
-import React from 'react';
-import {connect} from 'react-redux';
-import Album from '../components/Album'
+
+import React from 'react'
+import {connect} from 'react-redux'
+import Album from '../components/album'
 
 const mapStateToProps = state => {
     return {
@@ -13,5 +14,6 @@ const mapDispatchToProps = state => {
 
     }
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Album);

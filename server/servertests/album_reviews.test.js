@@ -1,29 +1,67 @@
-// 'use strict'
+'use strict'
 
-// const request = require('supertest-as-promised')
-// const {expect} = require('chai')
-// const db = require('APP/db')
-// const Order = require('APP/db/models/album_review')
-// let agent = request.agent(app)
+const request = require('supertest-as-promised')
+const {expect} = require('chai')
+const db = require('APP/db')
+const AlbumReview = require('APP/db/models/album_review')
+const Album = require('APP/db/models/album')
+const app = require('APP/server/start')
+let agent = request.agent(app)
 
-// describe('Album Reviews Route', () => {
-// 	// clear the db and recreate tables before run
-// 	before('wait for the db', () => db.didSync)
-// 	afterEach(function() {
-// 		return Promise.all([
-// 			Order.truncate({ cascade: true })
-// 		])
-// 	})
+describe('Albums Review Route', () => {
 
-// 	describe('GET /reviews/:albumId', function() {
+  before('wait for the db', () => db.didSync)
 
-// 		it('responds with a string via JSON', function() {
-			
-// 			return agent
-// 			.get('/api/')
 
-// 		})
+  beforeEach(function() {
+    Album.create({
+      title: 'Master Chef',
+      artist: 'Gordon Ramsey',
+      cost: 100,
+      quantity_available: 5
+    })
+    // .then(res => console.log(res))
+  })
 
-// 	})
+  afterEach(function () {
+    return Promise.all([
+      AlbumReview.truncate({ cascade: true }),
+      Album.truncate({ cascade: true })
+    ])
+  })
 
-// })
+  describe('GET /articles', function () {
+
+    it('responds with an array via JSON', function () {
+
+      return agent
+      .get('/api/reviews/1/reviews')
+      .expect(200)
+      .expect(function (res) {
+        // res.body is the JSON return object
+        expect(res.body).to.be.an.instanceOf(Array)
+        expect(res.body).to.have.length(0)
+      })
+
+    })
+  })
+
+  describe('POST reviews', function () {
+
+    it('creates a new review', function () {
+
+      return agent
+      .post('/api/reviews/6/reviews')
+      .send({
+        description: 'This is awesome',
+        stars: 5
+      })
+      .expect(function (res) {
+        expect(res.body.id).to.not.be.an('undefined')
+        expect(res.body.description).to.equal('This is awesome')
+        expect(res.body.stars).to.equal(5)
+      })
+
+    })
+  })
+})

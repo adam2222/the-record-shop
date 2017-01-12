@@ -1,7 +1,7 @@
-'use strict';
+'use strict'
 
-const Sequelize = require('sequelize');
-const db = require('APP/db');
+const Sequelize = require('sequelize')
+const db = require('APP/db')
 
 module.exports = db.define('album', {
   title: {
@@ -19,6 +19,7 @@ module.exports = db.define('album', {
     type: Sequelize.INTEGER,
     allowNull: false
   },
+  rating: Sequelize.INTEGER,      //see hook for album review
   quantity_available: {
     type: Sequelize.INTEGER,
     allowNull: false
@@ -29,4 +30,4 @@ module.exports = db.define('album', {
   image_back: {
     type: Sequelize.STRING
   },
-});
+})

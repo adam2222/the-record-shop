@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import HeaderContainer from '../containers/HeaderContainer'
 import HomeContainer from '../containers/HomeContainer'
-import Footer from './footer'
+import Footer from './Footer'
 
-export default class App extends Component {
-  render(){
+export default function App (props) {
+
     return (
       <div>
         <HeaderContainer />
@@ -12,5 +12,4 @@ export default class App extends Component {
         <Footer />
       </div>
     )
-  }
 }
