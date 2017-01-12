@@ -9,7 +9,11 @@ import AlbumContainer from './containers/AlbumContainer'
 
 import store from './store'
 
+
+render (
+
 ReactDOM.render(
+
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={App}>
@@ -20,8 +24,3 @@ ReactDOM.render(
   document.getElementById('main')
 )
 
-// <Route path="/puppies" component={AllPuppiesContainer}>
-//   <Route path="/puppies/:breed" component={AllPuppiesContainer} />
-// </Route>
-//
-// <Route path="puppy/:id" component={PuppyContainer} />
