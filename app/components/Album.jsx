@@ -11,8 +11,12 @@ export default function (props) {
       <div className="album-body">
         <div className="song-list">
           <ul>
-            <li></li>
+            <li>Song1</li>
+            <li>Song2</li>
+            <li>Song3</li>
           </ul>
+        </div>
+      </div>
     </div>
   )
 }
