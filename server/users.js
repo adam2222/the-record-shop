@@ -2,13 +2,13 @@
 
 const db = require('APP/db')
 const User = db.model('users')
-const ShoppingCartItem = db.model('shopping_cart');
+const ShoppingCartItem = require('../db/models/shopping_cart')
 const {mustBeLoggedIn, forbidden, selfOnly, adminOnly} = require('./auth.filters')
 const api = require('express').Router();
 
 // ALL USERS
 
-api.get('/', mustBeLoggedIn, adminOnly, (req, res, next) => 
+api.get('/', mustBeLoggedIn, adminOnly, (req, res, next) =>
 	User.scope('populate').findAll()
 	.then(users => res.json(users))
 	.catch(next)
@@ -28,7 +28,7 @@ api.get('/:userId', mustBeLoggedIn, selfOnly, (req, res, next) =>
 	.catch(next)
 )
 
-api.get('/:userId/orders', mustBeLoggedIn, selfOnly, (req, res, next) => 
+api.get('/:userId/orders', mustBeLoggedIn, selfOnly, (req, res, next) =>
 	Order.findAll({
 		where: {user_id: req.params.userId}
 	})
@@ -38,7 +38,7 @@ api.get('/:userId/orders', mustBeLoggedIn, selfOnly, (req, res, next) =>
 
 // ADMIN ACTIVITIES -- UPDATING AND DELETING USER PROFILES
 
-api.put('/:userId', mustBeLoggedIn, adminOnly, (req, res, next) => 
+api.put('/:userId', mustBeLoggedIn, adminOnly, (req, res, next) =>
 	User.update(req.body, {
 		where: {id: req.params.userId}
 	})
