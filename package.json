@@ -40,6 +40,7 @@
     "cookie-session": "^2.0.0-alpha.1",
     "enzyme": "^2.5.1",
     "express": "^4.14.0",
+    "jquery": "^3.1.1",
     "node-sass": "^4.2.0",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",

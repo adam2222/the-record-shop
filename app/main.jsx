@@ -3,10 +3,14 @@ import React from 'react'
 import {Router, Route, IndexRedirect, browserHistory} from 'react-router'
 import {render} from 'react-dom'
 import {connect, Provider} from 'react-redux'
-import App from './components/App'
-import HomeContainer from './containers/HomeContainer'
 
 import store from './store'
+import App from './components/App'
+import HomeContainer from './containers/HomeContainer'
+import AlbumContainer from './containers/AlbumContainer'
+import AlbumsContainer from './containers/AlbumsContainer'
+
+
 
 render (
   <Provider store={store}>
@@ -20,9 +24,3 @@ render (
   </Provider>,
   document.getElementById('main')
 )
-
-// <Route path="/puppies" component={AllPuppiesContainer}>
-//   <Route path="/puppies/:breed" component={AllPuppiesContainer} />
-// </Route>
-//
-// <Route path="puppy/:id" component={PuppyContainer} />

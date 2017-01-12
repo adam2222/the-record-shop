@@ -17,7 +17,7 @@ describe('The Shopping Cart model', () => {
 
   afterEach(function () {
     return Promise.all([
-      ShoppingCart.truncate({ cascade: true }),
+      ShoppingCartItem.truncate({ cascade: true }),
       Album.truncate({ cascade: true }),
       User.truncate({ cascade: true })
     ])
@@ -44,12 +44,32 @@ describe('The Shopping Cart model', () => {
 
         Promise.all([user, album])
         .spread((user, album) => {
-            return ShoppingCartItem.create({
-                quantity: 1,
-                user_id: user.id,
-                album_id: album.id
+          console.log('ALBUM')
+          console.log(Album)
+           user.addAlbum(album.id, { quantity: 1 })
+          .then(() => {
+            return ShoppingCartItem.findOne({
+              where: {
+                user_id: 1
+              }
             })
+          })
+          .then(item => {
+
+            console.log(item)
+
+          })
+          .catch(console.error.bind(console))
         })
+
     })
   })
 })
+
+// expect(item.album_id).to.equal(2)
+
+// return ShoppingCartItem.create({
+//   quantity: 1,
+//   user_id: user.id,
+//   album_id: album.id
+// })
