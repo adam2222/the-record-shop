@@ -15,19 +15,24 @@ describe('The Shopping Cart model', () => {
 
   })
 
+  afterEach(function () {
+    return Promise.all([
+      ShoppingCart.truncate({ cascade: true }),
+      Album.truncate({ cascade: true }),
+      User.truncate({ cascade: true })
+    ])
+  })
+
   describe('attributes definition', function(){
     it('includes an item quantity, user_id, and album_id', function () {
           const user = User.create({
-            id: 1,
             firstName: 'Adam',
             lastName: 'Intrator',
             email: 'adam@adam.adam',
-            password_digest: 'pass',
-            password: 'pass',
+            password: 'ok',
             DOB: '1980/4/3'
         })
         const album = Album.create({
-            id: 1,
             title: 'Bad',
             artist: 'Michael Jackson',
             genre: 'Pop',
@@ -46,11 +51,5 @@ describe('The Shopping Cart model', () => {
             })
         })
     })
-  })
-
-  afterEach(function () {
-    return Promise.all([
-      ShoppingCartItem.truncate({ cascade: true })
-    ])
   })
 })
