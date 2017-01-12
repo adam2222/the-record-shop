@@ -11,7 +11,7 @@ describe('The Shopping Cart model', () => {
 
   before('wait for the db', () => db.didSync)
 
-  let item;
+  let adam, bad;
 
   beforeEach(function(){
       const user = User.create({
@@ -32,30 +32,33 @@ describe('The Shopping Cart model', () => {
         description: 'Awesome!',
         cost: 10,
         quantity_available: 1
+
+
     })
-
-
 
     return Promise.all([user, album])
     .spread((user, album) => {
-        return ShoppingCartItem.create({
-            quantity: 1,
-            user_id: user.id,
-            album_id: album.id
-        })
+        adam = user;
+        bad = album;
     })
-    .then(cartItem => {
-      item = cartItem
+  })
+  describe('', () => {
+    it('creating an association between User and Album creates a new shopping cart item instance', function () {
+      adam.addAlbum(bad, { quantity: 2 })
+      .then(() => {
+        return ShoppingCartItem.findOne({
+            where: {
+              user_id: 1
+            }
+          })
+      })
+      .then(item => {
+        expect(item.album_id).to.equal(1)
+        expect(item.quantity).to.equal(2)
+      })
     })
   })
 
-  describe('attributes definition', function(){
-    it('includes an item quantity, user_id, and album_id', function () {
-      expect(item.user_id).to.equal(1)
-      expect(item.album_id).to.equal(1)
-      expect(item.quantity).to.equal(1)
-    })
-  })
 
   afterEach(function () {
     return Promise.all([
