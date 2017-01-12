@@ -9,6 +9,7 @@ api
   .use('/users', require('./users'))
   .use('/orders', require('./orders'))
   .use('/albums', require('./albums'))
+  .use('/reviews', require('./album_reviews'))
 
 // Send along any errors
 api.use((err, req, res, next) => {

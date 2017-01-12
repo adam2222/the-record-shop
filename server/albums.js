@@ -6,23 +6,23 @@ const {mustBeLoggedIn, forbidden, selfOnly, adminOnly} = require('./auth.filters
 const api = require('express').Router();
 
 api.get('/', (req, res, next) => {
-    Album.findAll({
-    	where: {
-    		quantity_available: {
-    			$gt: 0
-    		}
-    	}
-    })
-    .then(albums => res.json(albums))
-    .catch(next);
+Album.findAll({
+	where: {
+		quantity_available: {
+			$gt: 0
+		}
+	}
+})
+.then(albums => res.json(albums))
+.catch(next)
 })
 
 api.get('/:albumId', (req, res, next) => {
     Album.findOne({
-        where: {id: req.params.albumId}
+        where: {id: +req.params.albumId}
     })
     .then(album => res.json(album))
-    .catch(next);
+    .catch(next)
 })
 
 api.put('/:albumId/decrement/:quantity', (req, res, next) => {
@@ -40,4 +40,4 @@ api.put('/:albumId/decrement/:quantity', (req, res, next) => {
 	.catch(next)
 })
 
-module.exports = api;
+module.exports = api

@@ -7,15 +7,8 @@ const {expect} = require('chai')
 
 describe('The `Credit Card` model', () => {
 
-  /**
-   * First we clear the database and recreate the tables before beginning a run
-   */
-
   before('wait for the db', () => db.didSync)
 
-  /**
-   * Next, we create an (un-saved!) article instance before every spec
-   */
   var modelBody = {
     card_number: '4012888888881881',
     expiration_month: 12,
@@ -32,9 +25,6 @@ describe('The `Credit Card` model', () => {
     card = CreditCard.build(modelBody)
   })
 
-  /**
-   * Also, we empty the tables after each spec
-   */
   afterEach(function () {
     return Promise.all([
       CreditCard.truncate({ cascade: true })
@@ -43,11 +33,6 @@ describe('The `Credit Card` model', () => {
 
   describe('attributes definition', function(){
 
-    /**
-     * Your model should have two fields (both required): `title` and `content`.
-     *
-     * http://docs.sequelizejs.com/en/v3/docs/models-definition/#validations
-     */
     it('includes `card_number`, `expiration_month`, `expiration_year`, and `ccv`', function () {
 
       return card.save()
