@@ -21,8 +21,7 @@ module.exports = db.define('album', {
   },
   quantity_available: {
     type: Sequelize.INTEGER,
-    allowNull: false,
-    defaultValue: 1
+    allowNull: false
   },
   image_front: {
     type: Sequelize.STRING

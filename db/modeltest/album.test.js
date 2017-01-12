@@ -14,6 +14,15 @@ describe('The `Album` model', () => {
   before('wait for the db', () => db.didSync)
 
   /**
+   * Also, we empty the tables after each spec
+   */
+  afterEach(function () {
+    return Promise.all([
+      Album.truncate({ cascade: true })
+    ])
+  })
+
+  /**
    * Next, we create an (un-saved!) article instance before every spec
    * Next, we create an (un-saved!) a   */
   var modelBody = {
@@ -22,8 +31,7 @@ describe('The `Album` model', () => {
     genre: 'Pop',
     release_year: 2000,
     description: 'No Strings Attached is the second studio album by American boy band NSYNC, released on March 21, 2000 by Jive Records. Looking to distinguish their music from that of their labelmates, its music incorporates pop and R&B styles. Prior to the release of the album, NSYNC separated from their management Trans Continental and their label RCA Records; its title is a play on the idea of independence from corporate control.',
-    cost: 15,
-    quantity_available: 3
+    cost: 15
   }
 
   var modelBody2 = { //modelBody without quantity_available
@@ -39,15 +47,6 @@ describe('The `Album` model', () => {
   beforeEach(function(){
     album = Album.build(modelBody)
     album2 = Album.build(modelBody2) //modelBody without quantity_available
-  })
-
-  /**
-   * Also, we empty the tables after each spec
-   */
-  afterEach(function () {
-    return Promise.all([
-      Album.truncate({ cascade: true })
-    ])
   })
 
   describe('attributes definition', function(){
@@ -87,10 +86,6 @@ describe('The `Album` model', () => {
     })
 
 
-    it('has default quantity_available', function() {
-          expect(album2.quantity_available).to.equal(1)
-    })
-
     it('provides a default data value for artist if none is specified', function() {
       return album.save()
       .then(function(savedAlbum) {
@@ -115,4 +110,5 @@ describe('The `Album` model', () => {
       });
     })
   })
+
 })
