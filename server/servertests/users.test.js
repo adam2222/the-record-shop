@@ -1,9 +1,10 @@
+const db = require('APP/db')
+const app = require('APP/server/start')
 const request = require('supertest-as-promised')
 const {expect} = require('chai')
-const db = require('APP/db')
 const User = require('APP/db/models/user')
 const Album = require('APP/db/models/album')
-const app = require('APP/server/start')
+const ShoppingCartItem = require('APP/db/models/shopping_cart_items')
 const Promise = require('bluebird')
 
 const dummyAdminAcct = {
@@ -122,6 +123,7 @@ describe('User API', () => {
           password: 'pass',
           DOB: '1980/4/3'
       })
+
         const album = Album.create({
           id: 1,
           title: 'Bad',
@@ -133,8 +135,10 @@ describe('User API', () => {
           quantity_available: 1
       })
 
+      console.log('BEFORE EACH')
       return Promise.all([user, album])
       .spread((user, album) => {
+        console.log('as;dlfkja;sdlfkj;lk')
           return ShoppingCartItem.create({
               quantity: 1,
               user_id: user.id,
@@ -143,9 +147,12 @@ describe('User API', () => {
       })
     })
 
+
+
     describe('adding to cart', function(){
       it('returns json of added item', function(){
         request(app)
+        // .get('/api/users/1/')
         .put('/api/users/1/cart')
         .send({
           album_id: 1,
@@ -155,58 +162,20 @@ describe('User API', () => {
         .then(function(res) {
 
           console.log(res)
-          // expect(res.body.album_id).to.equal('2')
-          // expect(res.body.quantity).to.equal('1')
-          // expect(res.body.user_id).to.equal('1')
+          expect(res.body.album_id).to.equal('2')
+          expect(res.body.quantity).to.equal('1')
+          expect(res.body.user_id).to.equal('1')
         })
         .catch(console.error.bind(console))
       })
     })
- })
-    // beforeEach(function(){
-    //   const adam = User.create({
-    //     id: 1,
-    //     firstName: 'Adam',
-    //     lastName: 'Intrator',
-    //     email: 'adam@adam.adam',
-    //     password_digest: 'pass',
-    //     password: 'pass',
-    //     DOB: '1980/4/3'
-    //   })
-    //
-    //   const david = User.create({
-    //     id: 2,
-    //     firstName: 'David',
-    //     lastName: 'Godow',
-    //     email: 'david@adam.adam',
-    //     password_digest: 'asdf',
-    //     password: 'asd',
-    //   })
-    //
-    //   const bad = Album.create({
-    //       id: 1,
-    //       title: 'Bad',
-    //       artist: 'Michael Jackson',
-    //       genre: 'Pop',
-    //       release_year: 1986,
-    //       description: 'Awesome!',
-    //       cost: 10,
-    //       quantity_available: 2
-    //   })
-    //
-    //   const aftp = Album.create({
-    //       id: 2,
-    //       title: 'Automatic For The Peope',
-    //       artist: 'REM',
-    //       genre: 'Pop',
-    //       release_year: 1990,
-    //       description: 'Cool!',
-    //       cost: 10,
-    //       quantity_available: 3
-    //   })
-    //
-    // })
 
+    // afterEach(function () {
+    //   return Promise.all([
+    //     ShoppingCartItem.truncate({ cascade: true })
+    //   ])
+    // })
+ })
 
 
   // PASSWORD RESET TEST -- ASK HOW TO DO THIS

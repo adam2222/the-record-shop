@@ -38,11 +38,12 @@ api.get('/:userId/orders', mustBeLoggedIn, selfOnly, (req, res, next) =>
 
 // ADMIN ACTIVITIES -- UPDATING AND DELETING USER PROFILES
 
-api.put('/:userId', mustBeLoggedIn, adminOnly, (req, res, next) =>
+api.put('/:userId', mustBeLoggedIn, adminOnly, (req, res, next) =>{
+	console.log('HEYYY')
 	User.update(req.body, {
 		where: {id: req.params.userId}
 	})
-	.catch(next)
+	.catch(next)}
 )
 
 api.delete('/:userId', mustBeLoggedIn, adminOnly, (req, res, next) => {
@@ -55,6 +56,7 @@ api.delete('/:userId', mustBeLoggedIn, adminOnly, (req, res, next) => {
 // SHOPPING CART
 
 api.get('/:userId/cart', mustBeLoggedIn, (req, res, next) => {
+	console.log('HIIIII')
 	ShoppingCartItem.findAll({
 		where: {user_id: req.params.userId}
 	})
@@ -63,12 +65,19 @@ api.get('/:userId/cart', mustBeLoggedIn, (req, res, next) => {
 })
 
 api.put('/:userId/cart', (req, res, next) => {
+	console.log(req)
+	console.log('REQ.BODY.QUANTITY', req.body.quantity)
+	console.log('REQ.BODY.ALBUM_ID', req.body.album_id)
+	console.log('REQ.PARAMS.USERID', req.params.userId)
+
 	ShoppingCartItem.create({
 		quantity: req.body.quantity,
 		album_id: req.body.album_id,
-		user_id: req.params.userId
+		user_id: Number(req.params.userId)
 	})
 	.then(item => {
+		console.log('ITEM', item)
+
 		return res.json(item);
 	})
 	.catch(console.error.bind(console))
