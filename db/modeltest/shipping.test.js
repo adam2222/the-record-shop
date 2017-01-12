@@ -7,15 +7,8 @@ const {expect} = require('chai')
 
 describe('The `Shipping` model', () => {
 
-  /**
-   * First we clear the database and recreate the tables before beginning a run
-   */
-
   before('wait for the db', () => db.didSync)
 
-  /**
-   * Next, we create an (un-saved!) article instance before every spec
-   */
   var modelBody = {
     shipping_address: '20 main st',
     shipping_city: 'New York',
@@ -28,9 +21,7 @@ describe('The `Shipping` model', () => {
     location = Shipping.build(modelBody)
   })
 
-  /**
-   * Also, we empty the tables after each spec
-   */
+
   afterEach(function () {
     return Promise.all([
       Shipping.truncate({ cascade: true })
@@ -39,11 +30,7 @@ describe('The `Shipping` model', () => {
 
   describe('attributes definition', function(){
 
-    /**
-     * Your model should have two fields (both required): `title` and `content`.
-     *
-     * http://docs.sequelizejs.com/en/v3/docs/models-definition/#validations
-     */
+
     it('includes `shipping_address`, `shipping_city` and `shipping_state` shipping_zip_code', function () {
 
       return location.save()

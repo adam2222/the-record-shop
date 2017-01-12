@@ -33,15 +33,9 @@ describe('User', () => {
 
 describe('The `User` model', () => {
 
-  /**
-   * First we clear the database and recreate the tables before beginning a run
-   */
 
   before('wait for the db', () => db.didSync)
 
-  /**
-   * Next, we create an (un-saved!) article instance before every spec
-   */
   var modelBody = {
     firstName: 'James',
     lastName: 'Bond',
@@ -53,9 +47,7 @@ describe('The `User` model', () => {
     user = User.build(modelBody)
   })
 
-  /**
-   * Also, we empty the tables after each spec
-   */
+
   afterEach(function () {
     return Promise.all([
       User.truncate({ cascade: true })
@@ -64,11 +56,7 @@ describe('The `User` model', () => {
 
   describe('attributes definition', function(){
 
-    /**
-     * Your model should have two fields (both required): `title` and `content`.
-     *
-     * http://docs.sequelizejs.com/en/v3/docs/models-definition/#validations
-     */
+
     it('includes `firstName`, `email` and `lastName` fields', function () {
 
       return user.save()

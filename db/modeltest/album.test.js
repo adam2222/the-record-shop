@@ -84,7 +84,7 @@ describe('The `Album` model', () => {
 
     it('can handle long `description`', function() {
 
-      var albumDescription = 'WALL-E (stylized with an interpunct as WALL·E) is a 2008 American computer-animated science-fiction comedy film produced by Pixar Animation Studios and released by Walt Disney Pictures. Directed by Andrew Stanton, the story follows a robot named WALL-E, who is designed to clean up an abandoned, waste-covered Earth far in the future. He falls in love with another robot named EVE, who also has a programmed task, and follows her into outer space on an adventure that changes the destiny of both his kind and humanity. Both robots exhibit an appearance of free will and emotions similar to humans, which develop further as the film progresses.';
+      var albumDescription = 'WALL-E (stylized with an interpunct as WALL·E) is a 2008 American computer-animated science-fiction comedy film produced by Pixar Animation Studios and released by Walt Disney Pictures. Directed by Andrew Stanton, the story follows a robot named WALL-E, who is designed to clean up an abandoned, waste-covered Earth far in the future. He falls in love with another robot named EVE, who also has a programmed task, and follows her into outer space on an adventure that changes the destiny of both his kind and humanity. Both robots exhibit an appearance of free will and emotions similar to humans, which develop further as the film progresses.'
 
       return Album.create({
         title: 'Bad',
@@ -94,10 +94,10 @@ describe('The `Album` model', () => {
         quantity_available: 5
       })
       .then(function(result) {
-        expect(result).to.be.an('object');
-        expect(result.artist).to.equal('Michael Jackson');
-        expect(result.description).to.equal(albumDescription);
-      });
+        expect(result).to.be.an('object')
+        expect(result.artist).to.equal('Michael Jackson')
+        expect(result.description).to.equal(albumDescription)
+      })
     })
   })
 
