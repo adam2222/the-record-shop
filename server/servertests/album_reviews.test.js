@@ -4,6 +4,7 @@ const request = require('supertest-as-promised')
 const {expect} = require('chai')
 const db = require('APP/db')
 const AlbumReview = require('APP/db/models/album_review')
+const Album = require('APP/db/models/album')
 const app = require('APP/server/start')
 let agent = request.agent(app)
 
@@ -11,9 +12,21 @@ describe('Albums Review Route', () => {
 
   before('wait for the db', () => db.didSync)
 
+
+  beforeEach(function() {
+    Album.create({
+      title: 'Master Chef',
+      artist: 'Gordon Ramsey',
+      cost: 100,
+      quantity_available: 5
+    })
+    // .then(res => console.log(res))
+  })
+
   afterEach(function () {
     return Promise.all([
-      AlbumReview.truncate({ cascade: true })
+      AlbumReview.truncate({ cascade: true }),
+      Album.truncate({ cascade: true })
     ])
   })
 
@@ -22,7 +35,7 @@ describe('Albums Review Route', () => {
     it('responds with an array via JSON', function () {
 
       return agent
-      .get('/api/orders')
+      .get('/api/reviews/1/reviews')
       .expect(200)
       .expect(function (res) {
         // res.body is the JSON return object
@@ -31,83 +44,24 @@ describe('Albums Review Route', () => {
       })
 
     })
-    it('returns an order if there is one in the DB', function () {
-
-      var orders = AlbumReview.build({
-        total: 100
-      })
-
-      return orders.save().then(function () {
-
-        return agent
-        .get('/api/orders')
-        .expect(200)
-        .expect(function (res) {
-          expect(res.body).to.be.an.instanceOf(Array)
-          expect(res.body[0].total).to.equal(100)
-        })
-      })
-    })
   })
 
-  describe('PUT api/orders/:id', function () {
+  describe('POST reviews', function () {
 
-    var newOrder
-
-    beforeEach(function () {
-
-      return AlbumReview.create({
-        total: 200
-      })
-      .then(function (newlyCreatedOrder) {
-        newOrder = newlyCreatedOrder
-      })
-
-    })
-
-    it('updates an order', function () {
+    it('creates a new review', function () {
 
       return agent
-      .put('/api/orders/' + newOrder.id)
+      .post('/api/reviews/6/reviews')
       .send({
-        total: 100
+        description: 'This is awesome',
+        stars: 5
       })
-      .expect(200)
       .expect(function (res) {
         expect(res.body.id).to.not.be.an('undefined')
-        expect(res.body.total).to.equal(100)
-        expect(res.body.status).to.equal('created')
+        expect(res.body.description).to.equal('This is awesome')
+        expect(res.body.stars).to.equal(5)
       })
 
     })
-
-    it('saves updates to the DB', function () {
-
-      return agent
-      .put('/api/orders/' + newOrder.id)
-      .send({
-        total: 10
-      })
-      .then(function () {
-        return AlbumReview.findById(newOrder.id)
-      })
-      .then(function (foundOrder) {
-        expect(foundOrder).to.exist // eslint-disable-line no-unused-expressions
-        expect(foundOrder.total).to.equal(10)
-      })
-
-    })
-
-    it('gets 500 for invalid update', function () {
-
-      return agent
-      .put('/api/orders/' + newOrder.id)
-      .send({ total: 'no strings allowed' })
-      .expect(500)
-
-    })
-
   })
-
-
 })
