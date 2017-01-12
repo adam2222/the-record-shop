@@ -9,19 +9,19 @@ import HomeContainer from './containers/HomeContainer'
 
 import store from './store'
 
-
 render (
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={App}>
         <Route path="/home" component={HomeContainer} />
+        <Route path="/albums" component={AlbumsContainer} />
+        <Route path="/albums/:albumId" component={AlbumContainer} />
         <IndexRedirect to="/home" />
       </Route>
     </Router>
   </Provider>,
   document.getElementById('main')
 )
-
 
 
 
