@@ -36,7 +36,7 @@ module.exports = app
 
   // Serve static files from ../public
   .use(express.static(resolve(__dirname, '..', 'public')))
-  .use(express.static(resolve(__dirname, '..', 'node_modules')))
+  .use(express.static(resolve(__dirname, '..', 'node_modules/bootstrap3')))
 
   // Serve our api
   .use('/api', require('./api'))
@@ -56,4 +56,3 @@ if (module === require.main) {
     }
   )
 }
-
