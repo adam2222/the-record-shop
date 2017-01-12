@@ -6,15 +6,10 @@ const {expect} = require('chai')
 
 describe('The `Order` model', () => {
 
-  /**
-   * First we clear the database and recreate the tables before beginning a run
-   */
 
   before('wait for the db', () => db.didSync)
 
-  /**
-   * Next, we create an (un-saved!) article instance before every spec
-   */
+
   var modelBody = {
     total: 100,
     items: [{album: '90s', name: 'Jim'}, {album: '80s', name: 'Joe'}]
@@ -25,9 +20,7 @@ describe('The `Order` model', () => {
     currentOrder = Order.build(modelBody)
   })
 
-  /**
-   * Also, we empty the tables after each spec
-   */
+
   afterEach(function () {
     return Promise.all([
       Order.truncate({ cascade: true })
@@ -36,11 +29,6 @@ describe('The `Order` model', () => {
 
   describe('attributes definition', function(){
 
-    /**
-     * Your model should have two fields (both required): `title` and `content`.
-     *
-     * http://docs.sequelizejs.com/en/v3/docs/models-definition/#validations
-     */
     it('includes total and items field', function () {
 
       return currentOrder.save()

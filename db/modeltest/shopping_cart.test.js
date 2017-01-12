@@ -17,7 +17,7 @@ describe('The Shopping Cart model', () => {
 
   afterEach(function () {
     return Promise.all([
-      ShoppingCart.truncate({ cascade: true }),
+      ShoppingCartItem.truncate({ cascade: true }),
       Album.truncate({ cascade: true }),
       User.truncate({ cascade: true })
     ])
