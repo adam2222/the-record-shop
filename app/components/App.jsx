@@ -1,19 +1,15 @@
 import React, { Component } from 'react';
 import HeaderContainer from '../containers/HeaderContainer'
+import HomeContainer from '../containers/HomeContainer'
+import Footer from './Footer'
 
-export default class App extends Component {
-  render(){
+export default function App (props) {
+
     return (
       <div>
-        <div className="col-xs-12">
-          <HeaderContainer />
-        </div>
-
-        <div className="col-xs-12">
-          {this.props.children}
-        </div>
+        <HeaderContainer />
+        <HomeContainer />
+        <Footer />
       </div>
     )
-  }
-
 }

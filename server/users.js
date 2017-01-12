@@ -2,7 +2,9 @@
 
 const db = require('APP/db')
 const User = db.model('users')
-const ShoppingCartItem = db.model('shopping_cart_items');
+
+const ShoppingCartItem = require('../db/models/shopping_cart')
+
 const {mustBeLoggedIn, forbidden, selfOnly, adminOnly} = require('./auth.filters')
 const api = require('express').Router();
 
@@ -38,8 +40,9 @@ api.get('/:userId/orders', mustBeLoggedIn, selfOnly, (req, res, next) =>
 
 // ADMIN ACTIVITIES -- UPDATING AND DELETING USER PROFILES
 
-api.put('/:userId', mustBeLoggedIn, adminOnly, (req, res, next) =>{
-	console.log('HEYYY')
+
+
+api.put('/:userId', mustBeLoggedIn, adminOnly, (req, res, next) =>
 	User.update(req.body, {
 		where: {id: req.params.userId}
 	})

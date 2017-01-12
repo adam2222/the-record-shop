@@ -34,6 +34,7 @@ describe('The Shopping Cart model', () => {
         quantity_available: 1
 
 
+
     })
 
     return Promise.all([user, album])
