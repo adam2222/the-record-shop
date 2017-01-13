@@ -4,9 +4,9 @@ import { Link } from 'react-router'
 export default class AllAlbums extends Component {
 
   render() {
-    console.log(this.props.allAlbums)
+    const arrayOfAlbums = this.props.filteredAlbums[0] ? this.props.filteredAlbums : this.props.allAlbums
 
-    const arrayOfAllAlbums = this.props.allAlbums.map(album => {
+    const renderedAlbums = arrayOfAlbums.map(album => {
       return (
         <div className="col-md-3" key={album.id}>
           <div className="product">
@@ -27,7 +27,7 @@ export default class AllAlbums extends Component {
     return (
       <div className="container">
         <div className="row">
-          {arrayOfAllAlbums}
+          {renderedAlbums}
         </div>
       </div>
     )
