@@ -4,14 +4,11 @@ import ReactDOM from 'react-dom'
 import {Router, Route, IndexRedirect, browserHistory} from 'react-router'
 import {render} from 'react-dom'
 import {connect, Provider} from 'react-redux'
-
-import store from './store'
 import App from './components/App'
-import HomeContainer from './containers/HomeContainer'
 import AlbumContainer from './containers/AlbumContainer'
 import AllAlbumsContainer from './containers/AllAlbumsContainer'
-import { loadAlbums } from './reducers/AllAlbumsReducer'
 
+import { loadAlbums } from './reducers/AllAlbumsReducer'
 
 import store from './store'
 
