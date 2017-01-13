@@ -4,7 +4,6 @@ import { Link } from 'react-router'
 export default class AllAlbums extends Component {
 
   render() {
-    console.log(this.props.allAlbums)
 
     const arrayOfAllAlbums = this.props.allAlbums.map(album => {
       return (
