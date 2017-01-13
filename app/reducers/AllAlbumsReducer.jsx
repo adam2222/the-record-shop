@@ -3,6 +3,7 @@ import axios from 'axios'
 /* -----------------    ACTIONS     ------------------ */
 
 const GET_ALBUMS = 'GET_ALBUMS'
+const GET_ALBUM = 'GET_ALBUM'
 const UPDATE_ALBUM_INVENTORY = 'UPDATE_ALBUM_INVENTORY'
 
 
@@ -12,6 +13,13 @@ export const findAlbums = (allAlbums) => {
   return {
     type: GET_ALBUMS,
     allAlbums
+  }
+}
+
+export const findAlbum = (selectedAlbum) => {
+  return {
+    type: GET_ALBUM,
+    selectedAlbum
   }
 }
 
@@ -40,19 +48,36 @@ export const updateAlbumQuantity = (albumId, amount) => dispatch => {
   .catch(err => console.error('unable to update album', err))
 }
 
+export const getAlbumById = (albumId) => dispatch => {
+  axios.get(`/api/albums/${albumId}`)
+  .then(response => dispatch(findAlbum(response.data)))
+}
+
 
 /* -----------------    REDUCER     ------------------ */
 
-const reducer = (state = [], action) => {
+const reducer = (state = {selectedAlbum: {}, allAlbums: []}, action) => {
+
+  const newState = Object.assign({}, state);
+
   switch (action.type) {
     case GET_ALBUMS:
-      return action.allAlbums
+      newState.allAlbums = action.allAlbums;
+      break
+    case GET_ALBUM:
+      newState.selectedAlbum = action.selectedAlbum
+      break
     case UPDATE_ALBUM_INVENTORY:
-      return state.map(album => album.id === action.updatedAlbum.id ? action.updatedAlbum : album)
+      newState.allAlbums = state.map(album => album.id === action.updatedAlbum.id ? action.updatedAlbum : album);
+      break
     default:
       return state
-  }
+  } 
+
+  return newState
 }
+
+
 
 
 export default reducer
