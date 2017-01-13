@@ -30,7 +30,6 @@ describe('Albums Route', () => {
       .expect(200)
       .expect(function (res) {
         // res.body is the JSON return object
-        console.log(res.body)
         expect(res.body).to.be.an.instanceOf(Array)
         expect(res.body).to.have.length(0)
       })
