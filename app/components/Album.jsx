@@ -3,8 +3,10 @@ import HeaderContainer from '../containers/HeaderContainer'
 
 export default function (props) {
 
+
   const album = props.selectedAlbum
   console.log(album)
+
 
   return (
     <div>
@@ -24,3 +26,15 @@ export default function (props) {
     </div>
   )
 }
+
+// <div>
+//   <div className="album-header">
+//     <h1>An Album Title</h1>
+//     <h2>A Band Name</h2>
+//   </div>
+//   <div className="album-body">
+//     <div className="song-list">
+//       <ul>
+//         <li></li>
+//       </ul>
+//     </div>
