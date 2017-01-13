@@ -52,7 +52,7 @@ export const getAlbumById = (albumId) => dispatch => {
   axios.get(`/api/albums/${albumId}`)
   .then(response => dispatch(findAlbum(response.data)))
 }
-
+ 
 
 /* -----------------    REDUCER     ------------------ */
 
@@ -68,11 +68,11 @@ const reducer = (state = {selectedAlbum: {}, allAlbums: []}, action) => {
       newState.selectedAlbum = action.selectedAlbum
       break
     case UPDATE_ALBUM_INVENTORY:
-      newState.allAlbums = state.map(album => album.id === action.updatedAlbum.id ? action.updatedAlbum : album);
+      newState.allAlbums = state.allAlbums.map(album => album.id === action.updatedAlbum.id ? action.updatedAlbum : album);
       break
     default:
       return state
-  } 
+  }
 
   return newState
 }
