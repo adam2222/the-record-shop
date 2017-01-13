@@ -1,0 +1,12 @@
+* {
+  color: white; }
+
+img {
+  max-height: 55px; }
+
+.row {
+  background-image: url("/images/record_background.jpg");
+  height: 60px; }
+
+.col-md-5 {
+  vertical-align: middle; }
