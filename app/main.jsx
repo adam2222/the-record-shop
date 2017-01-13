@@ -9,6 +9,7 @@ import AlbumContainer from './containers/AlbumContainer'
 import AllAlbumsContainer from './containers/AllAlbumsContainer'
 
 import { loadAlbums, getAlbumById } from './reducers/AllAlbumsReducer'
+import { loadReviews } from './reducers/AlbumReviewsReducer'
 
 import store from './store'
 
@@ -17,8 +18,9 @@ const fetchAllData = () => {
 }
 
 const onAlbumEnter = (nextRouterState) => {
-  const albumId = nextRouterState.params.albumId
+  const albumId = +nextRouterState.params.albumId
   store.dispatch(getAlbumById(albumId))
+  store.dispatch(loadReviews(albumId))
 }
 
 ReactDOM.render(
