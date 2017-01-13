@@ -135,10 +135,8 @@ describe('User API', () => {
           quantity_available: 1
       })
 
-      console.log('BEFORE EACH')
       return Promise.all([user, album])
       .spread((user, album) => {
-        console.log('as;dlfkja;sdlfkj;lk')
           return ShoppingCartItem.create({
               quantity: 1,
               user_id: user.id,
@@ -160,13 +158,10 @@ describe('User API', () => {
         })
         .expect(200)
         .then(function(res) {
-
-          console.log(res)
           expect(res.body.album_id).to.equal('2')
           expect(res.body.quantity).to.equal('1')
           expect(res.body.user_id).to.equal('1')
         })
-        .catch(console.error.bind(console))
       })
     })
 

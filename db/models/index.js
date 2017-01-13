@@ -10,7 +10,7 @@ const Shipping = require('./shipping')
 const CreditCard = require('./credit_card')
 const Order = require('./order')
 const AlbumReview = require('./album_review')
-const ShoppingCartItem = require('./shopping_cart')
+const ShoppingCartItem = require('./shopping_cart_items')
 
 Shipping.belongsTo(User)
 User.hasMany(Shipping)

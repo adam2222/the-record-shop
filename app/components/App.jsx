@@ -1,15 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import HeaderContainer from '../containers/HeaderContainer'
-import HomeContainer from '../containers/HomeContainer'
-import Footer from './Footer'
+// import Footer from './footer'
 
-export default function App (props) {
-
-    return (
-      <div>
-        <HeaderContainer />
-        <HomeContainer />
-        <Footer />
-      </div>
-    )
+export default (props) => {
+  console.log('hit')
+  return (
+    <div>
+      <HeaderContainer />
+        {props.children}
+    </div>
+  )
 }

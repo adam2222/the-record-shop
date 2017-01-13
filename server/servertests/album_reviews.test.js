@@ -20,7 +20,6 @@ describe('Albums Review Route', () => {
       cost: 100,
       quantity_available: 5
     })
-    // .then(res => console.log(res))
   })
 
   afterEach(function () {
@@ -51,7 +50,7 @@ describe('Albums Review Route', () => {
     it('creates a new review', function () {
 
       return agent
-      .post('/api/reviews/6/reviews')
+      .post('/api/reviews/5/reviews')
       .send({
         description: 'This is awesome',
         stars: 5
