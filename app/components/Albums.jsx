@@ -18,6 +18,12 @@ export default class AllAlbums extends Component {
     })
   }
 
+  componentWillMount() {
+    this.setState({
+      quantity: 1
+    })
+  }
+
   render() {
     console.log(this.state.quantity)
 
@@ -34,13 +40,13 @@ export default class AllAlbums extends Component {
               <h3><Link to={`/albums/${album.id}`}>{album.title}</Link></h3>
               <h4>{album.artist}</h4>
             </div>
-            <div className="price col-sm-6">
-              ${album.cost}
+            <div className="price col-sm-4">
+              Price: ${album.cost}
             </div>
-            <div className="col-sm-6">
+            <div className="col-sm-4">
               <Dropdown onChange={this.handleChange} album={album}/>
             </div>
-
+            <button type="button" className="col-sm-4 btn btn-success">Add to Cart</button>
 
           </div>
         </div>
