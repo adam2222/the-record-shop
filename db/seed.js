@@ -1,7 +1,7 @@
 const db = require('APP/db')
 
-const seedUsers = () => db.Promise.map([
-  {title: 'Welcome to Flavortown', artist: 'Guy Fieri', genre: '1234', release_year: '2010', description: 'The greatest culinary experience ever.', cost: 30, quantity_available: 2},
+const seedAlbums = () => db.Promise.map([
+  {title: 'Welcome to Flavortown', artist: 'Guy Fieri', genre: '1234', release_year: '2010', description: 'The greatest culinary experience ever.', cost: 30, quantity_available: 2, image_front: 'https://images-na.ssl-images-amazon.com/images/I/81cpVFGmRfL._SX522_.jpg', image_back: 'https://images-na.ssl-images-amazon.com/images/I/81nFlfw42sL._SX522_.jpg'},
   {title: 'Funeral', artist: 'Arcade Fire', genre: 'Indie Rock', release_year: '2004', description: `The Arcade Fire's debut LP is a glorious, theatrical explosion of strings, horns, xylophones, accordions, and passionate, multi-voiced verses. Simultaneously sad, romantic and celebratory, the album's emotional strength combined with the sheer magnitude of its sound made "Funeral" truly unlike anything before it and inspired a legion of copycat acts that are still trying to catch up`, cost: 30, quantity_available: 2, image_front: 'https://images-na.ssl-images-amazon.com/images/I/81cpVFGmRfL._SX522_.jpg', image_back: 'https://images-na.ssl-images-amazon.com/images/I/81nFlfw42sL._SX522_.jpg'},
   {title: 'Kid A', artist: 'Radiohead', genre: 'Alternative Rock', release_year: '2000', description: `"Kid A" -- the follow-up to Radiohead's 1997's post-modern alt-rock classic "OK Computer" -- obliterated many people's notion of rock music from the fuzzy first tones of "Everything In Its Right Place." Driven by effects and fronted by Thom Yorke's oft-distorted vocals, "Kid A" was experimental and abstract, rooted in complex, mind-blowing electronic soundscapes.`, cost: 30, quantity_available: 2, image_front: 'https://images-na.ssl-images-amazon.com/images/I/81cpVFGmRfL._SX522_.jpg', image_back: 'https://images-na.ssl-images-amazon.com/images/I/81nFlfw42sL._SX522_.jpg'},
   {title: 'Is This It', artist: 'Strokes', genre: 'Indie Rock', release_year: '2001', description: `New York band the Strokes struck a post-9/11 chord with a confident and refreshing rock record that reflected the frantic, urgent angst of a city in transition. Featuring the singles "Hard To Explain" and "Last Nite," "Is This It" took its cues from artists like the Stooges and Television and blew through the indie-rock landscape like a blast of fresh air.`, cost: 20, quantity_available: 1, image_front: 'https://images-na.ssl-images-amazon.com/images/I/81cpVFGmRfL._SX522_.jpg', image_back: 'https://images-na.ssl-images-amazon.com/images/I/81nFlfw42sL._SX522_.jpg'},
@@ -13,16 +13,20 @@ const seedUsers = () => db.Promise.map([
   {title: 'Elephant', artist: 'The White Stripes', genre: 'Indie Rock', release_year: '2003', description: `The White Stripes' major-label debut introduced an explosive, bottom-heavy sound that signaled a departure from the band's sparse guitar-and-drums formula. Jack White's amp-ripping guitar work stayed in tact as the band experimented with kinetic bass rhythms ("Seven Nation Army"), lithe piano melodies ("I Want To Be The Boy"), and Meg White's vocals ("In The Cold, Cold Night"), all of which helped the Stripes grow from indie icons into arena-rocking superstars.`, cost: 10, quantity_available: 10, image_front: 'https://images-na.ssl-images-amazon.com/images/I/81cpVFGmRfL._SX522_.jpg', image_back: 'https://images-na.ssl-images-amazon.com/images/I/81nFlfw42sL._SX522_.jpg'}
 ], singleAlbum => db.model('album').create(singleAlbum))
 
+const seedUsers = () => db.Promise.map([
+  {firstName: 'Guy', lastName: 'Fieri', email: 'ddd@example.com', password: '1234'},
+  {firstName: 'Barack', lastName: 'Obama', email: 'barack@example.gov', password: '1234'},
+], user => db.model('users').create(user))
+
 db.didSync
   .then(() => db.sync({force: true}))
   .then(seedUsers)
   .then(users => console.log(`Seeded ${users.length} users OK`))
+  .then(seedAlbums)
+  .then(albums => console.log(`Seeded ${albums.length} albums OK`))
   .catch(error => console.error(error))
   .finally(() => db.close())
 
 
 
-// const seedUsers = () => db.Promise.map([
-//   {name: 'Guy Fieri', email: 'ddd@example.com', password: '1234'},
-//   {name: 'Barack Obama', email: 'barack@example.gov', password: '1234'},
-// ], user => db.model('users').create(user))
+
