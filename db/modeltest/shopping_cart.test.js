@@ -66,4 +66,13 @@ describe('The Shopping Cart model', () => {
       ShoppingCartItem.truncate({ cascade: true })
     ])
   })
+
 })
+
+// expect(item.album_id).to.equal(2)
+
+// return ShoppingCartItem.create({
+//   quantity: 1,
+//   user_id: user.id,
+//   album_id: album.id
+// })
