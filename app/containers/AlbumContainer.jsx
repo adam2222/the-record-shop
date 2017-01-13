@@ -4,14 +4,8 @@ import Album from '../components/album'
 
 const mapStateToProps = state => {
     return {
-
+        selectedAlbum: state.albums.selectedAlbum
     }
 }
 
-const mapDispatchToProps = state => {
-    return {
-
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Album);
+export default connect(mapStateToProps)(Album);
