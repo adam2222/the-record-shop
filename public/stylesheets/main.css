@@ -2,10 +2,7 @@
 MUST INCLUDE IMPORT STATEMENTS FOR OTHER .SCSS FILES UP TOP HERE
 e.g., @import "albums"
 */
-* {
-  color: black; }
-
-img {
+nav img {
   max-height: 55px; }
 
 nav {
@@ -14,8 +11,9 @@ nav {
 .col-md-3 {
   border: solid thin blue; }
 
-.navbar-nav {
-  font-weight: bold; }
+#blue li a {
+  font-weight: bold;
+  color: #23527c; }
 
 #body {
   margin: 20px 0 0 0; }

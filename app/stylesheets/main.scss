@@ -5,13 +5,15 @@
   border: solid thin blue;
 }
 
-.navbar-nav {
+#blue li a {
   font-weight: bold;
+  color: #23527c;
 }
 
 #body {
   margin: 20px 0 0 0;
 
 }
+
 
 @import "album";
