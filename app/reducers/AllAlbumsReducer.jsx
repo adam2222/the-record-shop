@@ -5,7 +5,7 @@ import axios from 'axios'
 const GET_ALBUMS = 'GET_ALBUMS'
 const GET_ALBUM = 'GET_ALBUM'
 const UPDATE_ALBUM_INVENTORY = 'UPDATE_ALBUM_INVENTORY'
-
+const FILTER_ALBUMS = 'FILTER_ALBUMS'
 
 /* -----------------    ACTION CREATORS    ------------------ */
 
@@ -13,6 +13,12 @@ export const findAlbums = (allAlbums) => {
   return {
     type: GET_ALBUMS,
     allAlbums
+  }
+}
+export const filterAlbums = (filteredAlbums) => {
+  return {
+    type: FILTER_ALBUMS,
+    filteredAlbums
   }
 }
 
@@ -56,7 +62,7 @@ export const getAlbumById = (albumId) => dispatch => {
 
 /* -----------------    REDUCER     ------------------ */
 
-const reducer = (state = {selectedAlbum: {}, allAlbums: []}, action) => {
+const reducer = (state = {selectedAlbum: {}, allAlbums: [], filteredAlbums: []}, action) => {
 
   const newState = Object.assign({}, state);
 
@@ -67,12 +73,15 @@ const reducer = (state = {selectedAlbum: {}, allAlbums: []}, action) => {
     case GET_ALBUM:
       newState.selectedAlbum = action.selectedAlbum
       break
+    case FILTER_ALBUMS:
+      newState.filteredAlbums = action.filteredAlbums
+      break
     case UPDATE_ALBUM_INVENTORY:
-      newState.allAlbums = state.map(album => album.id === action.updatedAlbum.id ? action.updatedAlbum : album);
+      newState.allAlbums = state.allAlbums.map(album => album.id === action.updatedAlbum.id ? action.updatedAlbum : album);
       break
     default:
       return state
-  } 
+  }
 
   return newState
 }

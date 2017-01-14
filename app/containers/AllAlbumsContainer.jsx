@@ -3,7 +3,8 @@ import Albums from '../components/Albums'
 
 const mapStateToProps = (state) => {
   return {
-    allAlbums: state.albums.allAlbums
+    allAlbums: state.albums.allAlbums,
+    filteredAlbums: state.albums.filteredAlbums
   }
 }
 
