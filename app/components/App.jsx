@@ -6,7 +6,10 @@ export default (props) => {
   return (
     <div>
       <HeaderContainer />
-        {props.children}
+      {props.children}
     </div>
   )
 }
+
+// <div className="row-header" id="header"> <HeaderContainer /></div>
+// <div id="body">{props.children && React.cloneElement(props.children, props)}</div>

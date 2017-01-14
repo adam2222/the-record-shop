@@ -8,7 +8,7 @@ e.g., @import "albums"
 img {
   max-height: 55px; }
 
-.row {
+.row-header {
   background-image: url("/images/record_background.jpg");
   height: 60px; }
 

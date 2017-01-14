@@ -86,7 +86,4 @@ const reducer = (state = {selectedAlbum: {}, allAlbums: [], filteredAlbums: []},
   return newState
 }
 
-
-
-
 export default reducer
