@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import HeaderContainer from '../containers/HeaderContainer'
-// import Footer from './footer'
+import Footer from './footer'
 
 export default (props) => {
   return (
     <div>
-      <HeaderContainer />
-        {props.children}
+  		<HeaderContainer />
+	    {props.children}
+	    <Footer />
     </div>
   )
 }
