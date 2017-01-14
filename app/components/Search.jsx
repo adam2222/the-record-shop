@@ -20,7 +20,7 @@ class Search extends Component {
       const filteredAlbumsfromState = this.props.filteredAlbums
       const inputValue = this.state.inputValue
 
-      let filtered = allAlbums.filter(album => album.title.match(inputValue))
+      let filtered = allAlbums.filter(album => album.title.toLowerCase().match(inputValue))
       console.log('INPUTVALUE', inputValue)
       console.log('FILTERED', filtered)
       // console.log(filtered)
@@ -35,11 +35,15 @@ class Search extends Component {
   render(){
     return (
         <form onSubmit={evt => {
-          evt.preventDefault()
+          evt.preventDefault();
           search(evt.target.search.value)
-        } }>
-          <input name="search" onChange={this.handleChange} value={this.state.inputValue}/>
-          <input type="submit" value="Search" />
+          }}>
+
+          <div className="form-group">
+            <input className="form-control" name="search" placeholder="Search Albums" onChange={this.handleChange} value={this.state.inputValue}/>
+          </div>
+          <button type="submit" className="btn btn-default">Search</button>
+
         </form>
     )
   }
