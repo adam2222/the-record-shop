@@ -33,7 +33,7 @@ export default function ShoppingCart (props) {
                                 <td>${album.albumDetails.cost}</td>
                                 <td>
                                     <div className="input-group quantity-input">
-                                        <input type="text" className="form-control" value={album.quantity} onChange={}></input>
+                                        <input type="text" className="form-control" value={album.quantity}></input>
                                     </div>
                                 </td>
                                 <td>${album.albumDetails.cost * album.quantity}</td>
