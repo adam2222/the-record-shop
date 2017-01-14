@@ -34,7 +34,7 @@ class Search extends Component {
 
   render(){
     return (
-        <form onSubmit={evt => {
+        <form className="navbar-form navbar-left" onSubmit={evt => {
           evt.preventDefault();
           search(evt.target.search.value)
           }}>
