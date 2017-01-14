@@ -25,10 +25,8 @@ export default class AllAlbums extends Component {
     })
 
     return (
-      <div className="container">
-        <div className="row">
-          {renderedAlbums}
-        </div>
+      <div>
+        {renderedAlbums}
       </div>
     )
   }

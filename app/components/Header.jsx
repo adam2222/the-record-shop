@@ -5,13 +5,24 @@ import Search from './Search'
 export default class Header extends Component {
   render(){
     return (
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-md-2"> <img id="logo" src='/images/logo.png' /> </div>
-          <div className="col-md-5"><Search /></div>
-          <div className="col-md-5"> <Login /> </div>
+      <nav className="navbar navbar-default">
+        <div className="container-fluid">
+          <div className="navbar-header"> <img id="logo" src='/images/logo_inversed.png' /> </div>
+          <div className="navbar-collapse collapse">
+            <ul className="nav navbar-nav" id="blue">
+              <li> <a href="#"> Home </a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Contact Us</a></li>
+            </ul>
+            <Search />
+
+            <Login />
+
+
+
+          </div>
         </div>
-      </div>
+      </nav>
       )
   }
 

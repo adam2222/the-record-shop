@@ -3,4 +3,20 @@ MUST INCLUDE IMPORT STATEMENTS FOR OTHER .SCSS FILES UP TOP HERE
 e.g., @import "albums"
 */
 @import "header";
+
+.col-md-3 {
+  border: solid thin blue;
+}
+
+#blue li a {
+  font-weight: bold;
+  color: #23527c;
+}
+
+#body {
+  margin: 20px 0 0 0;
+
+}
+
+
 @import "album";
