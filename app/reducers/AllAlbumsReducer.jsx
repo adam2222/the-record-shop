@@ -52,7 +52,7 @@ export const getAlbumById = (albumId) => dispatch => {
   axios.get(`/api/albums/${albumId}`)
   .then(response => dispatch(findAlbum(response.data)))
 }
- 
+
 
 /* -----------------    REDUCER     ------------------ */
 

@@ -25,7 +25,6 @@ export default class AllAlbums extends Component {
   }
 
   render() {
-    console.log(this.state.quantity)
 
     const arrayOfAllAlbums = this.props.allAlbums.map(album => {
       return (
@@ -54,7 +53,7 @@ export default class AllAlbums extends Component {
     })
 
     return (
-      <div className="container">
+      <div className="container-fluid">
         <div className="row">
           {arrayOfAllAlbums}
         </div>
