@@ -20,7 +20,7 @@ class Search extends Component {
       const filteredAlbumsfromState = this.props.filteredAlbums
       const inputValue = this.state.inputValue
 
-      let filtered = allAlbums.filter(album => album.title.toLowerCase().match(inputValue))
+      let filtered = allAlbums.filter(album => album.title.toLowerCase().match(inputValue.toLowerCase()))
       console.log('INPUTVALUE', inputValue)
       console.log('FILTERED', filtered)
       // console.log(filtered)

@@ -11,6 +11,7 @@ import ShoppingCartContainer from './containers/ShoppingCartContainer'
 
 import { loadAlbums, getAlbumById } from './reducers/AllAlbumsReducer'
 import { getCartFromDB } from './reducers/ShoppingCartReducer'
+import { loadReviews } from './reducers/AlbumReviewsReducer'
 
 import store from './store'
 
@@ -19,8 +20,9 @@ const fetchAllData = () => {
 }
 
 const onAlbumEnter = (nextRouterState) => {
-  const albumId = nextRouterState.params.albumId
+  const albumId = +nextRouterState.params.albumId
   store.dispatch(getAlbumById(albumId))
+  store.dispatch(loadReviews(albumId))
 }
 
 const onCartEnter = (nextRouterState) => {
