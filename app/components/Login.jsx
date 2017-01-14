@@ -17,6 +17,9 @@ export const Login = (props) => {
           <button className="btn btn-default" type="submit">Log In</button>
         </form>
       </li>
+      <a className="btn btn-social-icon btn-github">
+        <span className="fa fa-github"></span>
+      </a>
       <li><a href="#">Sign Up</a></li>
     </ul>
   )
