@@ -27,7 +27,7 @@ ReactDOM.render(
       <Route path="/" component={App} onEnter={ fetchAllData }>
         <Route path="/home" component={ AllAlbumsContainer } />
         <Route path="/albums/:albumId" component={AlbumContainer} onEnter={onAlbumEnter}/>
-        {/*<IndexRedirect to="/home" />*/}
+        <IndexRedirect to="/home" />
       </Route>
     </Router>
   </Provider>,

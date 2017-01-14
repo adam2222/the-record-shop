@@ -4,9 +4,14 @@ import HeaderContainer from '../containers/HeaderContainer'
 
 export default (props) => {
   return (
-    <div>
-      <HeaderContainer />
+    <div className="container-fluid">
+      <div className="row" id="header">
+        <HeaderContainer />
+      </div>
+
+      <div className="row" id="body">
         {props.children}
+      </div>
     </div>
   )
 }
