@@ -27,13 +27,13 @@ export default function ShoppingCart (props) {
                     <tbody>
                     {
                         cart && cart.map(album => (
-                             <tr id={album.albumDetails.id}>
+                             <tr key={album.albumDetails.id}>
                                 <td>{album.albumDetails.title}</td>
                                 <td>{album.albumDetails.artist}</td>
                                 <td>${album.albumDetails.cost}</td>
                                 <td>
                                     <div className="input-group quantity-input">
-                                        <input type="text" className="form-control" value={album.quantity}></input>
+                                        <input type="text" className="form-control" value={album.quantity} onChange={}></input>
                                     </div>
                                 </td>
                                 <td>${album.albumDetails.cost * album.quantity}</td>
