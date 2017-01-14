@@ -12,7 +12,6 @@ export default class extends Component {
     this.handleChange = this.handleChange.bind(this)
     this.onClick = this.onClick.bind(this)
   }
-
   onClick(event) {
     this.setState({
       edit: !this.state.edit
@@ -66,6 +65,5 @@ export default class extends Component {
         </div>
       </div>
     )
-
   }
 }

@@ -1,10 +1,10 @@
 * {
-  color: white; }
+  color: black; }
 
 img {
   max-height: 55px; }
 
-.row {
+.row-header {
   background-image: url("/images/record_background.jpg");
   height: 60px; }
 

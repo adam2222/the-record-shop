@@ -5,7 +5,7 @@ import Dropdown from './Dropdown'
 export default class AllAlbums extends Component {
 
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       quantity: 0
     }
@@ -25,8 +25,9 @@ export default class AllAlbums extends Component {
   }
 
   render() {
+    const arrayOfAlbums = this.props.filteredAlbums[0] ? this.props.filteredAlbums : this.props.allAlbums
 
-    const arrayOfAllAlbums = this.props.allAlbums.map(album => {
+    const renderedAlbums = arrayOfAlbums.map(album => {
       return (
         <div className="col-md-3" key={album.id}>
           <div className="product">
@@ -43,7 +44,7 @@ export default class AllAlbums extends Component {
               Price: ${album.cost}
             </div>
             <div className="col-sm-4">
-              <Dropdown onChange={this.handleChange} album={album}/>
+              <Dropdown onChange={this.handleChange} album={album} />
             </div>
             <button type="button" className="col-sm-4 btn btn-success">Add to Cart</button>
 
@@ -55,7 +56,7 @@ export default class AllAlbums extends Component {
     return (
       <div className="container-fluid">
         <div className="row">
-          {arrayOfAllAlbums}
+          {renderedAlbums}
         </div>
       </div>
     )

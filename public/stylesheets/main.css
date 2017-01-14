@@ -3,12 +3,12 @@ MUST INCLUDE IMPORT STATEMENTS FOR OTHER .SCSS FILES UP TOP HERE
 e.g., @import "albums"
 */
 * {
-  color: white; }
+  color: black; }
 
 img {
   max-height: 55px; }
 
-.row {
+.row-header {
   background-image: url("/images/record_background.jpg");
   height: 60px; }
 

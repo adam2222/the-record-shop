@@ -66,16 +66,22 @@ api.get('/:userId/cart', mustBeLoggedIn, (req, res, next) => {
 	.catch(next)
 })
 
-api.put('/:userId/cart', (req, res, next) => {
+// api.post('/:userId/cart', (req, res, next) => {
 
-	ShoppingCartItem.create({
+// })
+
+api.put('/:userId/cart/:albumId', (req, res, next) => {
+	ShoppingCartItem.findOrCreate({
+		where: {
+			album_id: req.params.albumId,
+			user_id: req.params.userId
+		}
+	}, {
 		quantity: req.body.quantity,
 		album_id: req.body.album_id,
 		user_id: Number(req.params.userId)
 	})
-	.then(item => {
-		return res.json(item);
-	})
+	.then(() => res.sendStatus(201))
 	.catch(console.error.bind(console))
 })
 
