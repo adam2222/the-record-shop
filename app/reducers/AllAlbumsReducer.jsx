@@ -77,7 +77,4 @@ const reducer = (state = {selectedAlbum: {}, allAlbums: []}, action) => {
   return newState
 }
 
-
-
-
 export default reducer

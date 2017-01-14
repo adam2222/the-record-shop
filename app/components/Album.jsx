@@ -3,10 +3,7 @@ import HeaderContainer from '../containers/HeaderContainer'
 
 export default function (props) {
 
-
   const album = props.selectedAlbum
-  console.log(album)
-
 
   return (
     <div>
@@ -22,6 +19,7 @@ export default function (props) {
         <div className="desc">
           {album.description}
         </div>
+        {/* Add add to cart button, cost, album reviews, rating, quantity available */}
       </div>
     </div>
   )
