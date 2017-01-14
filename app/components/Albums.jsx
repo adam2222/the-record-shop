@@ -54,9 +54,9 @@ export default class AllAlbums extends Component {
     })
 
     return (
-      <div className="container-fluid">
+      <div className="container">
         <div className="row">
-          {renderedAlbums}
+         {renderedAlbums}
         </div>
       </div>
     )
