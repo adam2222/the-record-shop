@@ -21,6 +21,7 @@ const onAlbumEnter = (nextRouterState) => {
   store.dispatch(getAlbumById(albumId))
 }
 
+
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
