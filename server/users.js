@@ -10,7 +10,7 @@ const api = require('express').Router();
 
 // ALL USERS
 
-api.get('/', mustBeLoggedIn, adminOnly, (req, res, next) =>
+api.get('/', (req, res, next) =>
 	User.scope('populate').findAll()
 	.then(users => res.json(users))
 	.catch(next)
@@ -24,13 +24,15 @@ api.post('/', (req, res, next) =>
 
 // SINGLE USER
 
-api.get('/:userId', mustBeLoggedIn, selfOnly, (req, res, next) =>
+// add mustBeLoggedIn, selfOnly AFTER AUTH IS WORKING
+api.get('/:userId', (req, res, next) =>
 	User.scope('populate').findById(req.params.id)
 	.then(user => res.json(user))
 	.catch(next)
 )
 
-api.get('/:userId/orders', mustBeLoggedIn, selfOnly, (req, res, next) =>
+// add mustBeLoggedIn, selfOnly AFTER AUTH IS WORKING
+api.get('/:userId/orders', (req, res, next) =>
 	Order.findAll({
 		where: {user_id: req.params.userId}
 	})
@@ -40,16 +42,16 @@ api.get('/:userId/orders', mustBeLoggedIn, selfOnly, (req, res, next) =>
 
 // ADMIN ACTIVITIES -- UPDATING AND DELETING USER PROFILES
 
-
-
-api.put('/:userId', mustBeLoggedIn, adminOnly, (req, res, next) =>
+// add mustBeLoggedIn, adminOnly AFTER AUTH IS WORKING
+api.put('/:userId', (req, res, next) =>
 	User.update(req.body, {
 		where: {id: req.params.userId}
 	})
 	.catch(next)
 )
 
-api.delete('/:userId', mustBeLoggedIn, adminOnly, (req, res, next) => {
+// add mustBeLoggedIn, adminOnly AFTER AUTH IS WORKING
+api.delete('/:userId', (req, res, next) => {
 	User.delete({
 		where: {id: req.params.userId}
 	})
@@ -58,7 +60,8 @@ api.delete('/:userId', mustBeLoggedIn, adminOnly, (req, res, next) => {
 
 // SHOPPING CART
 
-api.get('/:userId/cart', mustBeLoggedIn, (req, res, next) => {
+// add mustBeLoggedIn, selfOnly AFTER AUTH IS WORKING
+api.get('/:userId/cart', (req, res, next) => {
 	ShoppingCartItem.findAll({
 		where: {user_id: req.params.userId}
 	})
@@ -66,26 +69,23 @@ api.get('/:userId/cart', mustBeLoggedIn, (req, res, next) => {
 	.catch(next)
 })
 
-// api.post('/:userId/cart', (req, res, next) => {
-
-// })
-
-api.put('/:userId/cart/:albumId', (req, res, next) => {
+// add mustBeLoggedIn, selfOnly AFTER AUTH IS WORKING
+api.put('/:userId/cart/', (req, res, next) => {
 	ShoppingCartItem.findOrCreate({
 		where: {
-			album_id: req.params.albumId,
-			user_id: req.params.userId
+			album_id: req.body.album_id,
+			user_id: Number(req.params.userId)
+		},
+		defaults: {
+			quantity: req.body.quantity
 		}
-	}, {
-		quantity: req.body.quantity,
-		album_id: req.body.album_id,
-		user_id: Number(req.params.userId)
 	})
 	.then(() => res.sendStatus(201))
 	.catch(console.error.bind(console))
 })
 
-api.delete('/:userId/cart/:albumId', mustBeLoggedIn, (req, res, next) => {
+// add mustBeLoggedIn, selfOnly AFTER AUTH IS WORKING
+api.delete('/:userId/cart/:albumId', (req, res, next) => {
 	ShoppingCartItem.destroy({
 		where: {album_id: req.params.albumId}
 	})
