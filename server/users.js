@@ -2,7 +2,7 @@
 
 const db = require('APP/db')
 const User = db.model('users')
-
+const Album = db.model('album')
 const ShoppingCartItem = require('../db/models/shopping_cart_items')
 
 const {mustBeLoggedIn, forbidden, selfOnly, adminOnly} = require('./auth.filters')
@@ -62,10 +62,14 @@ api.delete('/:userId', (req, res, next) => {
 
 // add mustBeLoggedIn, selfOnly AFTER AUTH IS WORKING
 api.get('/:userId/cart', (req, res, next) => {
-	ShoppingCartItem.findAll({
-		where: {user_id: req.params.userId}
+	User.findAll({
+		where: {id: req.params.userId},
+		include: [Album]
 	})
-	.then(items => res.json(items))
+	.then(results => {
+		let formattedResults = results.map(result => result.dataValues.albums)
+		res.json(formattedResults)
+	})
 	.catch(next)
 })
 
@@ -80,7 +84,12 @@ api.put('/:userId/cart/', (req, res, next) => {
 			quantity: req.body.quantity
 		}
 	})
-	.then(() => res.sendStatus(201))
+	.spread((instance, created) => {
+		// Separate statuses used to signal to ShoppingCartReducer/dispatchers
+		// whether instance was created during AJAX requests
+		if (created) res.sendStatus(201)
+		else res.sendStatus(200)
+	})
 	.catch(console.error.bind(console))
 })
 

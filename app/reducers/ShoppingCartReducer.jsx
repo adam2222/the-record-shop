@@ -9,28 +9,28 @@ const UPDATE_QUANTITY = 'UPDATE_QUANTITY'
 
 /* -----------------    ACTION CREATORS    ------------------ */
 
-export const addAlbum = (album) => {
+export const addAlbum = album => {
   return {
     type: ADD_ALBUM,
     album
   }
 }
 
-export const findCart = (albums) => {
+export const findCart = albums => {
   return {
     type: FIND_CART,
     albums
   }
 }
 
-export const removeAlbum = (album) => {
+export const removeAlbum = album => {
   return {
     type: REMOVE_ALBUM,
     album
   }
 }
 
-export const updateQuantity = (quantity) => {
+export const updateQuantity = quantity => {
   return {
     type: UPDATE_QUANTITY,
     quantity
@@ -39,12 +39,14 @@ export const updateQuantity = (quantity) => {
 
 /* -----------------    DISPATCHERS    ------------------ */
 
-export const getCartFromDB = (user_id) => dispatch => {
+export const getCartFromDB = user_id => dispatch => {
   axios.get(`/api/users/${user_id}/cart`)
-  .then((cart) => {
+  .then(cart => {
     // Transformation of data returned by DB into format accepted by store
-    let newCart = cart.data.map(album => {
-      return {id: album.album_id, quantity: album.quantity}
+    let newCart = cart.data[0].map(album => {
+      album.quantity_ordered = album.shopping_cart_items.quantity
+      delete album.shopping_cart_items
+      return album
     })
     dispatch(findCart(newCart))
   })
@@ -57,7 +59,9 @@ export const addOrUpdateAlbumInDB = (user_id, album_id, quantity) => dispatch =>
       quantity,
       album_id
   })
-  .then(() => dispatch(addAlbum(album_id)))
+  .then((response) => {
+    dispatch(addAlbum(album_id))
+  })
   .catch(err => console.error('unable to add album to cart', err))
 }
 

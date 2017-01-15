@@ -1,17 +1,13 @@
 import React from 'react';
 
-export default function ShoppingCart (props) {
-    let cart = props.cart
-    const allAlbums = props.allAlbums
+export default function (props) {
 
-    cart = cart.map(item => {
-        item.albumDetails = allAlbums.filter(album => album.id === item.id)[0]
-        return item
-    })
+    const cart = props.cart
+    const handleChange = props.handleChange
 
     return (
         <div id="shopping-cart">
-            <div className="panel panel-default">
+            <div className="panel panel-default container">
                 <div className="panel-heading">Shopping Cart</div>
                 <table className="table">
                     <thead>
@@ -27,16 +23,16 @@ export default function ShoppingCart (props) {
                     <tbody>
                     {
                         cart && cart.map(album => (
-                             <tr key={album.albumDetails.id}>
-                                <td>{album.albumDetails.title}</td>
-                                <td>{album.albumDetails.artist}</td>
-                                <td>${album.albumDetails.cost}</td>
+                            <tr key={album.id}>
+                                <td>{album.title}</td>
+                                <td>{album.artist}</td>
+                                <td>${album.cost}</td>
                                 <td>
                                     <div className="input-group quantity-input">
-                                        <input type="text" className="form-control" value={album.quantity}></input>
+                                        <input type="text" className="form-control" value={album.quantity_ordered} onChange={handleChange}></input>
                                     </div>
                                 </td>
-                                <td>${album.albumDetails.cost * album.quantity}</td>
+                                <td>${album.cost * album.quantity_ordered}</td>
                                 <td>
                                 </td>
                             </tr>
