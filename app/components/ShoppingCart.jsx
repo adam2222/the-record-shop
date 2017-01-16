@@ -5,20 +5,30 @@ export default function (props) {
     const cart = props.cart
     const handleQuantityChange = props.handleQuantityChange
     const handleRemove = props.handleRemove
+    const handleRemoveAll = props.handleRemoveAll
 
     return (
         <div id="shopping-cart">
             <div className="panel panel-default container">
-                <div className="panel-heading">Shopping Cart</div>
+                <div className="panel-heading">
+                    <h3 className="panel-title">Shopping Cart</h3>
+                </div>
+                <div className="panel-body">
+                    <div className="button-box text-center">
+                        <button type="button" className="btn btn-secondary">Update Cart</button>
+                        <button type="button" className="btn btn-success">Check Out</button>
+                        <button type="button" className="btn btn-danger" onClick={(evt) => handleRemoveAll(cart[0].shopping_cart_items.user_id, evt)}>Clear Cart</button>
+                    </div>
+                </div>
                 <table className="table">
                     <thead>
                         <tr className="headings">
-                            <th>Album</th>
-                            <th>Artist</th>
-                            <th>Cost per Album</th>
-                            <th>Quantity</th>
-                            <th>Subtotal</th>
-                            <th>Remove</th>
+                            <th className="col-md-4">Album</th>
+                            <th className="col-md-3">Artist</th>
+                            <th className="col-md-3">Cost per Album</th>
+                            <th className="col-md-2" id="quantity-bar">Quantity</th>
+                            <th className="col-md-2">Subtotal</th>
+                            <th className="col-md-2">Remove</th>
                         </tr>
                     </thead>
                     <tbody>
