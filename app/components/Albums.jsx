@@ -49,7 +49,6 @@ export default class AllAlbums extends Component {
               <Dropdown onChange={this.handleChange} album={album} />
             </div>
             <button type="button" className="col-sm-4 btn btn-success">Add to Cart</button>
-
           </div>
         </div>
       )
