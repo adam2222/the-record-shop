@@ -1,5 +1,6 @@
 import React from 'react'
 import {Component} from 'react'
+import {browserHistory} from 'react-router'
 
 class Search extends Component {
   constructor(props){
@@ -9,6 +10,7 @@ class Search extends Component {
     }
 
     this.handleChange = this.handleChange.bind(this)
+    this.redirectToHome = this.redirectToHome.bind(this)
   }
 
   handleChange(event){
@@ -34,23 +36,26 @@ class Search extends Component {
     })
   }
 
+  redirectToHome (event) {
+    event.preventDefault()
+    browserHistory.push("/home")
+
+  }
+
   render(){
     return (
-        <form className="navbar-form navbar-left" onSubmit={evt => {
-          evt.preventDefault();
-          search(evt.target.search.value)
-          }}>
+        <form className="navbar-form navbar-left" onSubmit={this.redirectToHome}>
 
-          <div className="form-group">
-            <input className="form-control" name="search" placeholder="Search Albums" onChange={this.handleChange} value={this.state.inputValue}/>
+          <div className="form-group" onSubmit={this.handleChange}>
+            <input className="form-control" id="search" name="search" placeholder="Search Album Title or Artist" onChange={this.handleChange} value={this.state.inputValue}/>
           </div>
-          <button type="submit" className="btn btn-default">Search</button>
 
         </form>
     )
   }
 }
 
+// <button type="submit" className="btn btn-default">Search</button>
 
 
 import {connect} from 'react-redux'
