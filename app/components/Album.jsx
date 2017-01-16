@@ -80,6 +80,10 @@ export default class SingleAlbum extends Component {
             <div className="price col-sm-4">
               Price: ${album.cost}
             </div>
+            <div className="col-sm-4">
+              <Dropdown onChange={this.handleChange} album={album} />
+            </div>
+            <button type="button" className="col-sm-4 btn btn-success">Add to Cart</button>
             <div className="row">
               {this.state.edit && <ReviewForm />}
             </div>
