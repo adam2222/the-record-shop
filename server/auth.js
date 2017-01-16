@@ -1,4 +1,5 @@
 const app = require('APP'), {env} = app
+
 const debug = require('debug')(`${app.name}:auth`)
 const passport = require('passport')
 
@@ -49,7 +50,7 @@ OAuth.setupStrategy({
   config: {
     clientID: env.FACEBOOK_CLIENT_ID,
     clientSecret: env.FACEBOOK_CLIENT_SECRET,
-    callbackURL: `${app.rootUrl}/api/auth/login/facebook`,
+    callbackURL: `http://localhost:1337/api/auth/login/facebook`,
   },
   passport
 })
@@ -145,11 +146,22 @@ passport.use(new (require('passport-local').Strategy) (
 
 auth.get('/whoami', (req, res) => res.send(req.user))
 
-auth.post('/:strategy/login', (req, res, next) =>
-  passport.authenticate(req.params.strategy, {
+auth.get('/:strategy/login', (req, res, next) =>{
+  console.log('REQ', req.user)
+
+  return passport.authenticate(req.params.strategy, {
+    successRedirect: '/',
+    failureRedirect: '/error'
+  })(req, res, next)}
+)
+
+auth.post('/:strategy/login', (req, res, next) =>{
+
+  console.log('REQ', req.user)
+  return passport.authenticate(req.params.strategy, {
     successRedirect: '/',
     failureRedirect: '/'
-  })(req, res, next)
+  })(req, res, next)}
 )
 
 auth.post('/logout', (req, res, next) => {

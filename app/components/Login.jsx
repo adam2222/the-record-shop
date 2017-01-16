@@ -53,6 +53,7 @@ export const Login = (props) => {
     </div>
   )
 
+  console.log('AUTHENTICATED', authenticated)
   return authenticated ? loggedIn : loggedOut
 
 }
