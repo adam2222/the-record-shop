@@ -8,6 +8,9 @@ nav {
 .dropdown-menu {
   background-image: url("/images/close-up-record-light.jpg"); }
 
+.navbar-right {
+  margin-right: 5px; }
+
 #social-icon-group {
   display: block;
   margin: 0 auto; }

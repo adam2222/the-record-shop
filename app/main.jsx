@@ -12,11 +12,13 @@ import ShoppingCartContainer from './containers/ShoppingCartContainer'
 import { loadAlbums, getAlbumById } from './reducers/AllAlbumsReducer'
 import { getCartFromDB } from './reducers/ShoppingCartReducer'
 import { loadReviews } from './reducers/AlbumReviewsReducer'
+import { whoami } from './reducers/auth'
 
 import store from './store'
 
 const fetchAllData = () => {
   store.dispatch(loadAlbums())
+  store.dispatch(whoami());
 }
 
 const onAlbumEnter = (nextRouterState) => {

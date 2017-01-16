@@ -1,13 +1,5 @@
-/*nav img {
-  max-height: 55px; }*/
-#logo {
-  height: 100%;
-  width: 100%;
-}
-
-.navbar .navbar-brand img {
-  height: 100%;
-}
+nav img {
+  max-height: 55px; }
 
 nav {
   background-image: url("/images/vinyl-wallpaper-bw.jpg");
@@ -15,6 +7,9 @@ nav {
 
 .dropdown-menu {
   background-image: url("/images/close-up-record-light.jpg"); }
+
+.navbar-right {
+  margin-right: 5px; }
 
 #social-icon-group {
   display: block;
