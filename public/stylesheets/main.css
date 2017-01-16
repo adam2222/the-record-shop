@@ -5,12 +5,20 @@ nav {
   background-image: url("/images/vinyl-wallpaper-bw.jpg");
   height: 60px; }
 
-.col-md-3 {
-  border: solid thin blue; }
+.dropdown-menu {
+  background-image: url("/images/vinyl-wallpaper-bw.jpg"); }
+
+#social-icon-group {
+  display: block;
+  margin: 0 auto; }
+
+.dropdown-menu > li > a.btn-social-icon {
+  display: inline-block; }
 
 #blue li a {
   font-weight: bold;
   color: white; }
 
-#body {
-  margin: 20px 0 0 0; }
+body {
+  background-image: url("/images/close-up-record-light.jpg");
+  background-size: contain; }

@@ -38,6 +38,7 @@ module.exports = app
   .use(express.static(resolve(__dirname, '..', 'public')))
   .use(express.static(resolve(__dirname, '..', 'node_modules/bootstrap/dist')))
   .use(express.static(resolve(__dirname, '..', 'node_modules/bootstrap-social')))
+  .use(express.static(resolve(__dirname, '..', 'node_modules/font-awesome')))
   .use(express.static(resolve(__dirname, '..', 'node_modules/jquery/dist')))
 
   // Serve our api
