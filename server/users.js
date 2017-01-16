@@ -96,7 +96,10 @@ api.put('/:userId/cart/', (req, res, next) => {
 // add mustBeLoggedIn, selfOnly AFTER AUTH IS WORKING
 api.delete('/:userId/cart/:albumId', (req, res, next) => {
 	ShoppingCartItem.destroy({
-		where: {album_id: req.params.albumId}
+		where: {
+			album_id: +req.params.albumId,
+			user_id: +req.params.userId
+		}
 	})
 	.catch(next)
 })

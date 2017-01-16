@@ -3,7 +3,8 @@ import React from 'react';
 export default function (props) {
 
     const cart = props.cart
-    const handleChange = props.handleChange
+    const handleQuantityChange = props.handleQuantityChange
+    const handleRemove = props.handleRemove
 
     return (
         <div id="shopping-cart">
@@ -29,12 +30,12 @@ export default function (props) {
                                 <td>${album.cost}</td>
                                 <td>
                                     <div className="input-group quantity-input">
-                                        <input type="text" className="form-control" value={album.quantity_ordered} onChange={handleChange}></input>
+                                        <input type="text" className="form-control" value={album.shopping_cart_items.quantity} onChange={(evt) => handleQuantityChange(album.id, evt)}></input>
                                     </div>
                                 </td>
                                 <td>${album.cost * album.shopping_cart_items.quantity}</td>
                                 <td>
-                                    <div className="close-icon"></div>
+                                    <div className="remove-icon" onClick={(evt) => handleRemove(album.id, album.shopping_cart_items.user_id, evt)}></div>
                                 </td>
                             </tr>
                         ))
