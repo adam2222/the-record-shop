@@ -25,7 +25,9 @@ export default class AllAlbums extends Component {
   }
 
   render() {
-    const arrayOfAlbums = this.props.filteredAlbums[0] ? this.props.filteredAlbums : this.props.allAlbums
+    const filteredAlbums = this.props.filteredAlbums
+    const allAlbums = this.props.allAlbums
+    const arrayOfAlbums = filteredAlbums[0] ? filteredAlbums : allAlbums
 
     const renderedAlbums = arrayOfAlbums.map(album => {
       return (
@@ -54,10 +56,8 @@ export default class AllAlbums extends Component {
     })
 
     return (
-      <div className="container">
-        <div className="row">
+      <div className="row">
          {renderedAlbums}
-        </div>
       </div>
     )
   }

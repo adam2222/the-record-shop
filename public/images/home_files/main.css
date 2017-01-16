@@ -1,0 +1,25 @@
+nav img {
+  max-height: 55px; }
+
+nav {
+  background-image: url("/images/vinyl-wallpaper-bw.jpg");
+  height: 60px; }
+
+.dropdown-menu {
+  background-image: url("/images/vinyl-wallpaper-bw.jpg"); }
+
+.dropdown-menu > li > a.btn-social-icon {
+  display: inline-block;
+  margin: auto; }
+
+#social-icon-group {
+  display: inline-block;
+  margin: 0 auto; }
+
+#blue li a {
+  font-weight: bold;
+  color: white; }
+
+body {
+  background-image: url("/images/close-up-record-light.jpg");
+  background-size: contain; }

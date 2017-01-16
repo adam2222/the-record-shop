@@ -2,7 +2,7 @@
 @import "album";
 
 .col-md-3 {
-  border: solid thin blue;
+
 }
 
 #blue li a {
@@ -10,6 +10,38 @@
   color: white;
 }
 
-#body {
-  margin: 20px 0 0 0;
+body {
+
+  background-image: url("/images/close-up-record-light.jpg");
+  background-size: contain;
+}
+
+#body img {
+  // max-height: 200px;
+}
+
+
+
+@media (min-width: 480px) {
+
+}
+
+@media (min-width: 768px) {
+//   .table-row {
+//    display: table;
+//    table-layout: fixed;
+//  }
+//
+//  .table-row [class^="col-"] {
+//    display: table-cell;
+//    float: none;
+//  }
+}
+
+@media (min-width: 992px) {
+
+}
+
+@media (min-width: 1200px) {
+
 }

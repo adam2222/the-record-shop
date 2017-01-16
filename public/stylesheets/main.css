@@ -2,14 +2,23 @@ nav img {
   max-height: 55px; }
 
 nav {
+  background-image: url("/images/vinyl-wallpaper-bw.jpg");
+  height: 60px; }
+
+.dropdown-menu {
   background-image: url("/images/vinyl-wallpaper-bw.jpg"); }
 
-.col-md-3 {
-  border: solid thin blue; }
+#social-icon-group {
+  display: block;
+  margin: 0 auto; }
+
+.dropdown-menu > li > a.btn-social-icon {
+  display: inline-block; }
 
 #blue li a {
   font-weight: bold;
   color: white; }
 
-#body {
-  margin: 20px 0 0 0; }
+body {
+  background-image: url("/images/close-up-record-light.jpg");
+  background-size: contain; }
