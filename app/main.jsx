@@ -37,6 +37,7 @@ ReactDOM.render(
     <Router history={browserHistory}>
       <Route path="/" component={App} onEnter={ fetchAllData }>
         <Route path="/home" component={ AllAlbumsContainer }/>
+        <Route path="/:genre" component={ AllAlbumsContainer }/>
         <Route path="/albums/:albumId" component={AlbumContainer} onEnter={onAlbumEnter}/>
         <Route path ="/:userId/cart" component={ShoppingCartContainer} onEnter={onCartEnter}/>
         <IndexRedirect to="/home" />
