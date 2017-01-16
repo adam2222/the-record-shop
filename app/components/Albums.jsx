@@ -25,23 +25,23 @@ export default class AllAlbums extends Component {
 
   }
 
-  // componentDidMount(){
-  //   // If route includes genre, dispatch filtered results to 'filteredAlbums' in Store
-  //   if (this.props.params.genre) {
-  //     const filteredAlbums = this.props.filteredAlbums
-  //     const allAlbums = this.props.allAlbums
-  //     console.log("here's the genre")
-  //     console.log('THIS.PROPS.PARAMS.GENRE', this.props.params.genre)
-  //     let allAlbums = this.props.allAlbums
-  //     let filtered = allAlbums.filter(album => {
-  //       return (
-  //         album.genre.toLowerCase().match(this.props.params.genre.toLowerCase())
-  //       )})
-  //       this.props.findFilteredAlbums(filtered)
-  //     }
-  // }
+  componentDidMount() {
+    if (this.props.params.genre) {
+      const filteredAlbums = this.props.filteredAlbums
+      const allAlbums = this.props.allAlbums
+      console.log("here's the genre")
+      console.log('THIS.PROPS.PARAMS.GENRE', this.props.params.genre)
+      let filtered = allAlbums.filter(album => {
+        return (
+          album.genre.toLowerCase().match(this.props.params.genre.toLowerCase())
+        )})
+      this.props.findFilteredAlbums(filtered)
+    }
+  }
 
   render() {
+    const filteredAlbums = this.props.filteredAlbums
+    const allAlbums = this.props.allAlbums
     const arrayOfAlbums = filteredAlbums[0] ? filteredAlbums : allAlbums
 
     const renderedAlbums = arrayOfAlbums.map(album => {
