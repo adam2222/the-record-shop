@@ -31,7 +31,7 @@ export default class AllAlbums extends Component {
 
     const renderedAlbums = arrayOfAlbums.map(album => {
       return (
-        <div className="col-md-3" key={album.id}>
+        <div className="col-md-3 album" key={album.id}>
           <div className="product">
             <div className="image">
               <Link to={`/albums/${album.id}`}>

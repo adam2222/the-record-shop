@@ -6,7 +6,10 @@ export default class Header extends Component {
   render(){
     return (
       <nav className="row navbar navbar-default">
-          <div className="navbar-header"> <img id="logo" src='/images/logo_inversed.png' /> </div>
+          <div className="navbar-header">
+            <img id="logo" src='/images/logo.png' />
+            <span className="store-name">The Record Store</span>
+          </div>
 
           <div className="navbar-collapse collapse">
             <ul className="nav navbar-nav" id="blue">

@@ -1,0 +1,6 @@
+.product {
+  display: inline-block;
+  border-bottom: 1px grey solid; }
+
+.album {
+  height: 400px; }
