@@ -22,6 +22,21 @@ export default class AllAlbums extends Component {
     this.setState({
       quantity: 1
     })
+
+  }
+
+  componentDidMount() {
+    if (this.props.params.genre) {
+      const filteredAlbums = this.props.filteredAlbums
+      const allAlbums = this.props.allAlbums
+      console.log("here's the genre")
+      console.log('THIS.PROPS.PARAMS.GENRE', this.props.params.genre)
+      let filtered = allAlbums.filter(album => {
+        return (
+          album.genre.toLowerCase().match(this.props.params.genre.toLowerCase())
+        )})
+      this.props.findFilteredAlbums(filtered)
+    }
   }
 
   render() {
