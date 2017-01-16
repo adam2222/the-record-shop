@@ -1,6 +1,6 @@
 @import "header";
 @import "album";
-
+@import "shopping_cart";
 
 .col-md-3 {
 
@@ -10,7 +10,6 @@
   font-weight: bold;
   /*color: white;*/
 }
-
 
 body {
 
@@ -22,7 +21,27 @@ body {
   // max-height: 200px;
 }
 
-
+// @mixin make-cols ($type) {
+// 	@for $i from 1 through 12 {
+// 		.col-#{$type}-#{$i} {
+// 			float: left;
+// 			width: $i * 100%/12;
+// 			padding: 0 $gutter-size;
+// 		}
+// 	}
+// }
+//
+// $type-sizes: (
+// 	sm: 800px,
+// 	md: 1000px,
+// 	lg: 1200px
+// );
+//
+// @each $type, $size in $type-sizes {
+// 	@media screen and (min-width: $size) {
+// 		@include make-cols($type);
+// 	}
+// }
 
 @media (min-width: 480px) {
 

@@ -52,7 +52,6 @@ export default class AllAlbums extends Component {
             </div>
             <button type="button" className="col-sm-5 btn btn-success">Add to Cart</button>
             </div>
-
           </div>
         </div>
       )
