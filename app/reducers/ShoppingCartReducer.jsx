@@ -62,9 +62,12 @@ export const addOrUpdateAlbumInDB = (user_id, album_id, quantity) => dispatch =>
 }
 
 export const removeAlbumFromDB = (user_id, album_id) => dispatch => {
-  axios.delete(`/api/users/${user_id}/cart/${album_id}`)
+  return axios.delete(`/api/users/${user_id}/cart/${album_id}`)
   // DISPATCHER BELOW DOES NOT WORK -- DB deletion works but not reflected in Redux store
-  .then(() => dispatch(removeAlbum(album_id)))
+  .then(() => {
+    console.log('hi')
+    dispatch(removeAlbum(album_id))
+  })
   .catch(err => console.error('unable to remove album from cart', err))
 }
 
@@ -84,7 +87,9 @@ const reducer = (state = [], action) => {
       break
     case REMOVE_ALBUM:
       // NOT WORKING SOMEHOW -- NOT EVEN HITTING? CONSOLE.LOGS DON'T REGISTER
-      newState = newState.filter(item => item.id !== action.album)
+      console.log('hi')
+      console.log(action)
+      newState = state.filter(item => item.id !== action.album)
       break
     case UPDATE_QUANTITY:
       newState[action.album] = action.quantity

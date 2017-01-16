@@ -101,6 +101,7 @@ api.delete('/:userId/cart/:albumId', (req, res, next) => {
 			user_id: +req.params.userId
 		}
 	})
+	.then(() => res.sendStatus(200))
 	.catch(next)
 })
 
