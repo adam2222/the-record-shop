@@ -67,7 +67,7 @@ api.get('/:userId/cart', (req, res, next) => {
 		include: [Album]
 	})
 	.then(results => {
-		let formattedResults = results.map(result => result.dataValues.albums)
+		let formattedResults = results.map(result => result.dataValues.albums.map(album => album.dataValues))
 		res.json(formattedResults)
 	})
 	.catch(next)

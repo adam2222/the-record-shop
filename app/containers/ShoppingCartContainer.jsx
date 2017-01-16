@@ -26,23 +26,16 @@ class ShoppingCartContainer extends React.Component {
 
     constructor (props) {
         super(props)
-        this.state = {}
         this.handleChange = this.handleChange.bind(this)
+        this.handleRemove = this.handleRemove.bind(this)
     }
 
     handleChange (evt, id) {
-        this.setState({
-            [id]: evt.target.value
-        })
-        console.log(this.state)
+        
     }
 
-    componentDidMount () {
-        this.props.cart.map(album => {
-            this.setState({
-                [album.id]: album.quantity_ordered
-            })
-        })
+    handleRemove (evt) {
+
     }
 
     render () {
@@ -50,6 +43,7 @@ class ShoppingCartContainer extends React.Component {
             <ShoppingCart 
                 {...this.props}
                 handleChange = {this.handleChange}
+                handleRemove = {this.handleRemove}
             />
         )
     }

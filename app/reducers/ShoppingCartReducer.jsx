@@ -43,11 +43,7 @@ export const getCartFromDB = user_id => dispatch => {
   axios.get(`/api/users/${user_id}/cart`)
   .then(cart => {
     // Transformation of data returned by DB into format accepted by store
-    let newCart = cart.data[0].map(album => {
-      album.quantity_ordered = album.shopping_cart_items.quantity
-      delete album.shopping_cart_items
-      return album
-    })
+    let newCart = cart.data[0]
     dispatch(findCart(newCart))
   })
   .catch(err => console.error('unable to get cart info', err))

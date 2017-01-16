@@ -17,7 +17,7 @@ export default function (props) {
                             <th>Cost per Album</th>
                             <th>Quantity</th>
                             <th>Subtotal</th>
-                            <th></th>
+                            <th>Remove</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -32,8 +32,9 @@ export default function (props) {
                                         <input type="text" className="form-control" value={album.quantity_ordered} onChange={handleChange}></input>
                                     </div>
                                 </td>
-                                <td>${album.cost * album.quantity_ordered}</td>
+                                <td>${album.cost * album.shopping_cart_items.quantity}</td>
                                 <td>
+                                    <div className="close-icon"></div>
                                 </td>
                             </tr>
                         ))
