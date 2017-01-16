@@ -31,9 +31,12 @@ export default class Header extends Component {
                        <li><Link to="/genre/miscellaneous">Other</Link></li>
                     </ul>
                 </li>
+            </ul>
+              <ul className="nav navbar-nav navbar-right">
                 <li><Search /></li>
                 <li><Login /></li>
-            </ul>
+              </ul>
+
             </div>
 
 
