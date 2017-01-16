@@ -1,8 +1,24 @@
 .product {
 	display: inline-block;
-	border-bottom: 1px grey solid;
+	border-bottom: 1px lightgrey solid;
+	margin: 15px auto 30px;
+
+	.text {
+		h3 {
+			height: 2em;
+		}
+	}
+
+	.info {
+		margin-bottom: 10px;
+		display: inline-block;
+
+		.price {
+			white-space: nowrap;
+		}
+	}
 }
 
 .album {
-	height: 400px;
+	min-height: 400px;
 }

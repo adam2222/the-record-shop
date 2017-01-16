@@ -31,7 +31,7 @@ export default class AllAlbums extends Component {
 
     const renderedAlbums = arrayOfAlbums.map(album => {
       return (
-        <div className="col-md-3 album" key={album.id}>
+        <div className="col-lg-3 col-md-4 col-sm-6 album" key={album.id}>
           <div className="product">
             <div className="image">
               <Link to={`/albums/${album.id}`}>
@@ -42,13 +42,16 @@ export default class AllAlbums extends Component {
               <h3><Link to={`/albums/${album.id}`}>{album.title}</Link></h3>
               <h4>{album.artist}</h4>
             </div>
+
+            <div className="info">
             <div className="price col-sm-4">
               Price: ${album.cost}
             </div>
-            <div className="col-sm-4">
+            <div className="col-sm-3">
               <Dropdown onChange={this.handleChange} album={album} />
             </div>
-            <button type="button" className="col-sm-4 btn btn-success">Add to Cart</button>
+            <button type="button" className="col-sm-5 btn btn-success">Add to Cart</button>
+            </div>
 
           </div>
         </div>

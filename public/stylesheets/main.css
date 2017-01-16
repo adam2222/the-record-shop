@@ -20,10 +20,18 @@ nav {
 
 .product {
   display: inline-block;
-  border-bottom: 1px grey solid; }
+  border-bottom: 1px lightgrey solid;
+  margin: 15px auto 30px; }
+  .product .text h3 {
+    height: 2em; }
+  .product .info {
+    margin-bottom: 10px;
+    display: inline-block; }
+    .product .info .price {
+      white-space: nowrap; }
 
 .album {
-  height: 400px; }
+  min-height: 400px; }
 
 #blue li a {
   font-weight: bold;
