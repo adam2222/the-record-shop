@@ -20,10 +20,15 @@ class Search extends Component {
       const filteredAlbumsfromState = this.props.filteredAlbums
       const inputValue = this.state.inputValue
 
-      let filtered = allAlbums.filter(album => album.title.toLowerCase().match(inputValue.toLowerCase()))
-      console.log('FILTERED', filtered)
+
+      let filtered = allAlbums.filter(album => {
+        return (
+        album.title.toLowerCase().match(inputValue.toLowerCase()) ||
+        album.artist.toLowerCase().match(inputValue.toLowerCase())
+      )
+
+      })
       if (filtered) {
-        console.log('FILTERING!!!')
         findFilteredAlbums(filtered)
       }
     })

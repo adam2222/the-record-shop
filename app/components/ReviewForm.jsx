@@ -6,31 +6,39 @@ class ReviewForm extends React.Component {
     this.state = {
       myRating: 0
     }
-
-    // this.onClick = this.onClick(this)
+    this.handleChange = this.handleChange.bind(this)
   }
 
-  // onClick(event) {
-  //  this.setState()
-  // }
+  handleChange(e) {
+    this.setState({ myRating: e.target.value })
+  }
+
+  componentWillMount() {
+    this.setState({ myRating: 5 })
+  }
 
   render(){
+    let options = []
+    for (let i = 5; i > 0; i--) {
+      options.push(
+        <option key={ i } value={ i }>{ i }</option>
+      )
+    }
     return (
-        <form onSubmit={ this.props.onSubmit }>
+        <form onSubmit={ event => this.props.onSubmit(event, this.state.myRating) }>
           <div className="form-group">
             <textarea
-            name={this.props.description}
+            name="description"
             type="text"
             className="form-control"
             />
           </div>
-          <div className="form-group ratings">
-            <span value="1" className="glyphicon glyphicon-star" ></span>
-            <span value="2" className="glyphicon glyphicon-star" ></span>
-        <span value="3" className="glyphicon glyphicon-star" ></span>
-        <span value="4" className="glyphicon glyphicon-star" ></span>
-        <span value="5" className="glyphicon glyphicon-star" ></span>
-          </div>
+          <label>
+          Rate this album!
+            <select value={this.state.myRating} onChange={ this.handleChange }>
+              {options}
+            </select>
+          </label>
           <div className="text-center">
             <button type="submit" className="btn btn-default">Submit</button>
           </div>
@@ -40,8 +48,7 @@ class ReviewForm extends React.Component {
 }
 //validation
 ReviewForm.propTypes = {
-  onSubmit: React.PropTypes.func.isRequired,
-  description: React.PropTypes.description
+  onSubmit: React.PropTypes.func.isRequired
 }
 
 export default ReviewForm

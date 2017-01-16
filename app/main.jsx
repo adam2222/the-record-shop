@@ -7,8 +7,10 @@ import {connect, Provider} from 'react-redux'
 import App from './components/App'
 import AlbumContainer from './containers/AlbumContainer'
 import AllAlbumsContainer from './containers/AllAlbumsContainer'
+import ShoppingCartContainer from './containers/ShoppingCartContainer'
 
 import { loadAlbums, getAlbumById } from './reducers/AllAlbumsReducer'
+import { getCartFromDB } from './reducers/ShoppingCartReducer'
 import { loadReviews } from './reducers/AlbumReviewsReducer'
 
 import store from './store'
@@ -23,13 +25,18 @@ const onAlbumEnter = (nextRouterState) => {
   store.dispatch(loadReviews(albumId))
 }
 
+const onCartEnter = (nextRouterState) => {
+  const userId = nextRouterState.params.userId
+  store.dispatch(getCartFromDB(userId))
+}
 
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={App} onEnter={ fetchAllData }>
-        <Route path="/home" component={ AllAlbumsContainer } />
-        <Route path="/albums/:albumId" component={AlbumContainer} onEnter={onAlbumEnter} />
+        <Route path="/home" component={ AllAlbumsContainer }/>
+        <Route path="/albums/:albumId" component={AlbumContainer} onEnter={onAlbumEnter}/>
+        <Route path ="/:userId/cart" component={ShoppingCartContainer} onEnter={onCartEnter}/>
         <IndexRedirect to="/home" />
       </Route>
     </Router>
