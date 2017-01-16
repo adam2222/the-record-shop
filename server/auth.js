@@ -9,32 +9,40 @@ const auth = require('express').Router()
 
 /*************************
  * Auth strategies
- * 
+ *
  * The OAuth model knows how to configure Passport middleware.
  * To enable an auth strategy, ensure that the appropriate
  * environment variables are set.
- * 
+ *
  * You can do it on the command line:
- * 
+ *
  *   FACEBOOK_CLIENT_ID=abcd FACEBOOK_CLIENT_SECRET=1234 npm start
- * 
+ *
  * Or, better, you can create a ~/.$your_app_name.env.json file in
  * your home directory, and set them in there:
- * 
+ *
  * {
  *   FACEBOOK_CLIENT_ID: 'abcd',
  *   FACEBOOK_CLIENT_SECRET: '1234',
  * }
- * 
+ *
  * Concentrating your secrets this way will make it less likely that you
  * accidentally push them to Github, for example.
- * 
+ *
  * When you deploy to production, you'll need to set up these environment
  * variables with your hosting provider.
  **/
 
 // Facebook needs the FACEBOOK_CLIENT_ID and FACEBOOK_CLIENT_SECRET
 // environment variables.
+
+// ********************CONFIGURE OAUTH STRATEGIES*********************
+
+// OAuth#setupStrategy is a class method belonging to the model OAuth. It
+// takes config info and configures Passport for that particular strategy
+// by feeding the info into Passport.use (similar to the local strategy setup
+ // below)
+
 OAuth.setupStrategy({
   provider: 'facebook',
   strategy: require('passport-facebook').Strategy,
@@ -72,7 +80,14 @@ OAuth.setupStrategy({
   passport
 })
 
-// Other passport configuration:
+// ********************CONFIGURE PASSPORT SERIALIZE/DESERIALZE METHODS*********************
+// Serialize user occurs once, on authentication/login. e.g. If local strategy
+// below authenticates, it returns the user object, which is then passed to Passport's
+// 'login' function (attached to request as req.login) which in turn passes it to serializeUser.  This
+// sets cookie on user's browser (req.session.passport.user) with serialzed user info for future requests.
+// On subsequent requests, Passport.session() middleware (invoked on every request)
+// passes serialized user info (if present) to 'deserializeUser', which retrieves
+// user object from database and attaches it to request as req.user
 
 passport.serializeUser((user, done) => {
   debug('will serialize user.id=%d', user.id)
@@ -95,6 +110,14 @@ passport.deserializeUser(
   }
 )
 
+// ********************CONFIGURE LOCAL STRATEGY*********************
+
+// The local strategy looks up user (User.findOne) by email, then
+// uses the User instance method 'authenticate(plaintext)', which hashes
+// the plaintext password (with bcrypt) and compares is to the user.password_digest
+// field stored in the database. If they are the same, it invokes and returns 'done'
+// with the user object.
+
 passport.use(new (require('passport-local').Strategy) (
   (email, password, done) => {
     debug('will authenticate user(email: "%s")', email)
@@ -107,22 +130,25 @@ passport.use(new (require('passport-local').Strategy) (
         return user.authenticate(password)
           .then(ok => {
             if (!ok) {
-              debug('authenticate user(email: "%s") did fail: bad password')              
+              debug('authenticate user(email: "%s") did fail: bad password')
               return done(null, false, { message: 'Login incorrect' })
             }
             debug('authenticate user(email: "%s") did ok: user.id=%d', user.id)
-            done(null, user)              
+            done(null, user)
           })
       })
       .catch(done)
   }
 ))
 
+// ********************ROUTES*********************
+
 auth.get('/whoami', (req, res) => res.send(req.user))
 
 auth.post('/:strategy/login', (req, res, next) =>
   passport.authenticate(req.params.strategy, {
-    successRedirect: '/'
+    successRedirect: '/',
+    failureRedirect: '/'
   })(req, res, next)
 )
 
@@ -132,4 +158,3 @@ auth.post('/logout', (req, res, next) => {
 })
 
 module.exports = auth
-
