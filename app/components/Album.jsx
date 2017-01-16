@@ -1,18 +1,20 @@
-import React, { Component } from 'react';
-import Dropdown from './Dropdown';
-import ReviewForm from './ReviewForm';
+import React, { Component } from 'react'
+import Dropdown from './Dropdown'
+import ReviewForm from './ReviewForm'
+import ReviewList from './ReviewList'
 
-export default class extends Component {
+export default class SingleAlbum extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       quantity: 0,
       edit: false
     }
     this.handleChange = this.handleChange.bind(this)
     this.onClick = this.onClick.bind(this)
+    this.onFormSubmit = this.onFormSubmit.bind(this)
   }
-  onClick(event) {
+  onClick() {
     this.setState({
       edit: !this.state.edit
     })
@@ -24,6 +26,15 @@ export default class extends Component {
     })
   }
 
+  onFormSubmit(event, reviewRating) {
+    const { createReview, selectedAlbum } = this.props
+    let reviewInfo = {
+      description: event.target.description.value,
+      stars: +reviewRating
+    }
+    createReview(+selectedAlbum.id, reviewInfo)
+  }
+
   componentWillMount() {
     this.setState({
       quantity: 1
@@ -32,6 +43,15 @@ export default class extends Component {
 
   render() {
     const album = this.props.selectedAlbum
+    const averageRating = []
+    if (this.props.selectedAlbum.rating) {
+      for (let i = 1; i <= this.props.selectedAlbum.rating; i++) {
+        averageRating.push(
+          <span key={ i } className="glyphicon glyphicon-star" style={{color: 'yellow'}} />
+        )
+      }
+    }
+
     return (
       <div className="container">
         <div className="row">
@@ -41,10 +61,10 @@ export default class extends Component {
             </div>
             <div>
               <div>
-                <button type="button" className="btn btn-info" onClick={this.onClick}>Reviews</button>
+                <button type="button" className="btn btn-info" onClick={this.onClick}>Write a Review</button>
               </div>
               <div className="row">
-                {this.state.edit && <ReviewForm />}
+                {this.state.edit && <ReviewForm onSubmit={ this.onFormSubmit } />}
               </div>
             </div>
           </div>
@@ -52,6 +72,9 @@ export default class extends Component {
             <div className="text text-center">
               <h3>{album.title}</h3>
               <h4>{album.artist}</h4>
+              { this.props.selectedAlbum.rating && <h2>{ averageRating }</h2> }
+              <small>{ this.props.reviews.length } reviews</small>
+              <hr />
               <p>{album.description}</p>
             </div>
             <div className="price col-sm-4">
@@ -63,7 +86,15 @@ export default class extends Component {
             <button type="button" className="col-sm-4 btn btn-success">Add to Cart</button>
           </div>
         </div>
+        <div className="row">
+          <div className="col col-centered">
+            <ReviewList reviews={this.props.reviews} selectedAlbum={this.props.selectedAlbum} />
+          </div>
+        </div>
       </div>
     )
   }
 }
+
+
+// <span value="1" className="glyphicon glyphicon-star" ></span>
