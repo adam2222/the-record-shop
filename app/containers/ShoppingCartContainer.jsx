@@ -1,7 +1,7 @@
 import React from 'react';
 import { browserHistory } from 'react-router'
 import { connect } from 'react-redux';
-import { addOrUpdateAlbumInDB, getCartFromDB, removeAlbumFromDB } from '../reducers/ShoppingCartReducer'
+import { addOrUpdateAlbumInDB, getCartFromDB, removeAlbumFromDB, removeAllAlbumsFromDB } from '../reducers/ShoppingCartReducer'
 import ShoppingCart from '../components/ShoppingCart'
 
 
@@ -13,13 +13,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addOrUpdateAlbum: (user_id, album_id, quantity) => {
-            dispatch(addOrUpdateAlbumInDB(user_id, album_id, quantity))
-        },
+        addOrUpdateAlbum: (user_id, album_id, quantity) => dispatch(addOrUpdateAlbumInDB(user_id, album_id, quantity)),
         getCart: (user_id) => dispatch(getCartFromDB(user_id)),
-        removeAlbum: (user_id, album_id) => {
-            dispatch(removeAlbumFromDB(user_id, album_id))
-        }
+        removeAlbum: (user_id, album_id) => dispatch(removeAlbumFromDB(user_id, album_id)),
+        removeAllAlbums: user_id => dispatch(removeAllAlbumsFromDB(user_id))
     }
 }
 
@@ -29,6 +26,7 @@ class ShoppingCartContainer extends React.Component {
         super(props)
         this.handleQuantityChange = this.handleQuantityChange.bind(this)
         this.handleRemove = this.handleRemove.bind(this)
+        this.handleRemoveAll = this.handleRemoveAll.bind(this)
 
         this.state = {
             cart: [],
@@ -72,12 +70,22 @@ class ShoppingCartContainer extends React.Component {
         browserHistory.push(`/${user_id}/cart`)
     }
 
+    handleRemoveAll (user_id, evt) {
+        this.setState({
+            cart: [],
+            total: 0
+        })
+
+        this.props.removeAllAlbums(user_id)
+    }
+
     render () {
         return (
             <ShoppingCart 
                 {...this.props}
                 handleQuantityChange = {this.handleQuantityChange}
                 handleRemove = {this.handleRemove}
+                handleRemoveAll = {this.handleRemoveAll}
             />
         )
     }

@@ -36,11 +36,33 @@ nav {
 .album {
   min-height: 400px; }
 
+.button-box {
+  margin: 0 auto; }
+
+.btn {
+  color: white;
+  margin: 0 40px 0 40px; }
+
+td {
+  text-align: center; }
+
+th {
+  text-align: center; }
+
+.input-group.quantity-input input {
+  width: 50px;
+  text-align: center;
+  display: block;
+  margin: 0 auto; }
+
+#quantity-bar {
+  width: 50px; }
+
 .remove-icon {
   color: #000;
   position: absolute;
-  margin-top: 0;
-  margin-left: 0;
+  margin-top: 10px;
+  margin-left: 20px;
   width: 21px;
   height: 21px; }
 

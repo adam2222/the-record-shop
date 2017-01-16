@@ -5,6 +5,7 @@ import axios from 'axios'
 const ADD_ALBUM = 'ADD_ALBUM'
 const FIND_CART = 'FIND_CART'
 const REMOVE_ALBUM = 'REMOVE_ALBUM'
+const REMOVE_ALBUMS = 'REMOVE_ALBUMS'
 const UPDATE_QUANTITY = 'UPDATE_QUANTITY'
 
 /* -----------------    ACTION CREATORS    ------------------ */
@@ -27,6 +28,12 @@ export const removeAlbum = album => {
   return {
     type: REMOVE_ALBUM,
     album
+  }
+}
+
+export const removeAlbums = albums => {
+  return {
+    type: REMOVE_ALBUMS
   }
 }
 
@@ -62,13 +69,15 @@ export const addOrUpdateAlbumInDB = (user_id, album_id, quantity) => dispatch =>
 }
 
 export const removeAlbumFromDB = (user_id, album_id) => dispatch => {
-  return axios.delete(`/api/users/${user_id}/cart/${album_id}`)
-  // DISPATCHER BELOW DOES NOT WORK -- DB deletion works but not reflected in Redux store
-  .then(() => {
-    console.log('hi')
-    dispatch(removeAlbum(album_id))
-  })
+  axios.delete(`/api/users/${user_id}/cart/${album_id}`)
+  .then(() => dispatch(removeAlbum(album_id)))
   .catch(err => console.error('unable to remove album from cart', err))
+}
+
+export const removeAllAlbumsFromDB = user_id => dispatch => {
+  axios.delete(`/api/users/${user_id}/cart`)
+  .then(() => dispatch(removeAlbums(user_id)))
+  .catch(err => console.error('unable to empty cart', err))
 }
 
 /* -----------------     REDUCER     ------------------ */
@@ -86,10 +95,10 @@ const reducer = (state = [], action) => {
       newState.push(newAlbum)
       break
     case REMOVE_ALBUM:
-      // NOT WORKING SOMEHOW -- NOT EVEN HITTING? CONSOLE.LOGS DON'T REGISTER
-      console.log('hi')
-      console.log(action)
       newState = state.filter(item => item.id !== action.album)
+      break
+    case REMOVE_ALBUMS:
+      newState = []
       break
     case UPDATE_QUANTITY:
       newState[action.album] = action.quantity
