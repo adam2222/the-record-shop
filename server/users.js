@@ -90,7 +90,16 @@ api.put('/:userId/cart/', (req, res, next) => {
 		if (created) res.sendStatus(201)
 		else res.sendStatus(200)
 	})
-	.catch(console.error.bind(console))
+	.catch(next)
+})
+
+api.delete('/:userId/cart', (req, res, next) => {
+	ShoppingCartItem.destroy({
+		where: {user_id: req.params.userId},
+		truncate: true
+	})
+	.then(() => res.sendStatus(200))
+	.catch(next)
 })
 
 // add mustBeLoggedIn, selfOnly AFTER AUTH IS WORKING
