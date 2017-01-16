@@ -4,3 +4,13 @@ nav img {
 nav {
   background-image: url("/images/vinyl-wallpaper-bw.jpg");
   height: 60px; }
+
+.dropdown-menu {
+  background-image: url("/images/vinyl-wallpaper-bw.jpg"); }
+
+#social-icon-group {
+  display: block;
+  margin: 0 auto; }
+
+.dropdown-menu > li > a.btn-social-icon {
+  display: inline-block; }

@@ -23,9 +23,19 @@ export const Login = (props) => {
              </form>
            </li>
            <li role="separator" className="divider"></li>
-           <li><a className="btn btn-social-icon btn-github">
-             <span className="fa fa-github"></span>
-           </a></li>
+           <li>
+             <div id="social-icon-group">
+               <a className="btn btn-social-icon btn-facebook" href="/api/auth/facebook/login">
+                 <span className="fa fa-facebook"></span>
+              </a>
+               <a className="btn btn-social-icon btn-google" href="/api/auth/google/login">
+                 <span className="fa fa-google"></span>
+               </a>
+             <a className="btn btn-social-icon btn-github" href="/api/auth/github/login">
+               <span className="fa fa-github"></span>
+             </a>
+           </div>
+          </li>
          </ul>
        </li>
       <li><a href="#">Sign Up</a></li>

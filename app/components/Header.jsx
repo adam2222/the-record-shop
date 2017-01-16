@@ -5,9 +5,9 @@ import Search from './Search'
 export default class Header extends Component {
   render(){
     return (
-      <nav className="navbar navbar-default">
-        <div className="container-fluid">
+      <nav className="row navbar navbar-default">
           <div className="navbar-header"> <img id="logo" src='/images/logo_inversed.png' /> </div>
+
           <div className="navbar-collapse collapse">
             <ul className="nav navbar-nav" id="blue">
               <li> <a href="#"> Home </a></li>
@@ -17,11 +17,7 @@ export default class Header extends Component {
             <Search />
 
             <Login />
-
-
-
           </div>
-        </div>
       </nav>
       )
   }
