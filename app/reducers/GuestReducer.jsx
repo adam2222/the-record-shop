@@ -29,7 +29,11 @@ export const createGuestUser = (albumId, quantity) => dispatch => {
 export const doIHaveGuestId = () => dispatch => {
   axios.get('api/users/guest')
   .then(guest => guest.data)
-  .then(guest => dispatch(createGuest(guest)))
+  .then(guest => {
+    console.log('GUEST', guest)
+
+    dispatch(createGuest(guest))
+  })
 
 }
 
@@ -40,7 +44,7 @@ const reducer = (state = { guestUser: null }, action) => {
 
   switch (action.type) {
     case CREATE_GUEST:
-      newState = action.guest
+      newState.guestUser = action.guest
       break
     default:
       return state

@@ -25,6 +25,7 @@ export const findCart = albums => {
   }
 }
 
+
 export const removeAlbum = album => {
   return {
     type: REMOVE_ALBUM,
@@ -51,7 +52,6 @@ export const updateQuantity = (album, quantity) => {
 /* -----------------    DISPATCHERS    ------------------ */
 
 export const getCartFromDB = user_id => dispatch => {
-  console.log('GETCART')
   axios.get(`/api/users/${user_id}/cart`)
   .then(cart => {
     // Transformation of data returned by DB into format accepted by store
@@ -76,7 +76,7 @@ export const addAlbumToDB = (user_id, album_id, quantity) => dispatch => {
       album_id
   })
   .then(() => {
-    getCartFromDB(user_id)
+    dispatch(getCartFromDB(user_id))
   })
   .catch(err => console.error('unable to add album to cart', err))
 }
@@ -94,6 +94,7 @@ export const removeAllAlbumsFromDB = user_id => dispatch => {
 }
 
 /* -----------------     REDUCER     ------------------ */
+
 
 const reducer = (state = [], action) => {
 
