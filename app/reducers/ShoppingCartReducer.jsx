@@ -66,21 +66,18 @@ export const updateQuantityInDB = (user_id, album_id, quantity) => dispatch => {
 }
 
 export const addAlbumToDB = (user_id, album_id, quantity) => dispatch => {
-  axios.put(`/api/${user_id}/cart`, {
+   axios.post(`/api/users/${user_id}/cart/${album_id}`, {
       user_id,
       quantity,
       album_id
   })
   .then((response) => {
-    console.log('RESPONSE', response)
-    console.log('ALBUM_ID', album_id)
     dispatch(addAlbum(album_id))
   })
   .catch(err => console.error('unable to add album to cart', err))
 }
 
 export const removeAlbumFromDB = (user_id, album_id) => dispatch => {
-
   axios.delete(`/api/users/${user_id}/cart/${album_id}`)
   .then(() => dispatch(removeAlbum(album_id)))
   .catch(err => console.error('unable to remove album from cart', err))
