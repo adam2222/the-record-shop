@@ -18,11 +18,23 @@ const seedUsers = () => db.Promise.map([
   {firstName: 'Barack', lastName: 'Obama', email: 'barack@example.gov', password: '1234'},
 ], user => db.model('users').create(user))
 
+//needs items array
+const seedOrder = () => db.Promise.map([
+  {date_created: 'Sun Jan 15 2017', date_shipped: 'Mon Jan 16 2017', date_delivered: 'Tue Jan 17 2017', total: 500, items: [], status:'completed'},
+  {date_created: 'Sun Jan 15 2017', date_shipped: 'Pending', date_delivered: 'Pending', total: 10, items: [], status:'completed'},
+  {date_created: 'Sun Jan 15 2017', date_shipped: 'Mon Jan 16 2017', date_delivered: 'Pending', total: 20, items: [], status:'completed'},
+  {date_created: 'Fri Dec 16 2016', date_shipped: 'Pending', date_delivered: 'Pending', total: 30, items: [], status:'created'},
+  {date_created: 'Tue Jan 17 2016', date_shipped: 'Pending', date_delivered: 'Pending', total: 30, items: [], status:'cancelled'},
+  {date_created: 'Wed Jan 18 2016', date_shipped: 'Pending', date_delivered: 'Pending', total: 30, items: [], status:'processing'}
+], order => db.model('order').create(order))
+
 db.didSync
   .then(() => db.sync({force: true}))
   .then(seedUsers)
   .then(users => console.log(`Seeded ${users.length} users OK`))
   .then(seedAlbums)
   .then(albums => console.log(`Seeded ${albums.length} albums OK`))
+  .then(seedOrder)
+  .then(orders => console.log(`Seeded ${orders.length} orders OK`))
   .catch(error => console.error(error))
   .finally(() => db.close())
