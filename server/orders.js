@@ -9,11 +9,11 @@ const router = require('express').Router()
 router.get('/', (req, res, next) => {    //---> route is used for testing purposes
     Order.findAll()
     .then(orders => {
-        // If user is an admin, return all orders
-        // if (req.user.isAdmin) return res.json(orders)
+     //   If user is an admin, return all orders
+        if (req.user.isAdmin) return res.json(orders)
 
-        // Otherwise, return all of the user's own orders
-        // return res.json(orders.filter(order => order.user_id === req.user.id))
+     //   Otherwise, return all of the user's own orders
+        return res.json(orders.filter(order => order.user_id === req.user.id))
         res.json(orders)
     })
     .catch(next)
