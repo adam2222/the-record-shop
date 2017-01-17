@@ -30,7 +30,6 @@ const onAlbumEnter = (nextRouterState) => {
 
 const onGenreEnter = (nextRouterState) => {
   const genre = nextRouterState.params.genre.split("-").join(" ")
-  console.log('GENRE', genre)
   const allAlbums = store.getState().albums.allAlbums
   let filtered = allAlbums.filter(album => {
     return (

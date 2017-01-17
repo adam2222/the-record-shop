@@ -11,6 +11,9 @@ nav {
 .dropdown-menu {
   /*background-image: url("/images/vinyl-wallpaper-bw.jpg");*/ }
 
+#search {
+  width: 40vw; }
+
 .navbar-right {
   margin-right: 5px; }
 

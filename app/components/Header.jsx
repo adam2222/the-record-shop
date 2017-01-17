@@ -4,11 +4,17 @@ import Search from './Search'
 import { Link } from 'react-router'
 
 export default class Header extends Component {
+  constructor(props) {
+    super(props)
+
+  }
+
   render(){
+    const findFilteredAlbums = this.props.findFilteredAlbums
     return (
       <nav className="row navbar navbar-default">
           <div className="navbar-header">
-            <Link to="/">
+            <Link to="/" onClick={() => findFilteredAlbums([])}>
               <img id="logo" src='/images/logo.png' />
               <span className="store-name">The Record Store</span>
             </Link>
@@ -25,9 +31,12 @@ export default class Header extends Component {
                        <li><Link to="/genre/miscellaneous">Other</Link></li>
                     </ul>
                 </li>
+            </ul>
+              <ul className="nav navbar-nav navbar-right">
                 <li><Search /></li>
                 <li><Login /></li>
-            </ul>
+              </ul>
+
             </div>
 
 

@@ -78,6 +78,7 @@ export const addAlbumToDB = (user_id, album_id, quantity) => dispatch => {
 }
 
 export const removeAlbumFromDB = (user_id, album_id) => dispatch => {
+
   axios.delete(`/api/users/${user_id}/cart/${album_id}`)
   .then(() => dispatch(removeAlbum(album_id)))
   .catch(err => console.error('unable to remove album from cart', err))
