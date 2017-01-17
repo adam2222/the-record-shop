@@ -8,15 +8,30 @@ export default class SingleAlbum extends Component {
     super(props)
     this.state = {
       quantity: 0,
-      edit: false
+      edit: false,
+      hover: false
     }
     this.handleChange = this.handleChange.bind(this)
     this.onClick = this.onClick.bind(this)
+    this.mouseOver = this.mouseOver.bind(this)
+    this.mouseOut = this.mouseOut.bind(this)
     this.onFormSubmit = this.onFormSubmit.bind(this)
   }
   onClick() {
     this.setState({
       edit: !this.state.edit
+    })
+  }
+
+  mouseOver() {
+    this.setState({
+      hover: true
+    })
+  }
+
+  mouseOut() {
+    this.setState({
+      hover: false
     })
   }
 
@@ -56,8 +71,8 @@ export default class SingleAlbum extends Component {
       <div className="container single-album">
         <div className="row">
           <div className="col-md-6">
-            <div className="image">
-              <img src={`../${album.image_front}`} className="img-responsive" />
+            <div className="image" onMouseOver={this.mouseOver} onMouseOut={this.mouseOut}>
+              <img src={ this.state.hover ? (`../${album.image_back}`) : (`../${album.image_front}`) } className="img-responsive" />
             </div>
           </div>
           <div className="col-md-6">
