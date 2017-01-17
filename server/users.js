@@ -74,7 +74,8 @@ api.get('/:userId/cart', (req, res, next) => {
 })
 
 // add mustBeLoggedIn, selfOnly AFTER AUTH IS WORKING
-api.put('/:userId/cart/', (req, res, next) => {
+// FOR ADDING A NEW ITEM TO CART
+api.put('/:userId/cart', (req, res, next) => {
 	ShoppingCartItem.findOrCreate({
 		where: {
 			album_id: req.body.album_id,
@@ -89,6 +90,25 @@ api.put('/:userId/cart/', (req, res, next) => {
 		// whether instance was created during AJAX requests
 		if (created) res.sendStatus(201)
 		else res.sendStatus(200)
+	})
+	.catch(next)
+})
+
+// FOR UPDATING QUANTITY OF ITEMS IN A ROUTE 
+api.put('/:userId/cart/:albumId', (req, res, next) => {
+	if (req.body.quantity === '') req.body.quantity = 0
+
+	ShoppingCartItem.update({
+		quantity: +req.body.quantity
+	}, {
+		where: {
+			album_id: req.params.albumId,
+			user_id: req.params.userId
+		}, returning: true
+	})
+	.then(userAlbum => {
+		let updatedAlbum = userAlbum[1][0].dataValues
+		res.json(updatedAlbum)
 	})
 	.catch(next)
 })

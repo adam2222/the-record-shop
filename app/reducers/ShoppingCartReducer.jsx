@@ -37,9 +37,10 @@ export const removeAlbums = albums => {
   }
 }
 
-export const updateQuantity = quantity => {
+export const updateQuantity = (album, quantity) => {
   return {
     type: UPDATE_QUANTITY,
+    album,
     quantity
   }
 }
@@ -56,8 +57,16 @@ export const getCartFromDB = user_id => dispatch => {
   .catch(err => console.error('unable to get cart info', err))
 }
 
-export const addOrUpdateAlbumInDB = (user_id, album_id, quantity) => dispatch => {
-  axios.put(`/api/${user_id}/cart/${album_id}`, {
+export const updateQuantityInDB = (user_id, album_id, quantity) => dispatch => {
+  axios.put(`/api/users/${user_id}/cart/${album_id}`, {quantity: [quantity]})
+  .then((response) => {
+    dispatch(updateQuantity(album_id, quantity))
+  })
+  .catch(err => console.error('unable to update quantity', err))
+}
+
+export const addAlbumToDB = (user_id, album_id, quantity) => dispatch => {
+  axios.put(`/api/${user_id}/cart`, {
       user_id,
       quantity,
       album_id
@@ -95,13 +104,19 @@ const reducer = (state = [], action) => {
       newState.push(newAlbum)
       break
     case REMOVE_ALBUM:
-      newState = state.filter(item => item.id !== action.album)
+      newState = state.filter(album => album.id !== action.album)
       break
     case REMOVE_ALBUMS:
       newState = []
       break
     case UPDATE_QUANTITY:
-      newState[action.album] = action.quantity
+      newState = state.map(album => {
+        if (album.id === action.album) {
+          if (action.quantity === "") action.quantity = 0
+          album.shopping_cart_items.quantity = Number(action.quantity)
+          return album
+        } else return album
+      })
       break
     default:
       return state

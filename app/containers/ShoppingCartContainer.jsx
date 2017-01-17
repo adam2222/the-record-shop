@@ -1,7 +1,7 @@
 import React from 'react';
 import { browserHistory } from 'react-router'
 import { connect } from 'react-redux';
-import { addOrUpdateAlbumInDB, getCartFromDB, removeAlbumFromDB, removeAllAlbumsFromDB } from '../reducers/ShoppingCartReducer'
+import { addOrUpdateAlbumInDB, getCartFromDB, removeAlbumFromDB, removeAllAlbumsFromDB, updateQuantityInDB } from '../reducers/ShoppingCartReducer'
 import ShoppingCart from '../components/ShoppingCart'
 
 
@@ -16,7 +16,8 @@ const mapDispatchToProps = (dispatch) => {
         addOrUpdateAlbum: (user_id, album_id, quantity) => dispatch(addOrUpdateAlbumInDB(user_id, album_id, quantity)),
         getCart: (user_id) => dispatch(getCartFromDB(user_id)),
         removeAlbum: (user_id, album_id) => dispatch(removeAlbumFromDB(user_id, album_id)),
-        removeAllAlbums: user_id => dispatch(removeAllAlbumsFromDB(user_id))
+        removeAllAlbums: user_id => dispatch(removeAllAlbumsFromDB(user_id)),
+        updateQuantity: (user_id, album_id, quantity) => dispatch(updateQuantityInDB(user_id, album_id, quantity))
     }
 }
 
@@ -27,6 +28,7 @@ class ShoppingCartContainer extends React.Component {
         this.handleQuantityChange = this.handleQuantityChange.bind(this)
         this.handleRemove = this.handleRemove.bind(this)
         this.handleRemoveAll = this.handleRemoveAll.bind(this)
+        this.handleCheckout = this.handleCheckout.bind(this)
 
         this.state = {
             cart: [],
@@ -41,7 +43,7 @@ class ShoppingCartContainer extends React.Component {
         })
     }
 
-    handleQuantityChange (album_id, evt) {
+    handleQuantityChange (album_id, user_id, evt) {
         let cart = this.state.cart
         let changedCart = this.state.cart.map(album => {
             if (album.id === album_id) album.shopping_cart_items.quantity = evt.target.value
@@ -54,6 +56,8 @@ class ShoppingCartContainer extends React.Component {
             cart: changedCart,
             total: changedTotal
         })
+
+        this.props.updateQuantity(user_id, album_id, evt.target.value)
     }
 
     handleRemove (album_id, user_id, evt) {
@@ -79,13 +83,19 @@ class ShoppingCartContainer extends React.Component {
         this.props.removeAllAlbums(user_id)
     }
 
+    handleCheckout () {
+        dispatch()
+    }
+
     render () {
         return (
             <ShoppingCart 
+                total = {this.state.total}
                 {...this.props}
                 handleQuantityChange = {this.handleQuantityChange}
                 handleRemove = {this.handleRemove}
                 handleRemoveAll = {this.handleRemoveAll}
+                handleCheckout = {this.handleCheckout}
             />
         )
     }

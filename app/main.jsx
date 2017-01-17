@@ -8,6 +8,7 @@ import App from './components/App'
 import AlbumContainer from './containers/AlbumContainer'
 import AllAlbumsContainer from './containers/AllAlbumsContainer'
 import ShoppingCartContainer from './containers/ShoppingCartContainer'
+import CheckoutContainer from './containers/CheckoutContainer'
 
 import { loadAlbums, getAlbumById, filterAlbums } from './reducers/AllAlbumsReducer'
 import { getCartFromDB } from './reducers/ShoppingCartReducer'
@@ -51,7 +52,8 @@ ReactDOM.render(
         <Route path="/home" component={ AllAlbumsContainer }/>
         <Route path="/genre/:genre" component={ AllAlbumsContainer } onEnter={onGenreEnter}/>
         <Route path="/albums/:albumId" component={AlbumContainer} onEnter={onAlbumEnter}/>
-        <Route path ="/:userId/cart" component={ShoppingCartContainer} onEnter={onCartEnter}/>
+        <Route path="/:userId/cart" component={ShoppingCartContainer} onEnter={onCartEnter}/>
+        <Route path="/:userId/checkout" component={CheckoutContainer} onEnter={onCartEnter}/>
         <IndexRedirect to="/home" />
       </Route>
     </Router>
