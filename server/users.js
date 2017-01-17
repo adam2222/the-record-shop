@@ -22,13 +22,17 @@ api.post('/', (req, res, next) =>
 	.catch(next)
 )
 
+api.get('/guest', (req, res, next) => res.send(req.session.guestUser))
+
 api.post('/guest', (req, res, next) =>
 	User.create({
 		firstName: 'Guest',
 		lastName: 'User',
-		email:	'guest@user.com'
 	})
-	.then(user => res.sendStatus(201))
+	.then(user => {
+		// req.session.guestUser = JSON.stringify(guestUser)
+		res.status(201).json(user)
+	})
 	.catch(next)
 )
 
@@ -96,12 +100,7 @@ api.post('/:userId/cart/:album_id', (req, res, next) => {
 			quantity: req.body.quantity
 		}
 	})
-	.spread((instance, created) => {
-		// Separate statuses used to signal to ShoppingCartReducer/dispatchers
-		// whether instance was created during AJAX requests
-		if (created) res.sendStatus(201)
-		else res.sendStatus(200)
-	})
+	.then(res.sendStatus(200))
 	.catch(next)
 })
 

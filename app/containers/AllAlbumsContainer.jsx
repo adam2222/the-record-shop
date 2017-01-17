@@ -3,16 +3,18 @@ import Albums from '../components/Albums'
 
 const mapStateToProps = (state) => {
   const userId = state.auth ? state.auth.id : 'guest'
-  
+  const guestId = state.guest.guestUser ? state.guest.guestUser.id : null
+
   return {
     allAlbums: state.albums.allAlbums,
     filteredAlbums: state.albums.filteredAlbums,
-    userId
+    userId,
+    guestId
   }
 }
 
 import {filterAlbums} from '../reducers/AllAlbumsReducer'
-import {addOrUpdateAlbumInDB} from '../reducers/ShoppingCartReducer'
+import {addAlbumToDB} from '../reducers/ShoppingCartReducer'
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -20,7 +22,7 @@ const mapDispatchToProps = (dispatch) => {
       const action = filterAlbums(filtered)
       dispatch(action)
     },
-    addOrUpdateAlbumInDB
+    addAlbumToDB
   }
 }
 
