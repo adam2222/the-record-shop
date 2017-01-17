@@ -28,6 +28,8 @@ nav {
   display: inline-block;
   border-bottom: 1px lightgrey solid;
   margin: 15px auto 30px; }
+  .product .image img {
+    width: 100%; }
   .product .text h3 {
     height: 2em; }
   .product .info {
@@ -38,6 +40,16 @@ nav {
 
 .album {
   min-height: 400px; }
+
+.single-album .image img {
+  width: 100%; }
+
+.add-to-cart-btn {
+  width: 100%; }
+
+.review-form button {
+  margin: auto;
+  display: block; }
 
 .cart-button-box {
   margin: 0 auto; }
