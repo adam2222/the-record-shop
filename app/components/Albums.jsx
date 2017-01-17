@@ -52,7 +52,7 @@ export default class AllAlbums extends Component {
           <div className="product">
             <div className="image">
               <Link to={`/albums/${album.id}`}>
-                <img src={album.image_front} className="img-responsive" />
+                <img src={`../${album.image_front}`} className="img-responsive" />
               </Link>
             </div>
             <div className="text text-center">
