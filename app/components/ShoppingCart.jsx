@@ -8,7 +8,6 @@ export default function (props) {
     const handleRemove = props.handleRemove
     const handleRemoveAll = props.handleRemoveAll
     const handleCheckout = props.handleCheckout
-    console.log(props)
 
     return (
         <div id="shopping-cart">

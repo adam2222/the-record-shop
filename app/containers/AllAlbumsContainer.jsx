@@ -12,7 +12,7 @@ const mapStateToProps = (state) => {
 }
 
 import {filterAlbums} from '../reducers/AllAlbumsReducer'
-import {addOrUpdateAlbumInDB} from '../reducers/ShoppingCartReducer'
+import {addAlbumToDB} from '../reducers/ShoppingCartReducer'
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -20,7 +20,7 @@ const mapDispatchToProps = (dispatch) => {
       const action = filterAlbums(filtered)
       dispatch(action)
     },
-    addOrUpdateAlbumInDB
+    addAlbumToDB
   }
 }
 

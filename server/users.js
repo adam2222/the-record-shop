@@ -85,12 +85,7 @@ api.post('/:userId/cart/:album_id', (req, res, next) => {
 			quantity: req.body.quantity
 		}
 	})
-	.spread((instance, created) => {
-		// Separate statuses used to signal to ShoppingCartReducer/dispatchers
-		// whether instance was created during AJAX requests
-		if (created) res.sendStatus(201)
-		else res.sendStatus(200)
-	})
+	.then(res.sendStatus(200))
 	.catch(next)
 })
 
