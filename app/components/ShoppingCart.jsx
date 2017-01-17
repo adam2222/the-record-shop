@@ -8,6 +8,7 @@ export default function (props) {
     const handleRemove = props.handleRemove
     const handleRemoveAll = props.handleRemoveAll
     const handleCheckout = props.handleCheckout
+    console.log(props)
 
     return (
         <div id="shopping-cart">
@@ -35,12 +36,12 @@ export default function (props) {
                                 <td>${album.cost}</td>
                                 <td>
                                     <div className="input-group quantity-input">
-                                        <input type="text" className="form-control" value={album.shopping_cart_items.quantity} onChange={(evt) => handleQuantityChange(album.id, album.shopping_cart_items.user_id, evt)}></input>
+                                        <input type="text" className="form-control" value={album.shopping_cart_items.quantity} onChange={(evt) => handleQuantityChange(album.id, props.params.userId, evt)}></input>
                                     </div>
                                 </td>
                                 <td>${album.cost * album.shopping_cart_items.quantity}</td>
                                 <td>
-                                    <div className="remove-icon" onClick={(evt) => handleRemove(album.id, album.shopping_cart_items.user_id, evt)}></div>
+                                    <div className="remove-icon" onClick={(evt) => handleRemove(album.id, props.params.userId, evt)}></div>
                                 </td>
                             </tr>
                         ))
@@ -58,7 +59,7 @@ export default function (props) {
                 <div className="panel-body">
                     <div className="cart-button-box text-center col-md-12">
                         <button type="button" className="btn cart-btn btn-secondary">Update Cart</button>
-                        <Link to={`/api/users/${cart[0].shopping_cart_items.user_id}/checkout`}><button type="button" className="btn cart-btn btn-success">Check Out</button></Link>
+                        <Link to={`/${props.params.userId}/checkout`}><button type="button" className="btn cart-btn btn-success">Check Out</button></Link>
                         <button type="button" className="btn cart-btn btn-danger" onClick={(evt) => handleRemoveAll(cart[0].shopping_cart_items.user_id, evt)}>Clear Cart</button>
                     </div>
                 </div>

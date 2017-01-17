@@ -28,7 +28,6 @@ class ShoppingCartContainer extends React.Component {
         this.handleQuantityChange = this.handleQuantityChange.bind(this)
         this.handleRemove = this.handleRemove.bind(this)
         this.handleRemoveAll = this.handleRemoveAll.bind(this)
-        this.handleCheckout = this.handleCheckout.bind(this)
 
         this.state = {
             cart: [],
@@ -83,10 +82,6 @@ class ShoppingCartContainer extends React.Component {
         this.props.removeAllAlbums(user_id)
     }
 
-    handleCheckout () {
-        dispatch()
-    }
-
     render () {
         return (
             <ShoppingCart 
@@ -95,7 +90,6 @@ class ShoppingCartContainer extends React.Component {
                 handleQuantityChange = {this.handleQuantityChange}
                 handleRemove = {this.handleRemove}
                 handleRemoveAll = {this.handleRemoveAll}
-                handleCheckout = {this.handleCheckout}
             />
         )
     }

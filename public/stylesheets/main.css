@@ -87,6 +87,9 @@ th {
   -webkit-transform: rotate(-45deg);
   transform: rotate(-45deg); }
 
+.checkout-login {
+  margin-top: 40px; }
+
 #blue li a {
   font-weight: bold;
   /*color: white;*/ }
