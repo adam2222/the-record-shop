@@ -90,6 +90,9 @@ th {
 .checkout-login {
   margin-top: 40px; }
 
+.checkout-email .checkout-password {
+  margin-left: 20px; }
+
 #blue li a {
   font-weight: bold;
   /*color: white;*/ }

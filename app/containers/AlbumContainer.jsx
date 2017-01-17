@@ -3,6 +3,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import Album from '../components/album'
 import { createReview } from '../reducers/AlbumReviewsReducer'
+import { addAlbumToDB } from '../reducers/ShoppingCartReducer'
 
 const mapStateToProps = state => {
     return {
@@ -11,6 +12,6 @@ const mapStateToProps = state => {
     }
 }
 
-const mapDispatchToProps = { createReview }
+const mapDispatchToProps = { createReview, addAlbumToDB }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Album)
