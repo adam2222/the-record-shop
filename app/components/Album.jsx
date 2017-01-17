@@ -57,7 +57,7 @@ export default class SingleAlbum extends Component {
         <div className="row">
           <div className="col-md-6">
             <div className="image">
-              <img src={album.image_front} className="img-responsive" />
+              <img src={`../${album.image_front}`} className="img-responsive" />
             </div>
             <div>
               <div>
