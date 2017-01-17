@@ -1,6 +1,9 @@
 # Ignore all node_modules
 node_modules/*
 
+# Ignore compiled CSS
+public/stylesheets/*.css
+
 # ...except the symlink to ourselves.
 !node_modules/APP
 

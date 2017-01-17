@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 import Dropdown from './Dropdown'
+import store from '../store'
 
 export default class AllAlbums extends Component {
 
@@ -38,8 +39,11 @@ export default class AllAlbums extends Component {
   }
 
   render() {
+    const addOrUpdateAlbumInDB = this.props.addOrUpdateAlbumInDB
     const filteredAlbums = this.props.filteredAlbums
     const allAlbums = this.props.allAlbums
+    const userId = this.props.userId
+    const quantity = this.state.quantity
     const arrayOfAlbums = filteredAlbums[0] ? filteredAlbums : allAlbums
 
     const renderedAlbums = arrayOfAlbums.map(album => {
@@ -48,7 +52,7 @@ export default class AllAlbums extends Component {
           <div className="product">
             <div className="image">
               <Link to={`/albums/${album.id}`}>
-                <img src={album.image_front} className="img-responsive" />
+                <img src={`../${album.image_front}`} className="img-responsive" />
               </Link>
             </div>
             <div className="text text-center">
@@ -63,7 +67,9 @@ export default class AllAlbums extends Component {
             <div className="col-sm-3">
               <Dropdown onChange={this.handleChange} album={album} />
             </div>
-            <button type="button" className="col-sm-5 btn btn-success">Add to Cart</button>
+            <button type="button" className="col-sm-5 btn btn-success" onClick={() => {
+                  return store.dispatch(addOrUpdateAlbumInDB(userId, album.id, quantity))
+              }}>Add to Cart</button>
             </div>
           </div>
         </div>
