@@ -53,7 +53,7 @@ export default class SingleAlbum extends Component {
     }
 
     return (
-      <div className="container">
+      <div className="container single-album">
         <div className="row">
           <div className="col-md-6">
             <div className="image">
