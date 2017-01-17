@@ -14,15 +14,15 @@ const User = db.define('users', {
     type: Sequelize.STRING,
     allowNull: false
   },
+  isAdmin: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  },
   email: {
     type: Sequelize.STRING,
     unique: true,
     validate: {
       isEmail: true
-    },
-    isAdmin: {
-      type: Sequelize.BOOLEAN,
-      defaultValue: false
     }
   },
 

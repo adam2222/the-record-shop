@@ -14,14 +14,14 @@ const seedAlbums = () => db.Promise.map([
 ], singleAlbum => db.model('album').create(singleAlbum))
 
 const seedUsers = () => db.Promise.map([
-  {firstName: 'Guy', lastName: 'Fieri', email: 'ddd@example.com', password: '1234'},
-  {firstName: 'Barack', lastName: 'Obama', email: 'barack@example.gov', password: '1234'},
+  {firstName: 'Guy', lastName: 'Fieri', email: 'ddd@example.com', password: '1234', isAdmin: true},
+  {firstName: 'Barack', lastName: 'Obama', email: 'barack@example.gov', password: '1234', isAdmin: false},
 ], user => db.model('users').create(user))
 
 //needs items array
 const seedOrder = () => db.Promise.map([
-  {date_created: 'Sun Jan 15 2017', date_shipped: 'Mon Jan 16 2017', date_delivered: 'Tue Jan 17 2017', total: 150, items: [{title: 'Welcome to Flavortown', quantity:2}, {title: 'Funeral', quantity:3}], status:'completed'},
-  {date_created: 'Sun Jan 15 2017', date_shipped: 'Pending', date_delivered: 'Pending', total: 150, items: [{title: 'Welcome to Flavortown', quantity:2}, {title: 'Funeral', quantity:3}], status:'completed'},
+  {date_created: 'Sun Jan 15 2017', date_shipped: 'Mon Jan 16 2017', date_delivered: 'Tue Jan 17 2017', total: 150, items: [{title: 'Welcome to Flavortown', quantity:2}, {title: 'Funeral', quantity:3}], status:'completed', user_id: 2},
+  {date_created: 'Sun Jan 15 2017', date_shipped: 'Pending', date_delivered: 'Pending', total: 150, items: [{title: 'Welcome to Flavortown', quantity:2}, {title: 'Funeral', quantity:3}], status:'completed', user_id: 2},
   {date_created: 'Sun Jan 15 2017', date_shipped: 'Mon Jan 16 2017', date_delivered: 'Pending', total: 150, items: [{title: 'Welcome to Flavortown', quantity:2}, {title: 'Funeral', quantity:3}], status:'completed'},
   {date_created: 'Fri Dec 16 2016', date_shipped: 'Pending', date_delivered: 'Pending', total: 150, items: [{title: 'Welcome to Flavortown', quantity:2}, {title: 'Funeral', quantity:3}], status:'created'},
   {date_created: 'Tue Jan 17 2016', date_shipped: 'Pending', date_delivered: 'Pending', total: 150, items: [{title: 'Welcome to Flavortown', quantity:2}, {title: 'Funeral', quantity:3}], status:'cancelled'},
