@@ -72,6 +72,8 @@ export const addAlbumToDB = (user_id, album_id, quantity) => dispatch => {
       album_id
   })
   .then((response) => {
+    console.log('RESPONSE', response)
+    console.log('ALBUM_ID', album_id)
     dispatch(addAlbum(album_id))
   })
   .catch(err => console.error('unable to add album to cart', err))
@@ -121,7 +123,7 @@ const reducer = (state = [], action) => {
       break
     default:
       return state
-  } 
+  }
 
   return newState
 }

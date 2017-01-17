@@ -75,10 +75,10 @@ api.get('/:userId/cart', (req, res, next) => {
 
 // add mustBeLoggedIn, selfOnly AFTER AUTH IS WORKING
 // FOR ADDING A NEW ITEM TO CART
-api.put('/:userId/cart', (req, res, next) => {
+api.post('/:userId/cart/:album_id', (req, res, next) => {
 	ShoppingCartItem.findOrCreate({
 		where: {
-			album_id: req.body.album_id,
+			album_id: req.params.album_id,
 			user_id: Number(req.params.userId)
 		},
 		defaults: {
