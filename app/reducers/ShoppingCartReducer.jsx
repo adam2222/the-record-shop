@@ -56,13 +56,17 @@ export const getCartFromDB = user_id => dispatch => {
   .catch(err => console.error('unable to get cart info', err))
 }
 
-export const addOrUpdateAlbumInDB = (user_id, album_id, quantity) => dispatch => {
-  axios.put(`/api/${user_id}/cart/${album_id}`, {
+export const addOrUpdateAlbumInDB = (user_id, album_id, quantity) =>
+   dispatch => {
+    console.log('RIGHT BEFORE API CALL')
+   axios.put(`/api/users/${user_id}/cart/${album_id}`, {
       user_id,
       quantity,
       album_id
   })
   .then((response) => {
+    console.log('RESPONSE', response)
+    console.log('ALBUM_ID', album_id)
     dispatch(addAlbum(album_id))
   })
   .catch(err => console.error('unable to add album to cart', err))
@@ -107,7 +111,7 @@ const reducer = (state = [], action) => {
       break
     default:
       return state
-  } 
+  }
 
   return newState
 }

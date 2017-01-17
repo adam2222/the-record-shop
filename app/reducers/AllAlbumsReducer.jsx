@@ -40,6 +40,7 @@ export const updateAlbum = (updatedAlbum) => {
 /* -----------------    DISPATCHERS     ------------------ */
 
 export const loadAlbums = () => dispatch => {
+  console.log('LOAD ALBUMS')
   axios.get(`/api/albums`)
   .then(response => dispatch(findAlbums(response.data)))
   .catch(err => console.error('unable to load albums', err))
