@@ -34,12 +34,13 @@ export default class AllAlbums extends Component {
     const quantity = this.state.albumId ? this.state.albumId : 1
 
     if (userId == 'guest' && !guestId) {
-      store.dispatch(createGuestUser())
+      store.dispatch(createGuestUser(albumId, quantity))
+    } else {
+      let currentUserId = userId === 'guest' ? guestId : userId
+      return store.dispatch(addAlbumToDB(currentUserId, albumId, quantity))
     }
 
-    let currentUserId = userId === 'guest' ? guestId : userId
 
-    return store.dispatch(addAlbumToDB(currentUserId, albumId, quantity))
 
   }
 

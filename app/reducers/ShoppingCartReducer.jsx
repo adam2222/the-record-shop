@@ -7,7 +7,7 @@ const FIND_CART = 'FIND_CART'
 const REMOVE_ALBUM = 'REMOVE_ALBUM'
 const REMOVE_ALBUMS = 'REMOVE_ALBUMS'
 const UPDATE_QUANTITY = 'UPDATE_QUANTITY'
-const CREATE_GUEST = 'CREATE_GUEST'
+
 
 /* -----------------    ACTION CREATORS    ------------------ */
 
@@ -46,16 +46,12 @@ export const updateQuantity = (album, quantity) => {
   }
 }
 
-export const createGuest = (guest) => {
-  return {
-    type: CREATE_GUEST,
-    guest
-  }
-}
+
 
 /* -----------------    DISPATCHERS    ------------------ */
 
 export const getCartFromDB = user_id => dispatch => {
+  console.log('GETCART')
   axios.get(`/api/users/${user_id}/cart`)
   .then(cart => {
     // Transformation of data returned by DB into format accepted by store
@@ -85,14 +81,6 @@ export const addAlbumToDB = (user_id, album_id, quantity) => dispatch => {
   .catch(err => console.error('unable to add album to cart', err))
 }
 
-export const createGuestUser = () => {
-  axios.post('api/users/guest')
-  .then(guest => {
-
-    guest.data
-  })
-  .catch(console.error)
-}
 export const removeAlbumFromDB = (user_id, album_id) => dispatch => {
   axios.delete(`/api/users/${user_id}/cart/${album_id}`)
   .then(() => dispatch(removeAlbum(album_id)))

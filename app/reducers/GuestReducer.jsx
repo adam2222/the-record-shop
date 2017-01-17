@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {addAlbumToDB} from './ShoppingCartReducer'
 
 const CREATE_GUEST = 'CREATE_GUEST'
 // ******************************************
@@ -11,10 +12,16 @@ export const createGuest = (guest) => {
 }
 
 // ******************************************
-export const createGuestUser = () => dispatch => {
+export const createGuestUser = (albumId, quantity) => dispatch => {
   axios.post('api/users/guest')
+  .then(guest => guest.data)
   .then(guest => {
-    dispatch(createGuest(guest.data))
+     dispatch(createGuest(guest))
+     return guest;
+  })
+  .then(guest => {
+    console.log('GUEST', guest)
+    dispatch(addAlbumToDB(guest.id, albumId, quantity ))
   })
   .catch(console.error)
 }
