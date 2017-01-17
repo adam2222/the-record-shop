@@ -20,12 +20,12 @@ const seedUsers = () => db.Promise.map([
 
 //needs items array
 const seedOrder = () => db.Promise.map([
-  {date_created: 'Sun Jan 15 2017', date_shipped: 'Mon Jan 16 2017', date_delivered: 'Tue Jan 17 2017', total: 500, items: [], status:'completed'},
-  {date_created: 'Sun Jan 15 2017', date_shipped: 'Pending', date_delivered: 'Pending', total: 10, items: [], status:'completed'},
-  {date_created: 'Sun Jan 15 2017', date_shipped: 'Mon Jan 16 2017', date_delivered: 'Pending', total: 20, items: [], status:'completed'},
-  {date_created: 'Fri Dec 16 2016', date_shipped: 'Pending', date_delivered: 'Pending', total: 30, items: [], status:'created'},
-  {date_created: 'Tue Jan 17 2016', date_shipped: 'Pending', date_delivered: 'Pending', total: 30, items: [], status:'cancelled'},
-  {date_created: 'Wed Jan 18 2016', date_shipped: 'Pending', date_delivered: 'Pending', total: 30, items: [], status:'processing'}
+  {date_created: 'Sun Jan 15 2017', date_shipped: 'Mon Jan 16 2017', date_delivered: 'Tue Jan 17 2017', total: 150, items: [{title: 'Welcome to Flavortown', quantity:2}, {title: 'Funeral', quantity:3}], status:'completed'},
+  {date_created: 'Sun Jan 15 2017', date_shipped: 'Pending', date_delivered: 'Pending', total: 150, items: [{title: 'Welcome to Flavortown', quantity:2}, {title: 'Funeral', quantity:3}], status:'completed'},
+  {date_created: 'Sun Jan 15 2017', date_shipped: 'Mon Jan 16 2017', date_delivered: 'Pending', total: 150, items: [{title: 'Welcome to Flavortown', quantity:2}, {title: 'Funeral', quantity:3}], status:'completed'},
+  {date_created: 'Fri Dec 16 2016', date_shipped: 'Pending', date_delivered: 'Pending', total: 150, items: [{title: 'Welcome to Flavortown', quantity:2}, {title: 'Funeral', quantity:3}], status:'created'},
+  {date_created: 'Tue Jan 17 2016', date_shipped: 'Pending', date_delivered: 'Pending', total: 150, items: [{title: 'Welcome to Flavortown', quantity:2}, {title: 'Funeral', quantity:3}], status:'cancelled'},
+  {date_created: 'Wed Jan 18 2016', date_shipped: 'Pending', date_delivered: 'Pending', total: 150, items: [{title: 'Welcome to Flavortown', quantity:2}, {title: 'Funeral', quantity:3}], status:'processing'}
 ], order => db.model('order').create(order))
 
 db.didSync
