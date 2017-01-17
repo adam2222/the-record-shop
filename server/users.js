@@ -22,6 +22,20 @@ api.post('/', (req, res, next) =>
 	.catch(next)
 )
 
+api.get('/guest', (req, res, next) => res.send(req.session.guestUser))
+
+api.post('/guest', (req, res, next) =>
+	User.create({
+		firstName: 'Guest',
+		lastName: 'User',
+	})
+	.then(user => {
+		// req.session.guestUser = JSON.stringify(guestUser)
+		res.status(201).json(user)
+	})
+	.catch(next)
+)
+
 // SINGLE USER
 
 // add mustBeLoggedIn, selfOnly AFTER AUTH IS WORKING
@@ -74,6 +88,7 @@ api.get('/:userId/cart', (req, res, next) => {
 })
 
 // add mustBeLoggedIn, selfOnly AFTER AUTH IS WORKING
+
 // FOR ADDING A NEW ITEM TO CART
 api.post('/:userId/cart/:album_id', (req, res, next) => {
 	ShoppingCartItem.findOrCreate({
@@ -89,7 +104,7 @@ api.post('/:userId/cart/:album_id', (req, res, next) => {
 	.catch(next)
 })
 
-// FOR UPDATING QUANTITY OF ITEMS IN A ROUTE 
+// FOR UPDATING QUANTITY OF ITEMS IN A ROUTE
 api.put('/:userId/cart/:albumId', (req, res, next) => {
 	if (req.body.quantity === '') req.body.quantity = 0
 

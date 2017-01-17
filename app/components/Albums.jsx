@@ -2,27 +2,45 @@ import React, { Component } from 'react'
 import { Link } from 'react-router'
 import Dropdown from './Dropdown'
 import store from '../store'
+import {createGuestUser} from '../reducers/GuestReducer'
 
 export default class AllAlbums extends Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      quantity: 0
+      default: 1
     }
     this.handleChange = this.handleChange.bind(this)
   }
 
-  handleChange(event) {
+  handleChange(albumId, event) {
     this.setState({
-      quantity: event.target.value
+      albumId: event.target.value
     })
   }
 
   componentWillMount() {
     this.setState({
-      quantity: 1
+      albumId: 1
     })
+
+  }
+
+  addToCart(albumId) {
+    const addAlbumToDB = this.props.addAlbumToDB
+    const userId = this.props.userId
+    const guestId = this.props.guestId
+    const quantity = this.state.albumId ? this.state.albumId : 1
+
+    if (userId == 'guest' && !guestId) {
+      store.dispatch(createGuestUser(albumId, quantity))
+    } else {
+      let currentUserId = userId === 'guest' ? guestId : userId
+      return store.dispatch(addAlbumToDB(currentUserId, albumId, quantity))
+    }
+
+
 
   }
 
@@ -39,7 +57,6 @@ export default class AllAlbums extends Component {
   }
 
   render() {
-    const addAlbumToDB = this.props.addAlbumToDB
     const filteredAlbums = this.props.filteredAlbums
     const allAlbums = this.props.allAlbums
     const userId = this.props.userId
@@ -65,11 +82,9 @@ export default class AllAlbums extends Component {
               Price: ${album.cost}
             </div>
             <div className="col-sm-3">
-              <Dropdown onChange={this.handleChange} album={album} />
+              <Dropdown onChange={e => this.handleChange(album.id, e)} album={album} />
             </div>
-            <button type="button" className="col-sm-5 btn btn-success" onClick={() => {
-                  return store.dispatch(addAlbumToDB(userId, album.id, this.state.quantity))
-              }}>Add to Cart</button>
+            <button type="button" className="col-sm-5 btn btn-success" onClick={() => this.addToCart(album.id)}>Add to Cart</button>
             </div>
           </div>
         </div>

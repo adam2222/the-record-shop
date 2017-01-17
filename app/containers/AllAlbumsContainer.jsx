@@ -3,11 +3,13 @@ import Albums from '../components/Albums'
 
 const mapStateToProps = (state) => {
   const userId = state.auth ? state.auth.id : 'guest'
-  
+  const guestId = state.guest.guestUser ? state.guest.guestUser.id : null
+
   return {
     allAlbums: state.albums.allAlbums,
     filteredAlbums: state.albums.filteredAlbums,
-    userId
+    userId,
+    guestId
   }
 }
 
