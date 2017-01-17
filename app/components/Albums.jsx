@@ -30,8 +30,6 @@ export default class AllAlbums extends Component {
     if (this.props.params.genre) {
       const filteredAlbums = this.props.filteredAlbums
       const allAlbums = this.props.allAlbums
-      console.log("here's the genre")
-      console.log('THIS.PROPS.PARAMS.GENRE', this.props.params.genre)
       let filtered = allAlbums.filter(album => {
         return (
           album.genre.toLowerCase().match(this.props.params.genre.toLowerCase())
@@ -41,7 +39,7 @@ export default class AllAlbums extends Component {
   }
 
   render() {
-    const addOrUpdateAlbumInDB = this.props.addOrUpdateAlbumInDB
+    const addAlbumToDB = this.props.addAlbumToDB
     const filteredAlbums = this.props.filteredAlbums
     const allAlbums = this.props.allAlbums
     const userId = this.props.userId
@@ -70,7 +68,7 @@ export default class AllAlbums extends Component {
               <Dropdown onChange={this.handleChange} album={album} />
             </div>
             <button type="button" className="col-sm-5 btn btn-success" onClick={() => {
-                  return store.dispatch(addOrUpdateAlbumInDB(userId, album.id, quantity))
+                  return store.dispatch(addAlbumToDB(userId, album.id, this.state.quantity))
               }}>Add to Cart</button>
             </div>
           </div>

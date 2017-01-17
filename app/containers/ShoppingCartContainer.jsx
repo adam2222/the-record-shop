@@ -1,7 +1,7 @@
 import React from 'react';
 import { browserHistory } from 'react-router'
 import { connect } from 'react-redux';
-import { addOrUpdateAlbumInDB, getCartFromDB, removeAlbumFromDB, removeAllAlbumsFromDB, updateQuantityInDB } from '../reducers/ShoppingCartReducer'
+import { getCartFromDB, removeAlbumFromDB, removeAllAlbumsFromDB, updateQuantityInDB } from '../reducers/ShoppingCartReducer'
 import ShoppingCart from '../components/ShoppingCart'
 
 
@@ -13,7 +13,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addOrUpdateAlbum: (user_id, album_id, quantity) => dispatch(addOrUpdateAlbumInDB(user_id, album_id, quantity)),
         getCart: (user_id) => dispatch(getCartFromDB(user_id)),
         removeAlbum: (user_id, album_id) => dispatch(removeAlbumFromDB(user_id, album_id)),
         removeAllAlbums: user_id => dispatch(removeAllAlbumsFromDB(user_id)),
