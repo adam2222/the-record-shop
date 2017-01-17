@@ -12,7 +12,8 @@ nav {
   /*background-image: url("/images/vinyl-wallpaper-bw.jpg");*/ }
 
 #search {
-  width: 40vw; }
+  width: 40vw;
+  max-width: 550px; }
 
 .navbar-right {
   margin-right: 5px; }
@@ -23,6 +24,10 @@ nav {
 
 .dropdown-menu > li > a.btn-social-icon {
   display: inline-block; }
+
+@media screen and (max-width: 1200px) {
+  #search {
+    max-width: 350px; } }
 
 .product {
   display: inline-block;
