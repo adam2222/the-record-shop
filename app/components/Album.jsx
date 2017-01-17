@@ -8,15 +8,30 @@ export default class SingleAlbum extends Component {
     super(props)
     this.state = {
       quantity: 0,
-      edit: false
+      edit: false,
+      hover: false
     }
     this.handleChange = this.handleChange.bind(this)
     this.onClick = this.onClick.bind(this)
+    this.mouseOver = this.mouseOver.bind(this)
+    this.mouseOut = this.mouseOut.bind(this)
     this.onFormSubmit = this.onFormSubmit.bind(this)
   }
   onClick() {
     this.setState({
       edit: !this.state.edit
+    })
+  }
+
+  mouseOver() {
+    this.setState({
+      hover: true
+    })
+  }
+
+  mouseOut() {
+    this.setState({
+      hover: false
     })
   }
 
@@ -53,19 +68,11 @@ export default class SingleAlbum extends Component {
     }
 
     return (
-      <div className="container">
+      <div className="container single-album">
         <div className="row">
           <div className="col-md-6">
-            <div className="image">
-              <img src={`../${album.image_front}`} className="img-responsive" />
-            </div>
-            <div>
-              <div>
-                <button type="button" className="btn btn-info" onClick={this.onClick}>Write a Review</button>
-              </div>
-              <div className="row">
-                {this.state.edit && <ReviewForm onSubmit={ this.onFormSubmit } />}
-              </div>
+            <div className="image" onMouseOver={this.mouseOver} onMouseOut={this.mouseOut}>
+              <img src={ this.state.hover ? (`../${album.image_back}`) : (`../${album.image_front}`) } className="img-responsive" />
             </div>
           </div>
           <div className="col-md-6">
@@ -77,15 +84,22 @@ export default class SingleAlbum extends Component {
               <hr />
               <p>{album.description}</p>
             </div>
-            <div className="price col-sm-4">
-              Price: ${album.cost}
-            </div>
-            <div className="col-sm-4">
-              <Dropdown onChange={this.handleChange} album={album} />
-            </div>
-            <button type="button" className="col-sm-4 btn btn-success">Add to Cart</button>
             <div className="row">
-              {this.state.edit && <ReviewForm />}
+              <div className="price col-sm-4">
+                Price: ${album.cost}
+              </div>
+              <div className="col-sm-4">
+                <Dropdown onChange={this.handleChange} album={album} />
+              </div>
+              <div className="col-sm-4">
+                <button type="button" className="col-sm-4 btn btn-success add-to-cart-btn">Add to Cart</button>
+              </div>
+            </div>
+            <div className="review-form">
+              <div>
+                <button type="button" className="btn btn-info" onClick={this.onClick}>Write a Review</button>
+              </div>
+              {this.state.edit && <ReviewForm onSubmit={ this.onFormSubmit } />}
             </div>
           </div>
         </div>
