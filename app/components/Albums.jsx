@@ -26,6 +26,10 @@ export default class AllAlbums extends Component {
 
   }
 
+  addToCart() {
+    return store.dispatch(addOrUpdateAlbumInDB(userId, album.id, quantity))
+  }
+
   componentDidMount() {
     if (this.props.params.genre) {
       const filteredAlbums = this.props.filteredAlbums
@@ -67,9 +71,7 @@ export default class AllAlbums extends Component {
             <div className="col-sm-3">
               <Dropdown onChange={this.handleChange} album={album} />
             </div>
-            <button type="button" className="col-sm-5 btn btn-success" onClick={() => {
-                  return store.dispatch(addOrUpdateAlbumInDB(userId, album.id, quantity))
-              }}>Add to Cart</button>
+            <button type="button" className="col-sm-5 btn btn-success" onClick={addToCart}>Add to Cart</button>
             </div>
           </div>
         </div>
