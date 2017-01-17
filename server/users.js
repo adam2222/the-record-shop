@@ -22,6 +22,16 @@ api.post('/', (req, res, next) =>
 	.catch(next)
 )
 
+api.post('/guest', (req, res, next) =>
+	User.create({
+		firstName: 'Guest',
+		lastName: 'User',
+		email:	'guest@user.com'
+	})
+	.then(user => res.sendStatus(201))
+	.catch(next)
+)
+
 // SINGLE USER
 
 // add mustBeLoggedIn, selfOnly AFTER AUTH IS WORKING
@@ -74,10 +84,10 @@ api.get('/:userId/cart', (req, res, next) => {
 })
 
 // add mustBeLoggedIn, selfOnly AFTER AUTH IS WORKING
-api.put('/:userId/cart/', (req, res, next) => {
-	ShoppingCartItem.findOrCreate({
+api.put('/:userId/cart/:album_id', (req, res, next) => {
+	ShoppingCartItem.findOrCreate({gco
 		where: {
-			album_id: req.body.album_id,
+			album_id: req.params.album_id,
 			user_id: Number(req.params.userId)
 		},
 		defaults: {
