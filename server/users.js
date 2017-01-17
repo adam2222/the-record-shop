@@ -30,7 +30,7 @@ api.post('/guest', (req, res, next) =>
 		lastName: 'User',
 	})
 	.then(user => {
-		// req.session.guestUser = JSON.stringify(guestUser)
+		req.session.guestUser = JSON.stringify(guestUser)
 		res.status(201).json(user)
 	})
 	.catch(next)

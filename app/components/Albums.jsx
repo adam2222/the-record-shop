@@ -9,29 +9,24 @@ export default class AllAlbums extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      default: 1
     }
     this.handleChange = this.handleChange.bind(this)
   }
 
   handleChange(albumId, event) {
+    let eventQuantity = Number(event.target.value)
+
     this.setState({
-      albumId: event.target.value
+      [albumId]: eventQuantity
     })
   }
 
-  componentWillMount() {
-    this.setState({
-      albumId: 1
-    })
-
-  }
 
   addToCart(albumId) {
     const addAlbumToDB = this.props.addAlbumToDB
     const userId = this.props.userId
     const guestId = this.props.guestId
-    const quantity = this.state.albumId ? this.state.albumId : 1
+    const quantity = this.state[albumId] ? this.state[albumId] : 1
 
     if (userId == 'guest' && !guestId) {
       store.dispatch(createGuestUser(albumId, quantity))
@@ -39,8 +34,6 @@ export default class AllAlbums extends Component {
       let currentUserId = userId === 'guest' ? guestId : userId
       return store.dispatch(addAlbumToDB(currentUserId, albumId, quantity))
     }
-
-
 
   }
 
@@ -62,6 +55,8 @@ export default class AllAlbums extends Component {
     const userId = this.props.userId
     const quantity = this.state.quantity
     const arrayOfAlbums = filteredAlbums[0] ? filteredAlbums : allAlbums
+
+    console.log('STATE', this.state)
 
     const renderedAlbums = arrayOfAlbums.map(album => {
       return (

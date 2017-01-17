@@ -35,6 +35,21 @@ export default class SingleAlbum extends Component {
     })
   }
 
+  addToCart(albumId) {
+    const addAlbumToDB = this.props.addAlbumToDB
+    const userId = this.props.userId
+    const guestId = this.props.guestId
+    const quantity = this.state.albumId ? this.state.albumId : 1
+
+    if (userId == 'guest' && !guestId) {
+      store.dispatch(createGuestUser(albumId, quantity))
+    } else {
+      let currentUserId = userId === 'guest' ? guestId : userId
+      return store.dispatch(addAlbumToDB(currentUserId, albumId, quantity))
+    }
+
+  }
+
   handleChange(event) {
     this.setState({
       quantity: event.target.value
