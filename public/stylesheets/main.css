@@ -44,6 +44,13 @@ nav {
 .single-album .image img {
   width: 100%; }
 
+.add-to-cart-btn {
+  width: 100%; }
+
+.review-form button {
+  margin: auto;
+  display: block; }
+
 .cart-button-box {
   margin: 0 auto; }
 
