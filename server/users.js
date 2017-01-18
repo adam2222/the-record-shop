@@ -30,10 +30,12 @@ api.post('/guest', (req, res, next) =>
 		lastName: 'User',
 	})
 	.then(user => {
-		req.session.guestUser = JSON.stringify(guestUser)
+		console.log('USER', user)
+		req.session.guestUser = JSON.stringify(user)
+
 		res.status(201).json(user)
 	})
-	.catch(next)
+	.catch(console.error.bind(console))
 )
 
 // SINGLE USER

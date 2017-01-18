@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Link } from 'react-router'
 import Dropdown from './Dropdown'
 import store from '../store'
-import {createGuestUser} from '../reducers/GuestReducer'
 
 export default class AllAlbums extends Component {
 
@@ -26,6 +25,7 @@ export default class AllAlbums extends Component {
     const addAlbumToDB = this.props.addAlbumToDB
     const userId = this.props.userId
     const guestId = this.props.guestId
+    const createGuestUser = this.props.createGuestUser
     const quantity = this.state[albumId] ? this.state[albumId] : 1
 
     if (userId == 'guest' && !guestId) {
@@ -34,7 +34,6 @@ export default class AllAlbums extends Component {
       let currentUserId = userId === 'guest' ? guestId : userId
       return store.dispatch(addAlbumToDB(currentUserId, albumId, quantity))
     }
-
   }
 
   componentDidMount() {
@@ -55,8 +54,6 @@ export default class AllAlbums extends Component {
     const userId = this.props.userId
     const quantity = this.state.quantity
     const arrayOfAlbums = filteredAlbums[0] ? filteredAlbums : allAlbums
-
-    console.log('STATE', this.state)
 
     const renderedAlbums = arrayOfAlbums.map(album => {
       return (
