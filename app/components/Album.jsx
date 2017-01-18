@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Dropdown from './Dropdown'
 import ReviewForm from './ReviewForm'
 import ReviewList from './ReviewList'
+import Stars from './Stars'
 import store from '../store'
 
 export default class SingleAlbum extends Component {
@@ -16,6 +17,7 @@ export default class SingleAlbum extends Component {
     this.mouseOver = this.mouseOver.bind(this)
     this.mouseOut = this.mouseOut.bind(this)
     this.onFormSubmit = this.onFormSubmit.bind(this)
+    this.addToCart = this.addToCart.bind(this)
   }
   onClick() {
     this.setState({
@@ -41,7 +43,8 @@ export default class SingleAlbum extends Component {
     })
   }
 
-  addToCart(albumId) {
+  addToCart(albumId, event) {
+    event.stopPropagation()
     const addAlbumToDB = this.props.addAlbumToDB
     const userId = this.props.userId
     const guestId = this.props.guestId
@@ -74,14 +77,6 @@ export default class SingleAlbum extends Component {
 
   render() {
     const album = this.props.selectedAlbum
-    const averageRating = []
-    if (this.props.selectedAlbum.rating) {
-      for (let i = 1; i <= this.props.selectedAlbum.rating; i++) {
-        averageRating.push(
-          <span key={ i } className="glyphicon glyphicon-star" style={{color: 'yellow'}} />
-        )
-      }
-    }
 
     return (
       <div className="container single-album">
@@ -95,7 +90,7 @@ export default class SingleAlbum extends Component {
             <div className="text text-center">
               <h3>{album.title}</h3>
               <h4>{album.artist}</h4>
-              { this.props.selectedAlbum.rating && <h2>{ averageRating }</h2> }
+              { this.props.selectedAlbum.rating && <Stars rating={this.props.selectedAlbum.rating} /> }
               <small>{ this.props.reviews.length } reviews</small>
               <hr />
               <p>{album.description}</p>
@@ -108,7 +103,7 @@ export default class SingleAlbum extends Component {
                 <span>Quantity: </span><Dropdown onChange={(e) => this.handleChange(album.id, e)} album={album} />
               </div>
               <div className="col-sm-4">
-                <button type="button" className="col-sm-4 btn btn-success add-to-cart-btn" onClick={() => this.addToCart(album.id)}>Add to Cart</button>
+                <button type="button" className="col-sm-4 btn btn-success add-to-cart-btn" onClick={(event) => this.addToCart(album.id, event)}>Add to Cart</button>
               </div>
             </div>
           </div>

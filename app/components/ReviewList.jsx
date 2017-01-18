@@ -1,18 +1,13 @@
 import React from 'react'
+import Stars from './Stars'
 
 const ReviewList = ({ reviews }) => {
 
   const listOfReviews = reviews.map(review => {
-    var starCons = []
-    for (let i = 1; i <= review.stars; i++) {
-      starCons.push(
-        <span key={ i } className="glyphicon glyphicon-star" style={{color: 'yellow'}} />
-      )
-    }
     return (
       <li key={review.id}>
         <div>
-          {starCons}
+          <Stars rating={review.stars} />
         </div>
         <div>
            Description: {review.description}

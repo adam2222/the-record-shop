@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 import Dropdown from './Dropdown'
 import Hero from './Hero'
 import store from '../store'
+import Stars from './Stars'
 
 export default class AllAlbums extends Component {
 
@@ -68,6 +69,7 @@ export default class AllAlbums extends Component {
             <div className="text text-center">
               <h3><Link to={`/albums/${album.id}`}>{album.title}</Link></h3>
               <h4>{album.artist}</h4>
+              {album.rating && <h3><Stars rating={album.rating} /></h3>}
             </div>
 
             <div className="info">
