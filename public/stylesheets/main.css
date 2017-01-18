@@ -131,8 +131,27 @@ th {
 .checkout-login {
   margin-top: 40px; }
 
-.checkout-email .checkout-password {
-  margin-left: 20px; }
+.col-md-2.checkout-firstName {
+  margin-left: 20px;
+  margin-bottom: 20px; }
+
+.col-md-2.checkout-billing-address {
+  margin-left: 20px;
+  margin-bottom: 20px; }
+
+.col-md-2.checkout-ccn {
+  margin-left: 20px;
+  margin-bottom: 20px; }
+
+.grand-total {
+  text-align: left; }
+
+.confirmation-text {
+  text-align: center; }
+
+.confirmation-img {
+  display: block;
+  margin: 0 auto; }
 
 #blue li a {
   font-weight: bold;
