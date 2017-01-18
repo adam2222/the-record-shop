@@ -31,5 +31,3 @@ module.exports = db.define('order', {
 })
 
 
-//before validate hook to make sure quantity of item ordered is is equal to or less than the quantity specified on the album model
-//if not then throw error, else, then update quantity of item

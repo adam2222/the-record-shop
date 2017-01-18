@@ -5,10 +5,11 @@ export const Login = (props) => {
   const authenticated = props.authenticated;
   const login = props.login;
   const logout = props.logout;
+  const guestUserId = props.guestUserId ? props.guestUserId : 0
 
   const loggedOut = (
     <ul className="nav navbar-nav navbar-right" id="blue">
-      <li><Link to={`/cart`}><span className="glyphicon glyphicon-shopping-cart"></span></Link></li>
+      <li><Link to={`${guestUserId}/cart`}><span className="glyphicon glyphicon-shopping-cart"></span></Link></li>
       <li className="dropdown">
          <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sign In <span className="caret"></span></a>
          <ul className="dropdown-menu">
@@ -60,9 +61,15 @@ export const Login = (props) => {
 import {login, logout} from 'APP/app/reducers/auth'
 import {connect} from 'react-redux'
 
+const mapStateToProps = (state) => {
+  const guestUserId = state.guest.guestUser ? state.guest.guestUser.id : null
+
+  return ({
+    authenticated: state.auth,
+    guestUserId
+  })
+}
 export default connect (
-  state => ({
-    authenticated: state.auth
-  }),
+  state => mapStateToProps,
   {login, logout},
 ) (Login)

@@ -8,6 +8,7 @@ const REMOVE_ALBUM = 'REMOVE_ALBUM'
 const REMOVE_ALBUMS = 'REMOVE_ALBUMS'
 const UPDATE_QUANTITY = 'UPDATE_QUANTITY'
 
+
 /* -----------------    ACTION CREATORS    ------------------ */
 
 export const addAlbum = album => {
@@ -23,6 +24,7 @@ export const findCart = albums => {
     albums
   }
 }
+
 
 export const removeAlbum = album => {
   return {
@@ -44,6 +46,8 @@ export const updateQuantity = (album, quantity) => {
     quantity
   }
 }
+
+
 
 /* -----------------    DISPATCHERS    ------------------ */
 
@@ -90,6 +94,7 @@ export const removeAllAlbumsFromDB = user_id => dispatch => {
 }
 
 /* -----------------     REDUCER     ------------------ */
+
 
 const reducer = (state = [], action) => {
 

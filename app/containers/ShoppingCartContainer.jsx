@@ -83,7 +83,7 @@ class ShoppingCartContainer extends React.Component {
 
     render () {
         return (
-            <ShoppingCart 
+            <ShoppingCart
                 total = {this.state.total}
                 {...this.props}
                 handleQuantityChange = {this.handleQuantityChange}

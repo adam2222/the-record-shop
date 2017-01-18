@@ -17,12 +17,14 @@ import { loadAlbums, getAlbumById, filterAlbums } from './reducers/AllAlbumsRedu
 import { getCartFromDB } from './reducers/ShoppingCartReducer'
 import { loadReviews } from './reducers/AlbumReviewsReducer'
 import { whoami } from './reducers/auth'
+import { doIHaveGuestId } from './reducers/GuestReducer'
 
 import store from './store'
 
 const fetchAllData = () => {
   store.dispatch(loadAlbums())
   store.dispatch(whoami());
+  store.dispatch(doIHaveGuestId())
 }
 
 const onAlbumEnter = (nextRouterState) => {

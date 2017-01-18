@@ -1,3 +1,4 @@
+
 .cart-button-box {
   margin: 0 auto
 }
@@ -33,6 +34,12 @@ th {
   margin-left: 20px;
   width: 21px;
   height: 21px;
+}
+
+.remove-icon:hover {
+ color: red;
+ font-weight: bold;
+ cursor: pointer; 
 }
 
 .remove-icon:before {

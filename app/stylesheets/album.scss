@@ -1,7 +1,14 @@
 .product {
+	width: 100%;
 	display: inline-block;
 	border-bottom: 1px lightgrey solid;
 	margin: 15px auto 30px;
+
+	.image {
+		img {
+			width: 100%;
+		}
+	}
 
 	.text {
 		h3 {
@@ -21,4 +28,23 @@
 
 .album {
 	min-height: 400px;
+}
+
+.single-album {
+	.image {
+		img {
+			width: 100%;			
+		}
+	}
+}
+
+.add-to-cart-btn {
+	width: 100%;
+}
+
+.review-form {
+	button {
+		margin: auto;
+		display: block;		
+	}
 }

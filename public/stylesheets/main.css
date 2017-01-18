@@ -12,7 +12,8 @@ nav {
   /*background-image: url("/images/vinyl-wallpaper-bw.jpg");*/ }
 
 #search {
-  width: 40vw; }
+  width: 40vw;
+  max-width: 550px; }
 
 .navbar-right {
   margin-right: 5px; }
@@ -24,10 +25,17 @@ nav {
 .dropdown-menu > li > a.btn-social-icon {
   display: inline-block; }
 
+@media screen and (max-width: 1200px) {
+  #search {
+    max-width: 350px; } }
+
 .product {
+  width: 100%;
   display: inline-block;
   border-bottom: 1px lightgrey solid;
   margin: 15px auto 30px; }
+  .product .image img {
+    width: 100%; }
   .product .text h3 {
     height: 2em; }
   .product .info {
@@ -38,6 +46,16 @@ nav {
 
 .album {
   min-height: 400px; }
+
+.single-album .image img {
+  width: 100%; }
+
+.add-to-cart-btn {
+  width: 100%; }
+
+.review-form button {
+  margin: auto;
+  display: block; }
 
 .cart-button-box {
   margin: 0 auto; }
@@ -68,6 +86,11 @@ th {
   margin-left: 20px;
   width: 21px;
   height: 21px; }
+
+.remove-icon:hover {
+  color: red;
+  font-weight: bold;
+  cursor: pointer; }
 
 .remove-icon:before {
   content: '';

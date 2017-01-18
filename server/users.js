@@ -11,6 +11,7 @@ const api = require('express').Router();
 
 // ALL USERS
 
+
 api.get('/', (req, res, next) =>
 	User.scope('populate').findAll()
 	.then(users => res.json(users))
@@ -33,6 +34,22 @@ api.post('/', (req, res, next) => {
 	.spread((instance, created) => res.sendStatus(201))
 	.catch(next)
 })
+
+api.get('/guest', (req, res, next) => res.send(req.session.guestUser))
+
+api.post('/guest', (req, res, next) =>
+	User.create({
+		firstName: 'Guest',
+		lastName: 'User',
+	})
+	.then(user => {
+		console.log('USER', user)
+		req.session.guestUser = JSON.stringify(user)
+
+		res.status(201).json(user)
+	})
+	.catch(console.error.bind(console))
+)
 
 // SINGLE USER
 
@@ -88,6 +105,7 @@ api.get('/:userId/cart', (req, res, next) => {
 })
 
 // add mustBeLoggedIn, selfOnly AFTER AUTH IS WORKING
+
 // FOR ADDING A NEW ITEM TO CART
 api.post('/:userId/cart/:album_id', (req, res, next) => {
 	ShoppingCartItem.findOrCreate({
@@ -99,11 +117,19 @@ api.post('/:userId/cart/:album_id', (req, res, next) => {
 			quantity: req.body.quantity
 		}
 	})
-	.then(res.sendStatus(200))
+	.spread((item, created) => {
+		if (!created) {
+			let newQuantity = item.quantity + Number(req.body.quantity)
+			item.update({ quantity: newQuantity })
+			.then(res.sendStatus(200))
+		} else {
+			res.sendStatus(200)
+		}
+	})
 	.catch(next)
 })
 
-// FOR UPDATING QUANTITY OF ITEMS IN A ROUTE 
+// FOR UPDATING QUANTITY OF ITEMS IN A ROUTE
 api.put('/:userId/cart/:albumId', (req, res, next) => {
 	if (req.body.quantity === '') req.body.quantity = 0
 
