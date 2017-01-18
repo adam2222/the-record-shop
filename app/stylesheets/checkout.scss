@@ -2,6 +2,21 @@
     margin-top: 40px;
 }
 
-.checkout-email .checkout-password {
-    margin-left: 20px
+.col-md-2.checkout-firstName {
+    margin-left: 20px;
+    margin-bottom: 20px
+}
+
+.col-md-2.checkout-billing-address {
+    margin-left: 20px;
+    margin-bottom: 20px
+}
+
+.col-md-2.checkout-ccn {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.grand-total {
+    text-align: left;
 }
