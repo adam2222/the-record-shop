@@ -30,6 +30,7 @@ nav {
     max-width: 350px; } }
 
 .product {
+  width: 100%;
   display: inline-block;
   border-bottom: 1px lightgrey solid;
   margin: 15px auto 30px; }

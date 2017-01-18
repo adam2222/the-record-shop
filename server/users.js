@@ -10,6 +10,7 @@ const api = require('express').Router();
 
 // ALL USERS
 
+
 api.get('/', (req, res, next) =>
 	User.scope('populate').findAll()
 	.then(users => res.json(users))

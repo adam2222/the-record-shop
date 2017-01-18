@@ -58,12 +58,14 @@ export default class SingleAlbum extends Component {
 
 
   onFormSubmit(event, reviewRating) {
+    event.preventDefault()
     const { createReview, selectedAlbum } = this.props
     let reviewInfo = {
       description: event.target.description.value,
       stars: +reviewRating
     }
     createReview(+selectedAlbum.id, reviewInfo)
+    event.target.description.value = ''
   }
 
   componentWillMount() {
@@ -105,30 +107,35 @@ export default class SingleAlbum extends Component {
                 Price: ${album.cost}
               </div>
               <div className="col-sm-4">
-                <Dropdown onChange={(e) => this.handleChange(album.id, e)} album={album} />
+                <span>Quantity: </span><Dropdown onChange={(e) => this.handleChange(album.id, e)} album={album} />
               </div>
               <div className="col-sm-4">
                 <button type="button" className="col-sm-4 btn btn-success add-to-cart-btn" onClick={() => this.addToCart(album.id)}>Add to Cart</button>
               </div>
             </div>
-            <div className="review-form">
-              <div>
-                <button type="button" className="btn btn-info" onClick={this.onClick}>Write a Review</button>
-              </div>
-              {this.state.edit && <ReviewForm onSubmit={ this.onFormSubmit } />}
-            </div>
           </div>
         </div>
         <div className="row">
           <div className="col col-centered">
-            <ReviewList reviews={this.props.reviews} selectedAlbum={this.props.selectedAlbum} />
+            <div className="text-center">
+              <h2> Customer Reviews </h2>
+              <div className="review-form">
+                <div>
+                  <button type="button" className="btn btn-info" onClick={this.onClick}>Write a Review</button>
+                </div>
+                {this.state.edit && <ReviewForm onSubmit={ this.onFormSubmit } />}
+              </div>
+              <hr />
+              <ReviewList reviews={this.props.reviews} />
+            </div>
           </div>
         </div>
       </div>
-
     )
   }
 }
 
 
 // <span value="1" className="glyphicon glyphicon-star" ></span>
+//
+
