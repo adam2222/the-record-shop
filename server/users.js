@@ -102,7 +102,15 @@ api.post('/:userId/cart/:album_id', (req, res, next) => {
 			quantity: req.body.quantity
 		}
 	})
-	.then(res.sendStatus(200))
+	.spread((item, created) => {
+		if (!created) {
+			let newQuantity = item.quantity + Number(req.body.quantity)
+			item.update({ quantity: newQuantity })
+			.then(res.sendStatus(200))
+		} else {
+			res.sendStatus(200)
+		}
+	})
 	.catch(next)
 })
 
