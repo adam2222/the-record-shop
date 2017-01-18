@@ -17,7 +17,7 @@ const orderList = ({ order }) => {
           <ul className="list-group">
               {order.items && order.items.map(item => {
                   return (
-                    <li className="list-group-item">{item.title}: {item.quantity}</li>
+                    <li key={item.id} className="list-group-item">{item.title}: {item.quantity}</li>
                   )
                 })
               }
