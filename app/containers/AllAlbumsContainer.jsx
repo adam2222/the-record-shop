@@ -1,5 +1,8 @@
 import { connect } from 'react-redux'
 import Albums from '../components/Albums'
+import {filterAlbums} from '../reducers/AllAlbumsReducer'
+import {addAlbumToDB} from '../reducers/ShoppingCartReducer'
+import {createGuestUser} from '../reducers/GuestReducer'
 
 const mapStateToProps = (state) => {
   const userId = state.auth ? state.auth.id : 'guest'
@@ -13,8 +16,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-import {filterAlbums} from '../reducers/AllAlbumsReducer'
-import {addAlbumToDB} from '../reducers/ShoppingCartReducer'
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -22,7 +23,8 @@ const mapDispatchToProps = (dispatch) => {
       const action = filterAlbums(filtered)
       dispatch(action)
     },
-    addAlbumToDB
+    addAlbumToDB,
+    createGuestUser
   }
 }
 
