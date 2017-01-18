@@ -22,11 +22,13 @@ const orderList = ({ order }) => {
           <li className="list-group-item">Albums Purchased:
             <ul className="list-group">
               {order.items && order.items.map(item => {
-                return (
-                  <li className="list-group-item">{item.title}: {item.quantity}</li>
-                )
-              })
-            }
+
+                  return (
+                    <li key={item.id} className="list-group-item">{item.title}: {item.quantity}</li>
+                  )
+                })
+              }
+
           </ul></li>
           <li className="list-group-item">Grand Total: ${order.total}</li>
         </ul>
