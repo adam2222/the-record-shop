@@ -3,25 +3,35 @@
 const db = require('APP/db')
 const Album = require('APP/db/models/album')
 const Order = require('APP/db/models/order')
+const CreditCard = require('APP/db/models/credit_card')
 const {mustBeLoggedIn, forbidden, selfOnly, adminOnly} = require('./auth.filters')
 const router = require('express').Router()
 const User = require('APP/db/models/user')
 
-
 // router.get('/', (req, res, next) => {    //---> route is used for testing purposes
-router.get('/', mustBeLoggedIn, (req, res, next) => {
-  Order.findAll()
-  .then(orders => {
+// router.get('/', mustBeLoggedIn, (req, res, next) => {
+//   Order.findAll()
+//   .then(orders => {
 // If user is an admin, return all orders
-  if (req.user.isAdmin){
-    res.json(orders)
-  } else {
+//   if (req.user.isAdmin){
+//     res.json(orders)
+//   } else {
 //   Otherwise, return all of the user's own orders
-  return res.json(orders.filter(order => order.user_id === req.user.id))
+//   return res.json(orders.filter(order => order.user_id === req.user.id))
+//     }
+//   })
+//   .catch(next)
+//   })
+
+router.get('/:userId', (req, res, next) => {
+  Order.findAll({
+    where: {
+      user_id: +req.params.userId
     }
   })
+  .then(allOrders => res.json(allOrders))
   .catch(next)
-  })
+})
 
 router.post('/:userId', (req, res, next) => {
   //check for guest
@@ -56,7 +66,10 @@ router.post('/:userId', (req, res, next) => {
     return Order.create(req.body)
   })
   .then(createdOrder => {
-    res.status(201).json(createdOrder)
+    return createdOrder.setUser(+req.params.userId)
+  })
+  .then(finalizedOrder => {
+    res.status(201).json(finalizedOrder)
   })
   .catch(err => res.status(410).send(err))
 })

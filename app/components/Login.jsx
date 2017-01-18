@@ -48,7 +48,12 @@ export const Login = (props) => {
     <div>
       <ul className="nav navbar-nav navbar-right" id="blue">
         <li>{authenticated && <Link to={`/${authenticated.id}/cart`}><span className="glyphicon glyphicon-shopping-cart"></span></Link>}</li>
-        <li><a href="#">Hello {authenticated && authenticated.firstName}!</a></li>
+        <li className="dropdown">
+         <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hello {authenticated && authenticated.firstName}! <span className="caret"></span></a>
+           <ul className="dropdown-menu">
+            <li>{authenticated && <Link to={`/orders/${authenticated.id}`}>View Orders</Link>}</li>
+          </ul>
+        </li>
         <button className="btn btn-default navbar-btn" onClick={logout}>Log Out</button>
       </ul>
     </div>
