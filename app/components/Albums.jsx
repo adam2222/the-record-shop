@@ -86,9 +86,7 @@ export default class AllAlbums extends Component {
 
     return (
       <div>
-        <div className="row">
-          { filteredAlbums[0] ? null : (<Hero />) }
-        </div>
+
         <div className="row">
           <h1 className="text-center">Albums</h1>
            {renderedAlbums}
@@ -97,3 +95,6 @@ export default class AllAlbums extends Component {
     )
   }
 }
+// <div className="row">
+//   { filteredAlbums[0] ? null : (<Hero />) }
+// </div>
