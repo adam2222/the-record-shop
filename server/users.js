@@ -3,7 +3,8 @@
 const db = require('APP/db')
 const User = db.model('users')
 const Album = db.model('album')
-const ShoppingCartItem = require('../db/models/shopping_cart_items')
+const ShoppingCartItem = require('APP/db/models/shopping_cart_items')
+const CreditCard = require('APP/db/models/credit_card')
 
 const {mustBeLoggedIn, forbidden, selfOnly, adminOnly} = require('./auth.filters')
 const api = require('express').Router();
@@ -17,11 +18,22 @@ api.get('/', (req, res, next) =>
 	.catch(next)
 )
 
-api.post('/', (req, res, next) =>
-	User.create(req.body)
-	.then(user => res.sendStatus(201))
+api.post('/', (req, res, next) => {
+	if (req.user) {
+		return res.status(400).send('You are already logged in')
+	} 
+
+	User.findOrCreate({
+		where: {
+			firstName: req.body.firstName,
+			lastName: req.body.lastName,
+			email: req.body.email,
+			password: req.body.password
+		}	
+	})
+	.spread((instance, created) => res.sendStatus(201))
 	.catch(next)
-)
+})
 
 api.get('/guest', (req, res, next) => res.send(req.session.guestUser))
 
@@ -64,6 +76,7 @@ api.put('/:userId', (req, res, next) =>
 	User.update(req.body, {
 		where: {id: req.params.userId}
 	})
+	.then(() => res.sendStatus(200))
 	.catch(next)
 )
 
@@ -72,10 +85,11 @@ api.delete('/:userId', (req, res, next) => {
 	User.delete({
 		where: {id: req.params.userId}
 	})
+	.then(() => res.sendStatus(200))
 	.catch(next)
 })
 
-// SHOPPING CART
+// SHOPPING CART/CHECKOUT
 
 // add mustBeLoggedIn, selfOnly AFTER AUTH IS WORKING
 api.get('/:userId/cart', (req, res, next) => {
@@ -152,6 +166,16 @@ api.delete('/:userId/cart/:albumId', (req, res, next) => {
 		}
 	})
 	.then(() => res.sendStatus(200))
+	.catch(next)
+})
+
+// CREDIT CARD/SHIPPING
+
+api.post('/:userId/purchaseDetails', (req, res, next) => {
+	CreditCard.findOrCreate(req.body, {
+		where: {user_id: req.params.userId}
+	})
+	.then(() => res.sendStatus(201))
 	.catch(next)
 })
 

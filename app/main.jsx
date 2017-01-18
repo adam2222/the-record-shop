@@ -7,6 +7,7 @@ import {connect, Provider} from 'react-redux'
 
 import App from './components/App'
 import Signup from './components/Signup'
+import OrderConfirmation from './components/OrderConfirmation'
 
 import AlbumContainer from './containers/AlbumContainer'
 import AllAlbumsContainer from './containers/AllAlbumsContainer'
@@ -59,22 +60,10 @@ ReactDOM.render(
         <Route path="/albums/:albumId" component={AlbumContainer} onEnter={onAlbumEnter}/>
         <Route path="/:userId/cart" component={ShoppingCartContainer} onEnter={onCartEnter}/>
         <Route path="/:userId/checkout" component={CheckoutContainer} onEnter={onCartEnter}/>
+        <Route path="/:userId/checkout/confirm" component={OrderConfirmation}/>
         <IndexRedirect to="/home" />
       </Route>
     </Router>
   </Provider>,
   document.getElementById('main')
 )
-
-
-// const ExampleApp = connect(
-//   ({ auth }) => ({ user: auth })
-// ) (
-//   ({ user, children }) =>
-//     <div>
-//       <nav>
-//         {user ? <WhoAmI/> : <Login/>}
-//       </nav>
-//       {children}
-//     </div>
-// )

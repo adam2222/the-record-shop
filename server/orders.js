@@ -3,11 +3,11 @@
 const db = require('APP/db')
 const Album = require('APP/db/models/album')
 const Order = require('APP/db/models/order')
+const CreditCard = require('APP/db/models/credit_card')
 const {mustBeLoggedIn, forbidden, selfOnly, adminOnly} = require('./auth.filters')
 const router = require('express').Router()
 const ShoppingCartItem = require('APP/db/models/shopping_cart_items')
 const User = require('APP/db/models/user')
-
 
 // router.get('/', (req, res, next) => {    //---> route is used for testing purposes
 router.get('/', mustBeLoggedIn, (req, res, next) => {

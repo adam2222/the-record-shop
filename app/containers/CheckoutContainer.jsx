@@ -8,10 +8,4 @@ const mapStateToProps = state => {
     }
 }
 
-const mapDispatchToProps = state => {
-    return {
-        
-    }
-}
-
 export default connect(mapStateToProps)(Checkout)
