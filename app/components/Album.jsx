@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 import Dropdown from './Dropdown'
 import ReviewForm from './ReviewForm'
 import ReviewList from './ReviewList'
+import store from '../store'
 
 export default class SingleAlbum extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      quantity: 0,
       edit: false,
       hover: false
     }
@@ -35,11 +35,18 @@ export default class SingleAlbum extends Component {
     })
   }
 
+  handleChange(albumId, event) {
+    this.setState({
+      [albumId]: event.target.value
+    })
+  }
+
   addToCart(albumId) {
     const addAlbumToDB = this.props.addAlbumToDB
     const userId = this.props.userId
     const guestId = this.props.guestId
-    const quantity = this.state.albumId ? this.state.albumId : 1
+    const createGuestUser = this.props.createGuestUser
+    const quantity = this.state[albumId] ? this.state[albumId] : 1
 
     if (userId == 'guest' && !guestId) {
       store.dispatch(createGuestUser(albumId, quantity))
@@ -47,14 +54,8 @@ export default class SingleAlbum extends Component {
       let currentUserId = userId === 'guest' ? guestId : userId
       return store.dispatch(addAlbumToDB(currentUserId, albumId, quantity))
     }
-
   }
 
-  handleChange(event) {
-    this.setState({
-      quantity: event.target.value
-    })
-  }
 
   onFormSubmit(event, reviewRating) {
     const { createReview, selectedAlbum } = this.props
@@ -104,10 +105,10 @@ export default class SingleAlbum extends Component {
                 Price: ${album.cost}
               </div>
               <div className="col-sm-4">
-                <Dropdown onChange={this.handleChange} album={album} />
+                <Dropdown onChange={(e) => this.handleChange(album.id, e)} album={album} />
               </div>
               <div className="col-sm-4">
-                <button type="button" className="col-sm-4 btn btn-success add-to-cart-btn">Add to Cart</button>
+                <button type="button" className="col-sm-4 btn btn-success add-to-cart-btn" onClick={() => this.addToCart(album.id)}>Add to Cart</button>
               </div>
             </div>
             <div className="review-form">
