@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ReviewList = ({ selectedAlbum, reviews }) => {
+const ReviewList = ({ reviews }) => {
 
   const listOfReviews = reviews.map(review => {
     var starCons = []
@@ -23,13 +23,9 @@ const ReviewList = ({ selectedAlbum, reviews }) => {
   })
 
   return (
-    <div className="text-center">
-      <h2> Customer Reviews </h2>
-      <hr />
-      <ul className="list-unstyled">
-        { listOfReviews }
-      </ul>
-    </div>
+    <ul className="list-unstyled">
+      { listOfReviews }
+    </ul>
   )
 }
 

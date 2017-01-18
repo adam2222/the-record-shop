@@ -56,8 +56,6 @@ export default class AllAlbums extends Component {
     const quantity = this.state.quantity
     const arrayOfAlbums = filteredAlbums[0] ? filteredAlbums : allAlbums
 
-    console.log('STATE', this.state)
-
     const renderedAlbums = arrayOfAlbums.map(album => {
       return (
         <div className="col-lg-3 col-md-4 col-sm-6 album" key={album.id}>
