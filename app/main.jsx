@@ -6,6 +6,7 @@ import {render} from 'react-dom'
 import {connect, Provider} from 'react-redux'
 
 import App from './components/App'
+import Signup from './components/Signup'
 import OrderConfirmation from './components/OrderConfirmation'
 
 import AlbumContainer from './containers/AlbumContainer'
@@ -69,6 +70,7 @@ ReactDOM.render(
     <Router history={browserHistory}>
       <Route path="/" component={App} onEnter={ fetchAllData }>
         <Route path="/home" component={ AllAlbumsContainer }/>
+        <Route path="/signup" component={Signup}/>
         <Route path="/genre/:genre" component={ AllAlbumsContainer } onEnter={onGenreEnter}/>
         <Route path="/albums/:albumId" component={AlbumContainer} onEnter={onAlbumEnter}/>
         <Route path="/orders/:userId" component={ AllOrders } onEnter={ onOrderEnter} />

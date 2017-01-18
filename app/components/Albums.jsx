@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 import Dropdown from './Dropdown'
+import Hero from './Hero'
 import store from '../store'
 
 export default class AllAlbums extends Component {
@@ -84,8 +85,14 @@ export default class AllAlbums extends Component {
     })
 
     return (
-      <div className="row">
-         {renderedAlbums}
+      <div>
+        <div className="row">
+          { filteredAlbums[0] ? null : (<Hero />) }
+        </div>
+        <div className="row">
+          <h1 className="text-center">Albums</h1>
+           {renderedAlbums}
+        </div>
       </div>
     )
   }

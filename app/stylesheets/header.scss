@@ -1,15 +1,28 @@
 nav {
   height: 60px;
   padding-top: 5px;
+  z-index: 99;
+  
+  a:hover, a:link, a:visited, a:active {
+    text-decoration: none;
+  }
 
   #logo {
-    max-height: 55px;
+    max-width: 76px;
+    margin-top: -10px;
+    margin-left: -34px;
   }
 
   .store-name {
-  	font-size: 1.2em;
+  	font-size: 2.4em;
   	font-weight: bold;
   	margin-left: 10px;
+    font-family: 'Permanent Marker';
+    color: black;
+  }
+
+  .genre {
+    margin-left: 30px;
   }
 }
 
@@ -18,8 +31,8 @@ nav {
 }
 
 #search {
-  width: 40vw;
-  max-width: 550px;
+  width: 30vw;
+  max-width: 420px;
 }
 .navbar-right {
   margin-right: 5px;
@@ -36,6 +49,6 @@ nav {
 
 @media screen and (max-width: 1200px) {
   #search {
-    max-width: 350px;
+    max-width: 18vw;
   }
 }

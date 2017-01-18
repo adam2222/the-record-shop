@@ -1,19 +1,28 @@
 nav {
   height: 60px;
-  padding-top: 5px; }
+  padding-top: 5px;
+  z-index: 99; }
+  nav a:hover, nav a:link, nav a:visited, nav a:active {
+    text-decoration: none; }
   nav #logo {
-    max-height: 55px; }
+    max-width: 76px;
+    margin-top: -10px;
+    margin-left: -34px; }
   nav .store-name {
-    font-size: 1.2em;
+    font-size: 2.4em;
     font-weight: bold;
-    margin-left: 10px; }
+    margin-left: 10px;
+    font-family: 'Permanent Marker';
+    color: black; }
+  nav .genre {
+    margin-left: 30px; }
 
 .dropdown-menu {
   /*background-image: url("/images/vinyl-wallpaper-bw.jpg");*/ }
 
 #search {
-  width: 40vw;
-  max-width: 550px; }
+  width: 30vw;
+  max-width: 420px; }
 
 .navbar-right {
   margin-right: 5px; }
@@ -27,7 +36,13 @@ nav {
 
 @media screen and (max-width: 1200px) {
   #search {
-    max-width: 350px; } }
+    max-width: 18vw; } }
+
+.hero h1 {
+  position: absolute;
+  top: 111px;
+  margin-left: 15px;
+  font-size: 4vw; }
 
 .product {
   width: 100%;
@@ -56,6 +71,9 @@ nav {
 .review-form button {
   margin: auto;
   display: block; }
+
+#review-button {
+  margin-bottom: 15px; }
 
 .cart-button-box {
   margin: 0 auto; }
@@ -142,6 +160,15 @@ th {
 body {
   /*background-image: url("/images/close-up-record-light.jpg");*/
   background-size: contain; }
+
+h1 {
+  font-family: 'Permanent Marker'; }
+
+.hero img {
+  width: 100%;
+  margin-top: -26px;
+  opacity: 0.4;
+  filter: grayscale(100%); }
 
 @media (min-width: 768px) {
   /*//   .table-row {

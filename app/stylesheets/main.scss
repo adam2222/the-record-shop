@@ -1,10 +1,10 @@
 @import "header";
+@import "hero";
 @import "album";
 @import "shopping_cart";
 @import "checkout";
 @import "confirmation";
-
-
+@import "signup";
 
 #blue li a {
   font-weight: bold;
@@ -17,9 +17,23 @@ body {
   background-size: contain;
 }
 
+h1 {
+	font-family: 'Permanent Marker';
+}
 #body img {
   // max-height: 200px;
 }
+
+.hero {
+	img {
+		width: 100%;
+		margin-top: -26px;
+		opacity: 0.4;
+		filter: grayscale(100%);
+	}
+}
+
+
 
 // @mixin make-cols ($type) {
 // 	@for $i from 1 through 12 {
