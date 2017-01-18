@@ -1,4 +1,5 @@
 .product {
+  width: 100%;
   display: inline-block;
   border-bottom: 1px lightgrey solid;
   margin: 15px auto 30px; }
@@ -24,3 +25,6 @@
 .review-form button {
   margin: auto;
   display: block; }
+
+#review-button {
+  margin-bottom: 15px; }

@@ -1,19 +1,26 @@
 nav {
   height: 60px;
-  padding-top: 5px; }
+  padding-top: 5px;
+  z-index: 99; }
+  nav a:hover, nav a:link, nav a:visited, nav a:active {
+    text-decoration: none; }
   nav #logo {
-    max-height: 55px; }
+    max-height: 50px; }
   nav .store-name {
-    font-size: 1.2em;
+    font-size: 1.5em;
     font-weight: bold;
-    margin-left: 10px; }
+    margin-left: 10px;
+    font-family: 'Permanent Marker';
+    color: black; }
+  nav .genre {
+    margin-left: 30px; }
 
 .dropdown-menu {
   /*background-image: url("/images/vinyl-wallpaper-bw.jpg");*/ }
 
 #search {
-  width: 40vw;
-  max-width: 550px; }
+  width: 30vw;
+  max-width: 420px; }
 
 .navbar-right {
   margin-right: 5px; }
@@ -27,4 +34,4 @@ nav {
 
 @media screen and (max-width: 1200px) {
   #search {
-    max-width: 350px; } }
+    max-width: 18vw; } }
