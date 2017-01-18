@@ -1,7 +1,7 @@
 
 import React from 'react'
 import {connect} from 'react-redux'
-import Album from '../components/album'
+import Album from '../components/Album'
 import { createReview } from '../reducers/AlbumReviewsReducer'
 import { addAlbumToDB } from '../reducers/ShoppingCartReducer'
 import { createGuestUser } from '../reducers/GuestReducer'

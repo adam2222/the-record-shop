@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import HeaderContainer from '../containers/HeaderContainer'
-import Footer from './footer'
+import Footer from './Footer'
 
 export default (props) => {
   return (
