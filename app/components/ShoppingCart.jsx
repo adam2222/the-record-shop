@@ -40,7 +40,7 @@ export default function (props) {
                                 </td>
                                 <td>${album.cost * album.shopping_cart_items.quantity}</td>
                                 <td>
-                                    <div className="remove-icon" onClick={(evt) => handleRemove(album.id, props.params.userId, evt)}></div>
+                                    <div><div className="remove-icon" onClick={(evt) => handleRemove(album.id, props.params.userId, evt)}></div></div>
                                 </td>
                             </tr>
                         ))

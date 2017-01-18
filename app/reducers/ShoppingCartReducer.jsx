@@ -72,7 +72,7 @@ export const addAlbumToDB = (user_id, album_id, quantity) => dispatch => {
       album_id
   })
   .then(() => {
-    getCartFromDB(user_id)
+    dispatch(getCartFromDB(user_id))
   })
   .catch(err => console.error('unable to add album to cart', err))
 }

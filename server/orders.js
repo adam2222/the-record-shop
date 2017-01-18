@@ -2,8 +2,11 @@
 
 const db = require('APP/db')
 const Order = require('APP/db/models/order')
+const CreditCard = require('APP/db/models/credit_card')
 const {mustBeLoggedIn, forbidden, selfOnly, adminOnly} = require('./auth.filters')
 const router = require('express').Router()
+
+// ORDERS
 
 // router.get('/', mustBeLoggedIn, (req, res, next) => {   --> real route
 router.get('/', (req, res, next) => {    //---> route is used for testing purposes

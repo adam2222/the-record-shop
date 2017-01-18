@@ -39,7 +39,7 @@ const User = db.define('users', {
 	indexes: [{fields: ['email'], unique: true}],
   hooks: {
     beforeCreate: setEmailAndPassword,
-    beforeUpdate: setEmailAndPassword,
+    beforeUpdate: setEmailAndPassword
   },
   instanceMethods: {
     authenticate(plaintext) {
