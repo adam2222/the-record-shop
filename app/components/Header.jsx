@@ -20,7 +20,7 @@ export default class Header extends Component {
             </Link>
           </div>
             <div className="navbar-collapse collapse">
-              <ul className="nav navbar-nav">
+              <ul className="nav navbar-nav genre">
                 <li className="dropdown">
                    <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Genres <span className="caret"></span></a>
                      <ul className="dropdown-menu">
