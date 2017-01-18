@@ -13,12 +13,15 @@ import AlbumContainer from './containers/AlbumContainer'
 import AllAlbumsContainer from './containers/AllAlbumsContainer'
 import ShoppingCartContainer from './containers/ShoppingCartContainer'
 import CheckoutContainer from './containers/CheckoutContainer'
+import AllOrders from './components/AllOrders'
+import SingleOrder from './components/SingleOrder'
 
 import { loadAlbums, getAlbumById, filterAlbums } from './reducers/AllAlbumsReducer'
 import { getCartFromDB } from './reducers/ShoppingCartReducer'
 import { loadReviews } from './reducers/AlbumReviewsReducer'
 import { whoami } from './reducers/auth'
 import { doIHaveGuestId } from './reducers/GuestReducer'
+import { getUserOrders, getSingleOrder } from './reducers/OrdersReducer'
 
 import store from './store'
 
@@ -45,8 +48,20 @@ const onGenreEnter = (nextRouterState) => {
   store.dispatch(filterAlbums(filtered))
 }
 
+const onOrderEnter = (nextRouterState) => {
+  const byUserId = nextRouterState.params.userId
+  store.dispatch(getUserOrders(byUserId))
+}
+
+const onSingleOrderEnter = (nextRouterState) => {
+  const byUserId = nextRouterState.params.userId
+  const byOrderId = nextRouterState.params.orderId
+  store.dispatch(getSingleOrder(byUserId, byOrderId))
+}
+
 const onCartEnter = (nextRouterState) => {
   const userId = nextRouterState.params.userId
+
   store.dispatch(getCartFromDB(userId))
 }
 
@@ -58,6 +73,8 @@ ReactDOM.render(
         <Route path="/signup" component={Signup}/>
         <Route path="/genre/:genre" component={ AllAlbumsContainer } onEnter={onGenreEnter}/>
         <Route path="/albums/:albumId" component={AlbumContainer} onEnter={onAlbumEnter}/>
+        <Route path="/orders/:userId" component={ AllOrders } onEnter={ onOrderEnter} />
+        <Route path="/orders/:userId/:orderId" component={ SingleOrder } onEnter={ onSingleOrderEnter} />
         <Route path="/:userId/cart" component={ShoppingCartContainer} onEnter={onCartEnter}/>
         <Route path="/:userId/checkout" component={CheckoutContainer} onEnter={onCartEnter}/>
         <Route path="/:userId/checkout/confirm" component={OrderConfirmation}/>

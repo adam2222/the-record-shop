@@ -12,3 +12,4 @@ const mapStateToProps = state => {
 const mapDispatchToProps = { makeNewOrder }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Checkout)
+

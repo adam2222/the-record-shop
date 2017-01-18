@@ -9,6 +9,7 @@ export default class Checkout extends React.Component {
     constructor (props) {
         super(props)
         this.handleLoginSubmit = this.handleLoginSubmit.bind(this)
+        this.handleOrder = this.handleOrder.bind(this)
     }
 
     handleLoginSubmit () {
@@ -16,20 +17,20 @@ export default class Checkout extends React.Component {
         const lastName = this.lastNameInput.value
         const email = this.emailInput.value
         const password = this.pwInput.value
-        
+
         login(email, password)
     }
 
     handlePaymentSubmit () {
         const card_number = this.card_number.input
-        const expiration_month = this.expiration_month.value 
-        const expiration_year = this.expiration_year.value 
-        const ccv = this.ccv.value 
+        const expiration_month = this.expiration_month.value
+        const expiration_year = this.expiration_year.value
+        const ccv = this.ccv.value
 
         const billing_address = this.billing_address.value
         const billing_city = this.billing_city.value
         const billing_state = this.billing_state.value
-        const billing_zip = this.billing_zip.value 
+        const billing_zip = this.billing_zip.value
 
         const userId = this.props.params.userId
 
@@ -39,11 +40,20 @@ export default class Checkout extends React.Component {
         .catch(err => console.error(err))
     }
 
-    handleOrder () {
-
+    handleOrder (event) {
+        const { makeNewOrder, cart } = this.props
+        const orderInformation = {
+            total: cart.reduce((total, item) => {
+                return total + (item.cost * item.shopping_cart_items.quantity)}, 0),
+            items: [ ...cart ]
+        }
+        makeNewOrder(+this.props.routeParams.userId, orderInformation)
     }
 
     render () {
+        console.log('this is the props', this.props)
+        const totalCost = this.props.cart.reduce((total, item) => {
+            return total + (item.cost * item.shopping_cart_items.quantity)}, 0)
         return (
             <div>
                 <div className="panel panel-default checkout-login">
@@ -159,7 +169,7 @@ export default class Checkout extends React.Component {
                             </tr>
                         </thead>
                         <tbody>
-                        { 
+                        {
                             this.props.cart && this.props.cart.map(album => (
                                 <tr key={album.id}>
                                     <td>{album.title}</td>
@@ -171,7 +181,7 @@ export default class Checkout extends React.Component {
                         }
                         <tr>
                             <td><strong><h4>GRAND TOTAL:</h4></strong></td>
-                            <td><strong><h4 className="grand-total">${this.props.total}</h4></strong></td>
+                            <td><strong><h4 className="grand-total">${totalCost}</h4></strong></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -185,11 +195,11 @@ export default class Checkout extends React.Component {
                         <Link to={`/${this.props.params.userId}/cart`}><button type="button" className="btn cart-btn btn-secondary">Go Back to Cart</button></Link>
                     </div>
                     <div className="col-md-2 checkout-button">
-                        <Link to={`/${this.props.params.userId}/checkout/confirm`}><button type="button" className="btn cart-btn btn-success">Confirm Purchase</button></Link>
+                        <Link to={`/${this.props.params.userId}/checkout/confirm`}><button type="button" onClick={this.handleOrder} className="btn cart-btn btn-success">Confirm Purchase</button></Link>
                     </div>
                 </div>
             </div>
         )
-        
+
     }
 }
