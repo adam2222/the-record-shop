@@ -158,8 +158,9 @@ th {
 body {
   background-size: contain; }
 
-h1 {
-  font-family: 'Permanent Marker'; }
+h1, h2 {
+  font-family: 'Permanent Marker';
+  text-align: center; }
 
 .hero img {
   width: 100%;

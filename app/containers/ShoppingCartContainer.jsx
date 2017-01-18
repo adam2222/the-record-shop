@@ -7,7 +7,8 @@ import ShoppingCart from '../components/ShoppingCart'
 
 const mapStateToProps = (state) => {
     return {
-        cart: state.cart
+        cart: state.cart,
+        auth: state.auth
     }
 }
 

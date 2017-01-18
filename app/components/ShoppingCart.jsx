@@ -9,12 +9,15 @@ export default function (props) {
     const handleRemove = props.handleRemove
     const handleRemoveAll = props.handleRemoveAll
     const handleCheckout = props.handleCheckout
+    const user = props.auth ? props.auth.firstName : "Guest User"
 
     return (
-        <div id="shopping-cart">
+        <div className="row" id="shopping-cart">
+            <h2>Shopping Cart</h2>
+            <br></br>
             <div className="panel panel-default container">
                 <div className="panel-heading">
-                    <h3 className="panel-title">Shopping Cart</h3>
+                    <h3 className="panel-title">{user}'s Cart</h3>
                 </div>
                 <table className="table">
                     <thead>
@@ -64,6 +67,6 @@ export default function (props) {
                     </div>
                 </div>
             </div>
-        </div>       
+        </div>
     )
 }

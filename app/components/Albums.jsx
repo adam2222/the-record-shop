@@ -88,7 +88,7 @@ export default class AllAlbums extends Component {
       <div>
 
         <div className="row">
-          <h1 className="text-center">Albums</h1>
+          <h2>Albums</h2>
            {renderedAlbums}
         </div>
       </div>
