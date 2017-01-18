@@ -4,7 +4,10 @@ import ReactDOM from 'react-dom'
 import {Router, Route, IndexRedirect, browserHistory} from 'react-router'
 import {render} from 'react-dom'
 import {connect, Provider} from 'react-redux'
+
 import App from './components/App'
+import Signup from './components/Signup'
+
 import AlbumContainer from './containers/AlbumContainer'
 import AllAlbumsContainer from './containers/AllAlbumsContainer'
 import ShoppingCartContainer from './containers/ShoppingCartContainer'
@@ -51,6 +54,7 @@ ReactDOM.render(
     <Router history={browserHistory}>
       <Route path="/" component={App} onEnter={ fetchAllData }>
         <Route path="/home" component={ AllAlbumsContainer }/>
+        <Route path="/signup" component={SignupPage}/>
         <Route path="/genre/:genre" component={ AllAlbumsContainer } onEnter={onGenreEnter}/>
         <Route path="/albums/:albumId" component={AlbumContainer} onEnter={onAlbumEnter}/>
         <Route path="/:userId/cart" component={ShoppingCartContainer} onEnter={onCartEnter}/>
