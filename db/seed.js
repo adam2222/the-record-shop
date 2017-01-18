@@ -22,11 +22,22 @@ const seedUsers = () => db.Promise.map([
 const seedOrder = () => db.Promise.map([
   {date_created: 'Sun Jan 15 2017', date_shipped: 'Mon Jan 16 2017', date_delivered: 'Tue Jan 17 2017', total: 150, items: [{title: 'Welcome to Flavortown', quantity:2}, {title: 'Funeral', quantity:3}], status:'completed', user_id: 2},
   {date_created: 'Sun Jan 15 2017', date_shipped: 'Pending', date_delivered: 'Pending', total: 150, items: [{title: 'Welcome to Flavortown', quantity:2}, {title: 'Funeral', quantity:3}], status:'completed', user_id: 2},
-  {date_created: 'Sun Jan 15 2017', date_shipped: 'Mon Jan 16 2017', date_delivered: 'Pending', total: 150, items: [{title: 'Welcome to Flavortown', quantity:2}, {title: 'Funeral', quantity:3}], status:'completed'},
-  {date_created: 'Fri Dec 16 2016', date_shipped: 'Pending', date_delivered: 'Pending', total: 150, items: [{title: 'Welcome to Flavortown', quantity:2}, {title: 'Funeral', quantity:3}], status:'created'},
-  {date_created: 'Tue Jan 17 2016', date_shipped: 'Pending', date_delivered: 'Pending', total: 150, items: [{title: 'Welcome to Flavortown', quantity:2}, {title: 'Funeral', quantity:3}], status:'cancelled'},
-  {date_created: 'Wed Jan 18 2016', date_shipped: 'Pending', date_delivered: 'Pending', total: 150, items: [{title: 'Welcome to Flavortown', quantity:2}, {title: 'Funeral', quantity:3}], status:'processing'}
+  {date_created: 'Sun Jan 15 2017', date_shipped: 'Mon Jan 16 2017', date_delivered: 'Pending', total: 150, items: [{title: 'Welcome to Flavortown', quantity:2}, {title: 'Funeral', quantity:3}], status:'completed', user_id: 2},
+  {date_created: 'Fri Dec 16 2016', date_shipped: 'Pending', date_delivered: 'Pending', total: 150, items: [{title: 'Welcome to Flavortown', quantity:2}, {title: 'Funeral', quantity:3}], status:'created', user_id: 2},
+  {date_created: 'Tue Jan 17 2016', date_shipped: 'Pending', date_delivered: 'Pending', total: 150, items: [{title: 'Welcome to Flavortown', quantity:2}, {title: 'Funeral', quantity:3}], status:'cancelled', user_id: 1},
+  {date_created: 'Wed Jan 18 2016', date_shipped: 'Pending', date_delivered: 'Pending', total: 150, items: [{title: 'Welcome to Flavortown', quantity:2}, {title: 'Funeral', quantity:3}], status:'processing', user_id: 1}
 ], order => db.model('order').create(order))
+
+
+const seedReviews = () => db.Promise.map([
+  {description: 'Worst album ever', stars: 1, album_id: 1},
+  {description: 'Best album ever', stars: 5, album_id: 2},
+  {description: 'Worst album ever', stars: 1, album_id: 3},
+  {description: 'Best album ever', stars: 5, album_id: 4},
+  {description: 'Worst album ever', stars: 1, album_id: 5},
+  {description: 'Best album ever', stars: 5, album_id: 6},
+  {description: 'Best album ever', stars: 5, album_id: 7}
+], review => db.model('album_review').create(review))
 
 db.didSync
   .then(() => db.sync({force: true}))
@@ -36,5 +47,7 @@ db.didSync
   .then(albums => console.log(`Seeded ${albums.length} albums OK`))
   .then(seedOrder)
   .then(orders => console.log(`Seeded ${orders.length} orders OK`))
+  .then(seedReviews)
+  .then(reviews => console.log(`Seeded ${reviews.length} reviews OK`))
   .catch(error => console.error(error))
   .finally(() => db.close())
