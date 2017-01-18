@@ -58,14 +58,12 @@ export default class SingleAlbum extends Component {
 
 
   onFormSubmit(event, reviewRating) {
-    event.preventDefault()
     const { createReview, selectedAlbum } = this.props
     let reviewInfo = {
       description: event.target.description.value,
       stars: +reviewRating
     }
     createReview(+selectedAlbum.id, reviewInfo)
-    event.target.description.value = ''
   }
 
   componentWillMount() {
@@ -120,7 +118,7 @@ export default class SingleAlbum extends Component {
             <div className="text-center">
               <h2> Customer Reviews </h2>
               <div className="review-form">
-                <div>
+                <div id="review-button">
                   <button type="button" className="btn btn-info" onClick={this.onClick}>Write a Review</button>
                 </div>
                 {this.state.edit && <ReviewForm onSubmit={ this.onFormSubmit } />}

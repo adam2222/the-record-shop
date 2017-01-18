@@ -5,7 +5,6 @@ const Album = require('APP/db/models/album')
 const Order = require('APP/db/models/order')
 const {mustBeLoggedIn, forbidden, selfOnly, adminOnly} = require('./auth.filters')
 const router = require('express').Router()
-const ShoppingCartItem = require('APP/db/models/shopping_cart_items')
 const User = require('APP/db/models/user')
 
 
@@ -62,9 +61,16 @@ router.post('/:userId', (req, res, next) => {
   .catch(err => res.status(410).send(err))
 })
 
-router.get('/:orderId', (req, res, next) => {
-    Order.findById(+req.params.orderId)
-    .then(order => res.json(order))
+router.get('/:userId/orders/:orderId', (req, res, next) => {
+    Order.findAll({
+      where: {
+        id: req.params.orderId,
+        user_id: req.params.userId
+    }
+  })
+    .then(order => {
+      res.json(order[0])
+    })
     .catch(next)
 })
 

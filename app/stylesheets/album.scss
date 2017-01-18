@@ -33,7 +33,7 @@
 .single-album {
 	.image {
 		img {
-			width: 100%;			
+			width: 100%;
 		}
 	}
 }
@@ -45,6 +45,10 @@
 .review-form {
 	button {
 		margin: auto;
-		display: block;		
+		display: block;
 	}
+}
+
+.review-button {
+	margin-bottom: 10px;
 }
