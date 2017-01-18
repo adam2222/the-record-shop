@@ -39,7 +39,7 @@ export const Login = (props) => {
           </li>
          </ul>
        </li>
-      <li><a href="#">Sign Up</a></li>
+      <li><Link to={'/signup'}>Sign Up</Link></li>
     </ul>
   )
 

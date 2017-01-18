@@ -55,7 +55,7 @@ ReactDOM.render(
     <Router history={browserHistory}>
       <Route path="/" component={App} onEnter={ fetchAllData }>
         <Route path="/home" component={ AllAlbumsContainer }/>
-        <Route path="/signup" component={SignupPage}/>
+        <Route path="/signup" component={Signup}/>
         <Route path="/genre/:genre" component={ AllAlbumsContainer } onEnter={onGenreEnter}/>
         <Route path="/albums/:albumId" component={AlbumContainer} onEnter={onAlbumEnter}/>
         <Route path="/:userId/cart" component={ShoppingCartContainer} onEnter={onCartEnter}/>

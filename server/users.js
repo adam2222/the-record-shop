@@ -31,7 +31,7 @@ api.post('/', (req, res, next) => {
 			password: req.body.password
 		}	
 	})
-	.spread((instance, created) => res.sendStatus(201))
+	.spread((instance, created) => res.json(instance))
 	.catch(next)
 })
 
