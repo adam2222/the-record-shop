@@ -144,6 +144,9 @@ th {
 .grand-total {
   text-align: left; }
 
+.checkout-login-button {
+  margin-top: 23px; }
+
 .confirmation-text {
   text-align: center; }
 

@@ -172,8 +172,18 @@ api.delete('/:userId/cart/:albumId', (req, res, next) => {
 // CREDIT CARD/SHIPPING
 
 api.post('/:userId/purchaseDetails', (req, res, next) => {
-	CreditCard.findOrCreate(req.body, {
-		where: {user_id: req.params.userId}
+	CreditCard.findOrCreate({
+		where: {user_id: req.params.userId}, 
+		defaults: {
+			card_number: req.body.card_number,
+			expiration_month: req.body.expiration_month,
+			expiration_year: req.body.expiration_year,
+			ccv: req.body.ccv,
+			billing_address: req.body.billing_address,
+			billing_city: req.body.billing_city,
+			billing_state: req.body.billing_state,
+			billing_zip: req.body.billing_zip
+		}
 	})
 	.then(() => res.sendStatus(201))
 	.catch(next)
