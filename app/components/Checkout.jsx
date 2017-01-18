@@ -10,6 +10,7 @@ export default class Checkout extends React.Component {
         super(props)
         this.handleLoginSubmit = this.handleLoginSubmit.bind(this)
         this.handleOrder = this.handleOrder.bind(this)
+        this.handlePaymentSubmit = this.handlePaymentSubmit.bind(this)
     }
 
     handleLoginSubmit () {
@@ -22,7 +23,7 @@ export default class Checkout extends React.Component {
     }
 
     handlePaymentSubmit () {
-        const card_number = this.card_number.input
+        const card_number = this.card_number.value
         const expiration_month = this.expiration_month.value
         const expiration_year = this.expiration_year.value
         const ccv = this.ccv.value
@@ -51,7 +52,6 @@ export default class Checkout extends React.Component {
     }
 
     render () {
-        console.log('this is the props', this.props)
         const totalCost = this.props.cart.reduce((total, item) => {
             return total + (item.cost * item.shopping_cart_items.quantity)}, 0)
         return (
@@ -86,7 +86,7 @@ export default class Checkout extends React.Component {
                                 <input type="text" className="form-control" id="password-entry" placeholder="Password" ref={(input) => {this.pwInput = input}}></input>
                             </div>
                         </div>
-                        <div className="col-md-2 checkout-button">
+                        <div className="col-md-2 checkout-login-button">
                             <button type="button" className="btn cart-btn btn-success" onClick={() => store.dispatch(login(this.emailInput.value, this.pwInput.value))}>Log In</button>
                         </div>
                         <div className="col-md-4">
@@ -119,7 +119,7 @@ export default class Checkout extends React.Component {
                                 </div>
                             </div>
                             <div className="col-md-2 checkout-ccv">
-                                <label htmlFor="ccv">Expiration Year</label>
+                                <label htmlFor="ccv">Security Code</label>
                                 <div className="input-group inline-block">
                                     <input type="text" className="form-control" id="ccv" ref={(input) => {this.ccv = input}} placeholder="Check the back of your card"></input>
                                 </div>
@@ -151,6 +151,9 @@ export default class Checkout extends React.Component {
                                 <div className="input-group inline-block">
                                     <input type="text" className="form-control" id="billing-zip" ref={(input) => {this.billing_zip = input}} placeholder="e.g., 12345'"></input>
                                 </div>
+                            </div>
+                            <div className="col-md-2 payment-submit-button">
+                                <button type="button" onClick={this.handlePaymentSubmit} className="btn cart-btn btn-success">Submit Payment Method</button>
                             </div>
                         </div>
                     </form>

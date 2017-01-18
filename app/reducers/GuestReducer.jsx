@@ -20,7 +20,6 @@ export const createGuestUser = (albumId, quantity) => dispatch => {
      return guest;
   })
   .then(guest => {
-    console.log('GUEST', guest)
     dispatch(addAlbumToDB(guest.id, albumId, quantity ))
   })
   .catch(console.error)
@@ -30,8 +29,6 @@ export const doIHaveGuestId = () => dispatch => {
   axios.get('api/users/guest')
   .then(guest => guest.data)
   .then(guest => {
-    console.log('GUEST', guest)
-
     dispatch(createGuest(guest))
   })
 
