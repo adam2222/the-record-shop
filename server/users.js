@@ -31,10 +31,12 @@ api.post('/guest', (req, res, next) =>
 		lastName: 'User',
 	})
 	.then(user => {
-		req.session.guestUser = JSON.stringify(guestUser)
+		console.log('USER', user)
+		req.session.guestUser = JSON.stringify(user)
+
 		res.status(201).json(user)
 	})
-	.catch(next)
+	.catch(console.error.bind(console))
 )
 
 // SINGLE USER
@@ -101,7 +103,15 @@ api.post('/:userId/cart/:album_id', (req, res, next) => {
 			quantity: req.body.quantity
 		}
 	})
-	.then(res.sendStatus(200))
+	.spread((item, created) => {
+		if (!created) {
+			let newQuantity = item.quantity + Number(req.body.quantity)
+			item.update({ quantity: newQuantity })
+			.then(res.sendStatus(200))
+		} else {
+			res.sendStatus(200)
+		}
+	})
 	.catch(next)
 })
 

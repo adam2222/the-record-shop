@@ -87,6 +87,11 @@ th {
   width: 21px;
   height: 21px; }
 
+.remove-icon:hover {
+  color: red;
+  font-weight: bold;
+  cursor: pointer; }
+
 .remove-icon:before {
   content: '';
   position: absolute;
