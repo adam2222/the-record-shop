@@ -1,0 +1,54 @@
+.product {
+	width: 100%;
+	display: inline-block;
+	border-bottom: 1px lightgrey solid;
+	margin: 15px auto 30px;
+
+	.image {
+		img {
+			width: 100%;
+		}
+	}
+
+	.text {
+		h3 {
+			height: 2em;
+		}
+	}
+
+	.info {
+		margin-bottom: 10px;
+		display: inline-block;
+
+		.price {
+			white-space: nowrap;
+		}
+	}
+}
+
+.album {
+	min-height: 400px;
+}
+
+.single-album {
+	.image {
+		img {
+			width: 100%;
+		}
+	}
+}
+
+.add-to-cart-btn {
+	width: 100%;
+}
+
+.review-form {
+	button {
+		margin: auto;
+		display: block;
+	}
+}
+
+#review-button {
+	margin-bottom: 15px;
+}
